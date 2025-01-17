@@ -1,0 +1,73 @@
+import {
+  AboutImg1,
+  AboutImg2,
+  AppLogo,
+  CheckCircle,
+  PricingBg,
+} from "@/app/components/common/allImages/AllImages";
+import Image from "next/image";
+import React from "react";
+
+const AuthLayout = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <div className="flex min-h-screen lg:mx-20 md:mx-14">
+      {/* Left Side */}
+      <div className="w-1/2 m-6 py-14 flex flex-col relative bg-orange-50 border border-stone-200 rounded-2xl">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src={PricingBg}
+            alt="Background Pattern"
+            layout="fill"
+            objectFit="cover"
+            quality={100}
+          />
+        </div>
+        <div className="mx-3 lg:mx-10 md:mx-6 relative z-10">
+          <div className="mb-4">
+            <Image src={AppLogo} alt="Logo" width={48} height={48} />
+          </div>
+          <h1 className="text-3xl font-bold mb-4">
+            Discover Love Effortlessly
+          </h1>
+          <ul className="space-y-2">
+            <li className="flex items-center gap-2">
+              <Image src={CheckCircle} alt="check"/> All profiles are
+              verified.
+            </li>
+            <li className="flex items-center gap-2">
+            <Image src={CheckCircle} alt="check"/> Perfect Matching.
+            </li>
+            <li className="flex items-center gap-2">
+            <Image src={CheckCircle} alt="check"/> Use our mobile app.
+            </li>
+          </ul>
+
+          <div className="md:grid grid-cols-2 gap-3 relative lg:min-h-large hidden w-full">
+            <Image
+              src={AboutImg2}
+              width={250}
+              className="lg:absolute top-0 right-3"
+              alt="Couple Image 1"
+            />
+            <Image
+              src={AboutImg1}
+              width={250}
+              className="lg:absolute bottom-0 left-3"
+              alt="Couple Image 2"
+            />
+          </div>
+          {/* <div className="mt-8 flex space-x-4">
+            <Image src={AboutImg1} alt="Couple 1" width={160} height={240} className="rounded-lg" />
+            <Image src={AboutImg2} alt="Couple 2" width={160} height={240} className="rounded-lg" />
+          </div> */}
+        </div>
+      </div>
+
+      {/* Right Side (Content Area) */}
+      <div className="w-1/2 p-8 flex flex-col justify-center">{children}</div>
+    </div>
+  );
+};
+
+export default AuthLayout;

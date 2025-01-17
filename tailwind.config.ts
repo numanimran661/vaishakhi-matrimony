@@ -9,8 +9,23 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        primary: "var(--themeColor)",
+        secondary: "var(--themeColor2)",
+        lightGray: "var(--bgColor)",
+        gray: "var(--border)",
+        darkBlue: "var(--text)",
+        darkGray: "var(--text2)",
+        lightText: "var(--text3)",
+        normal: "var(--text4)",
+        lightBlue: "var(--lightBlue)",
+      },
+      fontFamily: {
+        light: ['var(--light)', 'sans-serif'],
+        regular: ['var(--regular)', 'sans-serif'],
+        bold: ['var(--bold)', 'sans-serif'],
+      },
+      minHeight: {
+        large: '500px',
       },
     },
   },
