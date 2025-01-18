@@ -20,7 +20,7 @@ const InputField: React.FC<InputFieldProps> = ({
   className = '',
 }) => {
   return (
-    <div className={`flex flex-col ${className} mt-2`}>
+    <div className={`flex flex-col ${className} mt-4`}>
       <label htmlFor={name} className="mb-2 text-sm font-regular text-gray-700">
         {label}
       </label>

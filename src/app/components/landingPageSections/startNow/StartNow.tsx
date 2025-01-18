@@ -22,8 +22,8 @@ const StartNow = () => {
           quality={100}
         />
       </div>
-      <div className="max-w-6xl mx-auto px-8 flex flex-wrap items-center relative z-10 bg-white rounded-2xl border border-gray">
-        <div className="w-full lg:w-1/2 text-center lg:text-left">
+      <div className="lg:mx-32 md:mx-20 mx-8 px-8 flex flex-wrap items-center relative z-10 bg-none md:bg-white rounded-2xl border-0 md:border border-gray">
+        <div className="w-full lg:w-1/2 text-left">
           <h2 className="text-sm font-medium text-normal uppercase">
             Start Now
           </h2>
@@ -36,7 +36,7 @@ const StartNow = () => {
             label="Signup Now"
           />
         </div>
-        <div className="w-full lg:w-1/2 mt-8 lg:mt-0 text-center p-1 lg:p-8 md:p-4">
+        <div className="w-full lg:w-1/2 mt-8 lg:mt-0 text-center p-1 lg:p-8 md:p-4 md:block hidden">
           <Image
             src={DatingImg}
             alt="Perfect match illustration"

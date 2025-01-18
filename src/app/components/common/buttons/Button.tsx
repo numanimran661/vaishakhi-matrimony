@@ -46,7 +46,7 @@ const Button: React.FC<ButtonProps> = ({
           <Image src={icon} alt={""} />
         </span>
       )}
-      <span>{label}</span>
+      <span className="text-nowrap">{label}</span>
     </button>
   );
 };

@@ -5,7 +5,7 @@ import React from 'react';
 
 const AboutSection: React.FC = () => {
   return (
-    <section className="bg-gray-50 md:py-16 border-b border-gray">
+    <section className="bg-gray-50 md:py-16 py-10 border-b border-gray">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div className="md:grid grid-cols-2 gap-3 relative lg:min-h-large hidden">

@@ -1,5 +1,6 @@
 @import "./fonts.css";
 @import "./variables.css";
+@import "./responsive.css";
 @import 'slick-carousel/slick/slick.css';
 @import 'slick-carousel/slick/slick-theme.css';
 

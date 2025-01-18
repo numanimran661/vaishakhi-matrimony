@@ -67,7 +67,7 @@ const SuccessStories = () => {
                       {testimonial.designation}
                     </p>
                   </div>
-                  <Image src={testimonial.image} alt={testimonial.name} />
+                  <Image src={testimonial.image} alt={testimonial.name} className="md:block hidden w-full h-full" objectFit="cover" />
                 </div>
               </div>
             ))}

@@ -10,9 +10,9 @@ import React from "react";
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="flex min-h-screen lg:mx-20 md:mx-14">
+    <div className="flex min-h-screen lg:mx-6 mx-3">
       {/* Left Side */}
-      <div className="w-1/2 m-6 py-14 flex flex-col relative bg-orange-50 border border-stone-200 rounded-2xl">
+      <div className="w-1/2 m-6 py-14 md:flex hidden flex-col relative bg-orange-50 border border-stone-200 rounded-2xl">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -43,7 +43,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
             </li>
           </ul>
 
-          <div className="md:grid grid-cols-2 gap-3 relative lg:min-h-large hidden w-full">
+          <div className="md:grid grid-cols-2 gap-3 mt-4 relative lg:min-h-large hidden w-full">
             <Image
               src={AboutImg2}
               width={250}
@@ -65,7 +65,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
       </div>
 
       {/* Right Side (Content Area) */}
-      <div className="w-1/2 p-8 flex flex-col justify-center">{children}</div>
+      <div className="md:w-1/2 w-full sm:p-8 p-5 flex flex-col justify-center">{children}</div>
     </div>
   );
 };

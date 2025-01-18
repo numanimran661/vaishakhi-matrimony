@@ -118,7 +118,7 @@ const PricingPlans = () => {
           {plans.map((plan, index) => (
             <div
               key={index}
-              className={`${plan.bgColor} rounded-2xl text-left border border-gray w-full sm:w-1/3 mx-4 my-4 px-6 py-8 `}
+              className={`${plan.bgColor} rounded-2xl text-left border border-gray w-full sm:w-1/3 md:mx-4 mx-0 my-4 px-6 py-8 `}
             >
               <h3 className={`text-xl font-semibold ${plan.textColor}`}>
                 {plan.title}

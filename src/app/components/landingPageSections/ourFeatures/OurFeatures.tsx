@@ -34,22 +34,22 @@ const OurFeatures: React.FC = () => {
     },
   ];
   return (
-    <section className="bg-gray-50 md:px-12 lg:px-20 mx-auto md:py-16 border-b border-gray">
+    <section className="bg-gray-50 md:px-12 lg:px-20 px-8 mx-auto md:py-16 py-10 border-b border-gray">
       <div className="text-left">
         <h2 className="text-sm font-medium text-normal uppercase">our features</h2>
         <h3 className="text-3xl font-bold text-gray-900 mt-2">Why Choose us</h3>
       </div>
-      <div className="mt-10 grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div className="mt-10 grid grid-cols-1 md:grid-cols-4 sm:grid-cols-2 gap-8">
         {steps.map((step, index) => (
           <div
             key={index}
             className="px-8 py-12 border border-gray rounded-lg text-center"
           >
-            <div className="flex justify-center items-center h-32 w-32 mx-auto bg-orange-100 rounded-full">
+            <div className="flex justify-center items-center lg:h-32 lg:w-32 w-24 h-24 mx-auto bg-orange-100 rounded-full">
               <Image
                 src={step.icon}
                 alt={`${step.title} icon`}
-                className="h-16 w-16"
+                className="lg:h-16 lg:w-16 w-10 h-10"
               />
             </div>
             <h4 className="text-xl font-semibold text-gray-900 mt-4">

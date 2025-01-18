@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import InputField from '@/app/components/common/inputFields/InputField';
 import Button from '@/app/components/common/buttons/Button';
 import { GoogleLogo } from '@/app/components/common/allImages/AllImages';
+import Link from 'next/link';
 
 const SignupForm: React.FC = () => {
   return (
@@ -29,19 +30,18 @@ const SignupForm: React.FC = () => {
             type="submit"
             disabled={isSubmitting}
             label='Sign Up'
-            className='mt-3 w-full'
+            className='mt-4 w-full'
           />
           <Button
             type="button"
-            disabled={isSubmitting}
             label='Sign Up with google'
             icon={GoogleLogo}
-            className='mt-3 w-full bg-lightBlue'
+            className='mt-4 w-full bg-lightBlue'
             variant='light'
           />
-          <div className='mt-3 font-regular'>
+          <div className='mt-4 font-regular'>
             <span>Already have an account?</span>{" "}
-            <span className='text-primary'>Log in</span>
+            <Link href={'/auth/login'} className='text-primary'>Log in</Link>
           </div>
         </Form>
       )}

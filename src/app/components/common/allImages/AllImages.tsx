@@ -13,6 +13,8 @@ import AdvanceSearchIcon from "../../../../../public/images/svg/advance-search-i
 import MobileFriendlyIcon from "../../../../../public/images/svg/mobile-friendly-icon.svg";
 import GoogleLogo from "../../../../../public/images/svg/Google-logo.svg";
 import CheckCircle from "../../../../../public/images/svg/check-circle-icon.svg";
+import Hamburger from "../../../../../public/images/svg/hamburger-icon.svg";
+import CloseIcon from "../../../../../public/images/svg/close-icon.svg";
 
 import AppLogo from "../../../../../public/images/png/app-logo.png";
 import LogoDark from "../../../../../public/images/png/logo-dark.png";
@@ -54,5 +56,7 @@ export {
   PricingBg,
   DatingImg,
   GoogleLogo,
-  CheckCircle
+  CheckCircle,
+  Hamburger,
+  CloseIcon
 };
