@@ -7,7 +7,7 @@ import ProcessSection from "./components/landingPageSections/process/Process";
 import StartNow from "./components/landingPageSections/startNow/StartNow";
 import SuccessStories from "./components/landingPageSections/successStories/SuccessStories";
 
-const HomePage = () => {
+const MainPage = () => {
   return (
     <>
     <Banner />
@@ -22,4 +22,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default MainPage;

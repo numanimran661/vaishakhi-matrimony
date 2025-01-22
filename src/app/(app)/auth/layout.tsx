@@ -10,7 +10,7 @@ import React from "react";
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="flex min-h-screen lg:mx-6 mx-3">
+    <div className="flex min-h-screen mx-auto max-w-7xl">
       {/* Left Side */}
       <div className="w-1/2 m-6 py-14 md:flex hidden flex-col relative bg-orange-50 border border-stone-200 rounded-2xl">
         {/* Background Image */}

@@ -15,6 +15,11 @@ import GoogleLogo from "../../../../../public/images/svg/Google-logo.svg";
 import CheckCircle from "../../../../../public/images/svg/check-circle-icon.svg";
 import Hamburger from "../../../../../public/images/svg/hamburger-icon.svg";
 import CloseIcon from "../../../../../public/images/svg/close-icon.svg";
+import VerifiedIcon from "../../../../../public/images/svg/verified-icon.svg";
+import MessageIcon from "../../../../../public/images/svg/message-icon.svg";
+import ReqSendIcon from "../../../../../public/images/svg/send-req-icon.svg";
+import BriefcaseIcon from "../../../../../public/images/svg/briefcase-icon.svg";
+import LocationMarker from "../../../../../public/images/svg/location-marker.svg";
 
 import AppLogo from "../../../../../public/images/png/app-logo.png";
 import LogoDark from "../../../../../public/images/png/logo-dark.png";
@@ -28,6 +33,9 @@ import AppStore from "../../../../../public/images/png/app-store.png";
 import SuccessStory from "../../../../../public/images/png/success-story-img.png";
 import PricingBg from "../../../../../public/images/png/pricing-plan-bg.png";
 import DatingImg from "../../../../../public/images/png/dating-img.png";
+import FemalePlaceholder from "../../../../../public/images/png/female-placeholder.png";
+import MalePlaceholder from "../../../../../public/images/png/male-placeholder.png";
+import DummyProfile from "../../../../../public/images/png/dummy-profile.png";
 
 export {
   AppLogo,
@@ -58,5 +66,13 @@ export {
   GoogleLogo,
   CheckCircle,
   Hamburger,
-  CloseIcon
+  CloseIcon,
+  VerifiedIcon,
+  DummyProfile,
+  FemalePlaceholder,
+  MalePlaceholder,
+  MessageIcon,
+  BriefcaseIcon,
+  ReqSendIcon,
+  LocationMarker
 };

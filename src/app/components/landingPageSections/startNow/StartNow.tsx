@@ -1,17 +1,18 @@
+"use client";
 import Image from "next/image";
-// import { useRouter } from "next/router";
 import { DatingImg, PricingBg } from "../../common/allImages/AllImages";
 import Button from "../../common/buttons/Button";
+import { useRouter } from "next/navigation";
 
 const StartNow = () => {
-  //   const router = useRouter();
+  const router = useRouter();
 
-  //   const handleSignupClick = () => {
-  //     router.push("/signup");
-  //   };
+  const handleSignupClick = () => {
+    router.push("/auth/signup");
+  };
 
   return (
-    <section className="py-16 relative">
+    <section className="py-16 px-8 relative">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -22,7 +23,7 @@ const StartNow = () => {
           quality={100}
         />
       </div>
-      <div className="lg:mx-32 md:mx-20 mx-8 px-8 flex flex-wrap items-center relative z-10 bg-none md:bg-white rounded-2xl border-0 md:border border-gray">
+      <div className=" max-w-7xl mx-auto px-8 flex flex-wrap items-center relative z-10 bg-none md:bg-white rounded-2xl border-0 md:border border-gray">
         <div className="w-full lg:w-1/2 text-left">
           <h2 className="text-sm font-medium text-normal uppercase">
             Start Now
@@ -31,7 +32,7 @@ const StartNow = () => {
             Ready to find your perfect match?
           </h2>
           <Button
-            // onClick={handleSignupClick}
+            onClick={handleSignupClick}
             className="mt-6"
             label="Signup Now"
           />
