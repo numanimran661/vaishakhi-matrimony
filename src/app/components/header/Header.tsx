@@ -9,17 +9,27 @@ import {
   LogoDark,
 } from "../common/allImages/AllImages";
 import Button from "../common/buttons/Button";
+import { useRouter } from "next/navigation";
 
 const Header: React.FC = () => {
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  const handleLoginClick = () => {
+    router.push("/auth/login");
+  };
+
+  const handleSignUpClick = () => {
+    router.push("/auth/signup");
+  };
   return (
     <header className="bg-white h-20">
       <div className="w-full fixed top-0 z-50 bg-white border-b border-gray">
-        <div className="md:mx-12 lg:mx-20 mx-auto px-4 py-4 flex justify-between items-center">
+        <div className="mx-auto px-4 py-4 flex justify-between items-center max-w-7xl">
           <div className="flex items-center">
             <div>
               <button
@@ -56,7 +66,7 @@ const Header: React.FC = () => {
               isMenuOpen ? "flex" : "hidden"
             }`}
           >
-            <Link href="/">
+            <Link href="/home">
               <span className="text-gray-600 hover:text-gray-800">Home</span>
             </Link>
             <Link href="/about">
@@ -82,8 +92,9 @@ const Header: React.FC = () => {
               variant="transparent"
               icon={LockIcon}
               className="sm:flex hidden"
+              onClick={handleLoginClick}
             />
-            <Button label="Get Started" />
+            <Button label="Get Started" onClick={handleSignUpClick} />
           </div>
         </div>
       </div>
