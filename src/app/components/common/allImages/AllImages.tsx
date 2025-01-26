@@ -33,6 +33,9 @@ import AppStore from "../../../../../public/images/png/app-store.png";
 import SuccessStory from "../../../../../public/images/png/success-story-img.png";
 import PricingBg from "../../../../../public/images/png/pricing-plan-bg.png";
 import DatingImg from "../../../../../public/images/png/dating-img.png";
+import basicInfo from "../../../../../public/images/svg/basic_info.svg";
+import personalInfo from "../../../../../public/images/svg/personal_info.svg";
+import partnerPref from "../../../../../public/images/svg/partner_pref.svg";
 import FemalePlaceholder from "../../../../../public/images/png/female-placeholder.png";
 import MalePlaceholder from "../../../../../public/images/png/male-placeholder.png";
 import DummyProfile from "../../../../../public/images/png/dummy-profile.png";
@@ -67,6 +70,9 @@ export {
   CheckCircle,
   Hamburger,
   CloseIcon,
+  basicInfo,
+  partnerPref,
+  personalInfo,
   VerifiedIcon,
   DummyProfile,
   FemalePlaceholder,
