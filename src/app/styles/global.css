@@ -44,3 +44,43 @@ body {
 .custom-rounded {
   border-radius: 30px;
 }
+.slick-list div:focus {
+  outline: none;
+}
+/* Blur background container for Slider */
+/* Main slider container */
+.slider-container {
+  position: relative;
+}
+
+/* Blurred dots background */
+.dots-container {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  background: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
+  backdrop-filter: blur(10px); /* Adds the blur effect */
+  border-radius: 30px; /* Rounded container */
+  padding: 5px 0;
+}
+
+/* Default slick dots styling */
+.slick-dots {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.slick-dots li button:before {
+  font-size: 10px;
+  color: #e5e5e5; /* Default dot color */
+  opacity: 1; /* Ensure dots are visible */
+}
+
+.slick-dots li.slick-active button:before {
+  color: #ff7b36; /* Active dot color (orange) */
+}
+

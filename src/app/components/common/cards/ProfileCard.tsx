@@ -1,3 +1,4 @@
+'use client'
 import Image, { StaticImageData } from "next/image";
 import React from "react";
 import {
@@ -9,6 +10,7 @@ import {
   ReqSendIcon,
   VerifiedIcon,
 } from "../allImages/AllImages";
+import { useRouter } from "next/navigation";
 
 type ProfileCardProps = {
   id: number;
@@ -35,8 +37,9 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
   location,
   gender,
 }) => {
+  const router = useRouter()
   return (
-    <div className="bg-white shadow rounded-xl relative">
+    <div className="bg-white shadow rounded-xl relative" onClick={() => router.push(`/home/profile-details/${id}`)}>
       <Image
         src={
           image
