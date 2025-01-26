@@ -28,6 +28,9 @@ import AppStore from "../../../../../public/images/png/app-store.png";
 import SuccessStory from "../../../../../public/images/png/success-story-img.png";
 import PricingBg from "../../../../../public/images/png/pricing-plan-bg.png";
 import DatingImg from "../../../../../public/images/png/dating-img.png";
+import basicInfo from "../../../../../public/images/svg/basic_info.svg";
+import personalInfo from "../../../../../public/images/svg/personal_info.svg";
+import partnerPref from "../../../../../public/images/svg/partner_pref.svg";
 
 export {
   AppLogo,
@@ -58,5 +61,8 @@ export {
   GoogleLogo,
   CheckCircle,
   Hamburger,
-  CloseIcon
+  CloseIcon,
+  basicInfo,
+  partnerPref,
+  personalInfo,
 };
