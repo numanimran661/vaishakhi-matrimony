@@ -1,9 +1,6 @@
-"use client";
-
 import Image from "next/image";
-import Button from "../../common/buttons/Button";
-import { PricingBg } from "../../common/allImages/AllImages";
-import { useRouter } from "next/navigation";
+import { PricingBg } from "../components/common/allImages/AllImages";
+import Button from "../components/common/buttons/Button";
 
 type planItem = {
   title: string;
@@ -19,7 +16,6 @@ type planItem = {
   buttonBgColor: string;
   borderColor: string;
   buttonTextColor: string;
-  path: string;
   variant: "primary" | "secondary" | "transparent";
 };
 
@@ -47,7 +43,6 @@ const PricingPlans = () => {
       buttonBgColor: "bg-orange-500",
       borderColor: "border-gray",
       buttonTextColor: "text-white",
-      path: "/auth/signup",
       variant: "primary",
     },
     {
@@ -70,7 +65,6 @@ const PricingPlans = () => {
       buttonBgColor: "bg-white",
       borderColor: "border-white",
       buttonTextColor: "text-orange-900",
-      path: "/auth/signup",
       variant: "secondary",
     },
     {
@@ -93,12 +87,9 @@ const PricingPlans = () => {
       buttonBgColor: "bg-orange-500",
       borderColor: "border-gray",
       buttonTextColor: "text-white",
-      path: "/auth/signup",
       variant: "primary",
     },
   ];
-
-  const router = useRouter();
 
   return (
     <section className="relative py-16 border-b border-gray">
@@ -112,7 +103,7 @@ const PricingPlans = () => {
           quality={100}
         />
       </div>
-      <div className="relative z-10 max-w-7xl mx-auto px-8 text-center">
+      <div className="relative z-10 max-w-5xl mx-auto px-8 text-center">
         <h2 className="text-sm font-medium text-normal uppercase">
           Membership Plans
         </h2>
@@ -152,7 +143,6 @@ const PricingPlans = () => {
                 className={`mt-8 w-full`}
                 label={plan.buttonLabel}
                 variant={plan.variant}
-                onClick={() => router.push(plan.path)}
               />
             </div>
           ))}

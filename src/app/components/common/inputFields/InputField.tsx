@@ -3,11 +3,12 @@ import React from 'react';
 type InputFieldProps = {
   label: string;
   name: string;
-  type?: 'text' | 'email' | 'password' | 'number';
+  type?: 'text' | 'email' | 'password' | 'number' | 'textarea';
   value?: string | number;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   className?: string;
+  classNameLabel?: string;
 };
 
 const InputField: React.FC<InputFieldProps> = ({
@@ -18,10 +19,11 @@ const InputField: React.FC<InputFieldProps> = ({
   onChange,
   placeholder = '',
   className = '',
+  classNameLabel = "",
 }) => {
   return (
     <div className={`flex flex-col ${className} mt-4`}>
-      <label htmlFor={name} className="mb-2 text-sm font-regular text-gray-700">
+      <label htmlFor={name} className={`mb-2 text-sm font-regular text-gray-700 ${classNameLabel}`}>
         {label}
       </label>
       <input

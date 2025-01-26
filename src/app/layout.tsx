@@ -16,6 +16,8 @@ export default function RootLayout({
         {!isAuthRoute && <Header />}
         <div>{children}</div>
         {!isAuthRoute && <Footer />}
+
+        <div id="modal-root"></div>
       </body>
     </html>
   );
