@@ -7,7 +7,7 @@ import {
   personalInfo,
 } from "../components/common/allImages/AllImages";
 import React, { useState } from "react";
-import { Form, Formik, Field } from "formik"; // Import Field
+import { Form, Formik, Field, FieldProps } from "formik"; // Import Field
 import * as Yup from "yup";
 import InputField from "../components/common/inputFields/InputField";
 import Button from "../components/common/buttons/Button";
@@ -110,7 +110,7 @@ const TellUsMoreAboutYourself: React.FC = () => {
               <Form className="flex flex-wrap gap-6 px-[78px] pb-20 relative">
                 <Field
                   name="fullName"
-                  render={({ field, meta }) => (
+                  render={({ field, meta }: FieldProps) => (
                     <InputField
                       label="Full Name"
                       {...field}
@@ -122,7 +122,7 @@ const TellUsMoreAboutYourself: React.FC = () => {
                 />
                 <Field
                   name="age"
-                  render={({ field, meta }) => (
+                  render={({ field, meta }: FieldProps) => (
                     <SelectField
                       label="Age"
                       {...field}
@@ -131,14 +131,14 @@ const TellUsMoreAboutYourself: React.FC = () => {
                         { value: "option2", label: "26-35" },
                         { value: "option3", label: "36-45" },
                       ]}
-                      onChange={handleSelectChange}
+                      // onChange={handleSelectChange}
                       className="w-full sm:w-[47%]"
                     />
                   )}
                 />
                 <Field
                   name="gender"
-                  render={({ field, meta }) => (
+                  render={({ field, meta }: FieldProps) => (
                     <SelectField
                       label="Gender"
                       {...field}
@@ -147,14 +147,14 @@ const TellUsMoreAboutYourself: React.FC = () => {
                         { value: "choice2", label: "Female" },
                         { value: "choice3", label: "Other" },
                       ]}
-                      onChange={handleSelectChange}
+                      // onChange={handleSelectChange}
                       className="w-full sm:w-[47%]"
                     />
                   )}
                 />
                 <Field
                   name="height"
-                  render={({ field, meta }) => (
+                  render={({ field, meta }: FieldProps) => (
                     <SelectField
                       label="Height"
                       {...field}
@@ -163,25 +163,25 @@ const TellUsMoreAboutYourself: React.FC = () => {
                         { value: "option2", label: "5'8" },
                         { value: "option3", label: "6'0" },
                       ]}
-                      onChange={handleSelectChange}
+                      // onChange={handleSelectChange}
                       className="w-full sm:w-[47%]"
                     />
                   )}
                 />
                 <Field
                   name="dob"
-                  render={({ field, meta }) => (
+                  render={({ field, meta }: FieldProps) => (
                     <DatePicker
                       label="Date Of Birth"
                       {...field}
-                      onChange={handleDateChange("dob")}
+                      // onChange={handleDateChange("dob")}
                       className="w-full sm:w-[47%]"
                     />
                   )}
                 />
                 <Field
                   name="maritalStatus"
-                  render={({ field, meta }) => (
+                  render={({ field, meta }: FieldProps) => (
                     <SelectField
                       label="Marital Status"
                       {...field}
@@ -190,14 +190,14 @@ const TellUsMoreAboutYourself: React.FC = () => {
                         { value: "option2", label: "Married" },
                         { value: "option3", label: "Divorced" },
                       ]}
-                      onChange={handleSelectChange}
+                      // onChange={handleSelectChange}
                       className="w-full sm:w-[47%]"
                     />
                   )}
                 />
                 <Field
                   name="religion"
-                  render={({ field, meta }) => (
+                  render={({ field, meta }: FieldProps) => (
                     <SelectField
                       label="Religion"
                       {...field}
@@ -206,14 +206,14 @@ const TellUsMoreAboutYourself: React.FC = () => {
                         { value: "choice2", label: "Muslim" },
                         { value: "choice3", label: "Hindu" },
                       ]}
-                      onChange={handleSelectChange}
+                      // onChange={handleSelectChange}
                       className="w-full sm:w-[47%]"
                     />
                   )}
                 />
                 <Field
                   name="motherTongue"
-                  render={({ field, meta }) => (
+                  render={({ field, meta }: FieldProps) => (
                     <SelectField
                       label="Mother Tongue"
                       {...field}
@@ -222,14 +222,14 @@ const TellUsMoreAboutYourself: React.FC = () => {
                         { value: "option2", label: "Spanish" },
                         { value: "option3", label: "Hindi" },
                       ]}
-                      onChange={handleSelectChange}
+                      // onChange={handleSelectChange}
                       className="w-full sm:w-[47%]"
                     />
                   )}
                 />
                 <Field
                   name="cast"
-                  render={({ field, meta }) => (
+                  render={({ field, meta }: FieldProps) => (
                     <SelectField
                       label="Cast"
                       {...field}
@@ -238,14 +238,14 @@ const TellUsMoreAboutYourself: React.FC = () => {
                         { value: "choice2", label: "OBC" },
                         { value: "choice3", label: "SC/ST" },
                       ]}
-                      onChange={handleSelectChange}
+                      // onChange={handleSelectChange}
                       className="w-full sm:w-[47%]"
                     />
                   )}
                 />
                 <Field
                   name="city"
-                  render={({ field, meta }) => (
+                  render={({ field, meta }: FieldProps) => (
                     <SelectField
                       label="City"
                       {...field}
@@ -254,7 +254,7 @@ const TellUsMoreAboutYourself: React.FC = () => {
                         { value: "choice2", label: "Los Angeles" },
                         { value: "choice3", label: "Chicago" },
                       ]}
-                      onChange={handleSelectChange}
+                      // onChange={handleSelectChange}
                       className="w-full sm:w-[47%]"
                     />
                   )}
