@@ -9,7 +9,7 @@ import Pagination from "@/app/components/common/pagination/Pagination";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { Suspense } from "react";
 
 const testimonials = [
   {
@@ -29,7 +29,7 @@ const testimonials = [
 ];
 
 const SuccessStoriesPage = () => {
-    const router = useRouter();
+  const router = useRouter();
   return (
     <section className="">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -39,7 +39,9 @@ const SuccessStoriesPage = () => {
               Home
             </Link>
           </li>
-          <li className="text-gray-400"><span>›</span></li>
+          <li className="text-gray-400">
+            <span>›</span>
+          </li>
           <li>
             <span className="text-orange-500">Success Stories</span>
           </li>
@@ -84,12 +86,20 @@ const SuccessStoriesPage = () => {
                   </div>
                 </div>
                 <div>
-                  <Button label="See Detail" variant="secondary" className='px-10 w-full sm:w-auto' onClick={() => router.push('/home/success-stories/1')} />
+                  <Button
+                    label="See Detail"
+                    variant="secondary"
+                    className="px-10 w-full sm:w-auto"
+                    onClick={() => router.push("/home/success-stories/1")}
+                  />
                 </div>
               </React.Fragment>
             ))}
           </div>
-          <Pagination />
+
+          <Suspense fallback={<div>Loading pagination...</div>}>
+            <Pagination />
+          </Suspense>
         </div>
       </div>
     </section>
