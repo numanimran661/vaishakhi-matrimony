@@ -127,7 +127,7 @@ const MessagePage = () => {
   }, []);
 
   return (
-    <div className="max-w-7xl mx-auto h-screen bg-gray-50 mb-20">
+    <div className="max-w-7xl mx-auto h-screen bg-gray-50 mb-20 px-4">
       <ul className="flex items-center gap-2 text-sm my-8">
         <li>
           <Link href="/home" className="hover:text-primary">
