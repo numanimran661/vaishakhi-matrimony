@@ -31,6 +31,14 @@ import IntegrityIcon from "../../../../../public/images/svg/integrity-icon.svg";
 import InovationIcon from "../../../../../public/images/svg/inovation-icon.svg";
 import EmpathyIcon from "../../../../../public/images/svg/empathy-icon.svg";
 import InclusivityIcon from "../../../../../public/images/svg/inclusivity-icon.svg";
+import basicInfo from "../../../../../public/images/svg/basic_info.svg";
+import personalInfo from "../../../../../public/images/svg/personal_info.svg";
+import partnerPref from "../../../../../public/images/svg/partner_pref.svg";
+import orangePersonalDetails from "../../../../../public/images/svg/orange-personal-details.svg";
+import rightArrowWithoutBg from "../../../../../public/images/svg/right-arrow-without-bg.svg";
+import razorpayLogo from "../../../../../public/images/svg/razorpayLogo.svg";
+import tick from "../../../../../public/images/svg/tick.svg";
+import radio from "../../../../../public/images/svg/radio.svg";
 
 import AppLogo from "../../../../../public/images/png/app-logo.png";
 import LogoDark from "../../../../../public/images/png/logo-dark.png";
@@ -44,9 +52,6 @@ import AppStore from "../../../../../public/images/png/app-store.png";
 import SuccessStory from "../../../../../public/images/png/success-story-img.png";
 import PricingBg from "../../../../../public/images/png/pricing-plan-bg.png";
 import DatingImg from "../../../../../public/images/png/dating-img.png";
-import basicInfo from "../../../../../public/images/svg/basic_info.svg";
-import personalInfo from "../../../../../public/images/svg/personal_info.svg";
-import partnerPref from "../../../../../public/images/svg/partner_pref.svg";
 import FemalePlaceholder from "../../../../../public/images/png/female-placeholder.png";
 import MalePlaceholder from "../../../../../public/images/png/male-placeholder.png";
 import DummyProfile from "../../../../../public/images/png/dummy-profile.png";
@@ -85,15 +90,14 @@ export {
   CheckCircle,
   Hamburger,
   CloseIcon,
+  MalePlaceholder,
+  FemalePlaceholder,
+  DummyProfile,
   basicInfo,
   partnerPref,
   personalInfo,
   VerifiedIcon,
-  DummyProfile,
-  FemalePlaceholder,
-  MalePlaceholder,
   MessageIcon,
-  BriefcaseIcon,
   ReqSendIcon,
   LocationMarker,
   ArrowLeft,
@@ -110,5 +114,12 @@ export {
   IntegrityIcon,
   FounderImg,
   MissionVisionImg,
-  AboutBannerImg
+  AboutBannerImg,
+  BriefcaseIcon,
+  orangePersonalDetails,
+  rightArrowWithoutBg,
+  razorpayLogo,
+  tick,
+  radio,
 };
+
