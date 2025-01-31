@@ -37,6 +37,28 @@ body {
   margin: 0;
 }
 
+/******* Scroll Bar *******/
+@layer utilities {
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    border-radius: 100vh;
+    background: var(--bgLight);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--text3);
+    border-radius: 100vh;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--text3);
+  }
+}
+
 .blur-bg {
   backdrop-filter: blur(28.16170883178711px);
 }
@@ -83,4 +105,3 @@ body {
 .slick-dots li.slick-active button:before {
   color: #ff7b36; /* Active dot color (orange) */
 }
-

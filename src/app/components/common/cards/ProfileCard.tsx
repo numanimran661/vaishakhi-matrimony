@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import Image, { StaticImageData } from "next/image";
 import React from "react";
 import {
@@ -37,9 +37,12 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
   location,
   gender,
 }) => {
-  const router = useRouter()
+  const router = useRouter();
   return (
-    <div className="bg-white shadow rounded-xl relative" onClick={() => router.push(`/home/profile-details/${id}`)}>
+    <div
+      className="bg-white shadow rounded-xl relative"
+      onClick={() => router.push(`/home/profile-details/${id}`)}
+    >
       <Image
         src={
           image
@@ -92,11 +95,27 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
               {location}
             </p>
             <div className="flex gap-1 items-center">
-              <span className="rounded-full bg-lightGray p-2">
-                <Image width={14} height={14} src={ReqSendIcon} alt="Send Request" />
+              <span className="rounded-full bg-lightGray p-2 cursor-pointer">
+                <Image
+                  width={14}
+                  height={14}
+                  src={ReqSendIcon}
+                  alt="Send Request"
+                />
               </span>
-              <span className="rounded-full bg-orange-50 p-2">
-                <Image width={14} height={14} src={MessageIcon} alt="Message Icon" />
+              <span
+                className="rounded-full bg-orange-50 p-2 cursor-pointer"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  router.push("/home/messages");
+                }}
+              >
+                <Image
+                  width={14}
+                  height={14}
+                  src={MessageIcon}
+                  alt="Message Icon"
+                />
               </span>
             </div>
           </div>

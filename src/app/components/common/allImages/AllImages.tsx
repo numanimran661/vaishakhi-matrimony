@@ -20,6 +20,25 @@ import MessageIcon from "../../../../../public/images/svg/message-icon.svg";
 import ReqSendIcon from "../../../../../public/images/svg/send-req-icon.svg";
 import BriefcaseIcon from "../../../../../public/images/svg/briefcase-icon.svg";
 import LocationMarker from "../../../../../public/images/svg/location-marker.svg";
+import ArrowLeft from "../../../../../public/images/svg/arrow-left.svg";
+import ArrowRight from "../../../../../public/images/svg/arrow-right.svg";
+import SearchIcon from "../../../../../public/images/svg/search.svg";
+import PaperPlane from "../../../../../public/images/svg/paper-plane.svg";
+import ThreeDotIcon from "../../../../../public/images/svg/three-dots.svg";
+import ClockIcon from "../../../../../public/images/svg/clock-icon.svg";
+import SmileIcon from "../../../../../public/images/svg/face-smile-wink.svg";
+import IntegrityIcon from "../../../../../public/images/svg/integrity-icon.svg";
+import InovationIcon from "../../../../../public/images/svg/inovation-icon.svg";
+import EmpathyIcon from "../../../../../public/images/svg/empathy-icon.svg";
+import InclusivityIcon from "../../../../../public/images/svg/inclusivity-icon.svg";
+import basicInfo from "../../../../../public/images/svg/basic_info.svg";
+import personalInfo from "../../../../../public/images/svg/personal_info.svg";
+import partnerPref from "../../../../../public/images/svg/partner_pref.svg";
+import orangePersonalDetails from "../../../../../public/images/svg/orange-personal-details.svg";
+import rightArrowWithoutBg from "../../../../../public/images/svg/right-arrow-without-bg.svg";
+import razorpayLogo from "../../../../../public/images/svg/razorpayLogo.svg";
+import tick from "../../../../../public/images/svg/tick.svg";
+import radio from "../../../../../public/images/svg/radio.svg";
 
 import AppLogo from "../../../../../public/images/png/app-logo.png";
 import LogoDark from "../../../../../public/images/png/logo-dark.png";
@@ -33,12 +52,13 @@ import AppStore from "../../../../../public/images/png/app-store.png";
 import SuccessStory from "../../../../../public/images/png/success-story-img.png";
 import PricingBg from "../../../../../public/images/png/pricing-plan-bg.png";
 import DatingImg from "../../../../../public/images/png/dating-img.png";
-import basicInfo from "../../../../../public/images/svg/basic_info.svg";
-import personalInfo from "../../../../../public/images/svg/personal_info.svg";
-import partnerPref from "../../../../../public/images/svg/partner_pref.svg";
 import FemalePlaceholder from "../../../../../public/images/png/female-placeholder.png";
 import MalePlaceholder from "../../../../../public/images/png/male-placeholder.png";
 import DummyProfile from "../../../../../public/images/png/dummy-profile.png";
+import SuccessDetailImg from "../../../../../public/images/png/success-detail-img.png";
+import FounderImg from "../../../../../public/images/png/founder-img.png";
+import AboutBannerImg from "../../../../../public/images/png/about-banner-bg.png";
+import MissionVisionImg from "../../../../../public/images/png/mission-vision-img.png";
 
 export {
   AppLogo,
@@ -70,15 +90,36 @@ export {
   CheckCircle,
   Hamburger,
   CloseIcon,
+  MalePlaceholder,
+  FemalePlaceholder,
+  DummyProfile,
   basicInfo,
   partnerPref,
   personalInfo,
   VerifiedIcon,
-  DummyProfile,
-  FemalePlaceholder,
-  MalePlaceholder,
   MessageIcon,
-  BriefcaseIcon,
   ReqSendIcon,
-  LocationMarker
+  LocationMarker,
+  ArrowLeft,
+  ArrowRight,
+  SuccessDetailImg,
+  ClockIcon,
+  SearchIcon,
+  ThreeDotIcon,
+  PaperPlane,
+  SmileIcon,
+  InclusivityIcon,
+  InovationIcon,
+  EmpathyIcon,
+  IntegrityIcon,
+  FounderImg,
+  MissionVisionImg,
+  AboutBannerImg,
+  BriefcaseIcon,
+  orangePersonalDetails,
+  rightArrowWithoutBg,
+  razorpayLogo,
+  tick,
+  radio,
 };
+

@@ -14,6 +14,7 @@ import {
 import Button from "@/app/components/common/buttons/Button";
 import Slider from "react-slick";
 import GlobalModal from "@/app/components/common/modals/InitialModal";
+import Link from "next/link";
 
 const ProfileDetail = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -32,11 +33,19 @@ const ProfileDetail = () => {
   };
   return (
     <div className="max-w-7xl mx-auto p-6">
-      <div className="flex items-center text-sm text-gray-500 space-x-2 mb-4">
-        <span>Home</span>
-        <span>›</span>
-        <span className="text-primary">Profile Detail</span>
-      </div>
+      <ul className="flex items-center gap-2 text-sm my-8">
+        <li>
+          <Link href="/home" className="hover:text-primary">
+            Home
+          </Link>
+        </li>
+        <li className="text-gray-400">
+          <span>›</span>
+        </li>
+        <li>
+          <span className="text-primary">Profile Detail</span>
+        </li>
+      </ul>
 
       <div className="bg-white border border-gray rounded-2xl py-3 md:py-6 lg:py-10 grid grid-cols-1 lg:grid-cols-2">
         {/* Left Section */}
@@ -215,7 +224,11 @@ const ProfileDetail = () => {
           all the amazing features we offer!
         </p>
         <div className="flex justify-end mt-4 gap-4 border-t border-gray pt-3">
-          <Button onClick={() => setIsModalOpen(false)} label="Cancel" variant="light" />
+          <Button
+            onClick={() => setIsModalOpen(false)}
+            label="Cancel"
+            variant="light"
+          />
           <Button label="Upgrade Now" />
         </div>
       </GlobalModal>
