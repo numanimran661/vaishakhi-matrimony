@@ -1,10 +1,9 @@
-import { InputFieldProps } from '@/types/formTypes';
 import React from 'react';
 
 type InputFieldProps = {
   label: string;
   name: string;
-  type?: 'text' | 'email' | 'password' | 'number';
+  type?: 'text' | 'email' | 'password' | 'number' | "textarea";
   value?: string | number;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;

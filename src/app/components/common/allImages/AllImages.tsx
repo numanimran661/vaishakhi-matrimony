@@ -20,6 +20,14 @@ import MessageIcon from "../../../../../public/images/svg/message-icon.svg";
 import ReqSendIcon from "../../../../../public/images/svg/send-req-icon.svg";
 import BriefcaseIcon from "../../../../../public/images/svg/briefcase-icon.svg";
 import LocationMarker from "../../../../../public/images/svg/location-marker.svg";
+import basicInfo from "../../../../../public/images/svg/basic_info.svg";
+import personalInfo from "../../../../../public/images/svg/personal_info.svg";
+import partnerPref from "../../../../../public/images/svg/partner_pref.svg";
+import orangePersonalDetails from "../../../../../public/images/svg/orange-personal-details.svg";
+import rightArrowWithoutBg from "../../../../../public/images/svg/right-arrow-without-bg.svg";
+import razorpayLogo from "../../../../../public/images/svg/razorpayLogo.svg";
+import tick from "../../../../../public/images/svg/tick.svg";
+import radio from "../../../../../public/images/svg/radio.svg";
 
 import AppLogo from "../../../../../public/images/png/app-logo.png";
 import LogoDark from "../../../../../public/images/png/logo-dark.png";
@@ -33,9 +41,9 @@ import AppStore from "../../../../../public/images/png/app-store.png";
 import SuccessStory from "../../../../../public/images/png/success-story-img.png";
 import PricingBg from "../../../../../public/images/png/pricing-plan-bg.png";
 import DatingImg from "../../../../../public/images/png/dating-img.png";
-import basicInfo from "../../../../../public/images/svg/basic_info.svg";
-import personalInfo from "../../../../../public/images/svg/personal_info.svg";
-import partnerPref from "../../../../../public/images/svg/partner_pref.svg";
+import DummyProfile from "../../../../../public/images/png/dummy-profile.png"
+import MalePlaceholder from "../../../../../public/images/png/male-placeholder.png"
+import FemalePlaceholder from "../../../../../public/images/png/female-placeholder.png"
 
 export {
   AppLogo,
@@ -67,7 +75,21 @@ export {
   CheckCircle,
   Hamburger,
   CloseIcon,
+  MalePlaceholder,
+  FemalePlaceholder,
+  DummyProfile,
   basicInfo,
   partnerPref,
   personalInfo,
+  VerifiedIcon,
+  MessageIcon,
+  ReqSendIcon,
+  BriefcaseIcon,
+  LocationMarker,
+  orangePersonalDetails,
+  rightArrowWithoutBg,
+  razorpayLogo,
+  tick,
+  radio,
 };
+
