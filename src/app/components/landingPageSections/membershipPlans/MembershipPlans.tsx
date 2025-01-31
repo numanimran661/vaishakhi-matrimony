@@ -1,12 +1,96 @@
-"use client"
 import Image from "next/image";
 import Button from "../../common/buttons/Button";
 import { PricingBg } from "../../common/allImages/AllImages";
-import { plans } from "../../common/allConstants/landingSectionConstants";
-import { useRouter } from "next/navigation";
+
+type planItem = {
+  title: string;
+  price: string;
+  period: string;
+  description: string;
+  features: string[];
+  featureClr: string;
+  buttonLabel: string;
+  bgColor: string;
+  textColor: string;
+  priceColor: string;
+  buttonBgColor: string;
+  borderColor: string;
+  buttonTextColor: string;
+  variant: "primary" | "secondary" | "transparent";
+};
+
+type PlanItems = planItem[];
 
 const PricingPlans = () => {
-  const router = useRouter()
+  const plans: PlanItems = [
+    {
+      title: "Starter",
+      price: "₹80",
+      period: "/month",
+      description: "Lorem ipsum dolor sit amet dolor sit conset cetur adip.",
+      features: [
+        "3 months Duration",
+        "213 Messages",
+        "Live Chats",
+        "2 Profile Views",
+        "Up to 3 team members",
+      ],
+      featureClr: "text-darkBlue",
+      buttonLabel: "Get started",
+      bgColor: "bg-white",
+      textColor: "text-gray-800",
+      priceColor: "text-primary",
+      buttonBgColor: "bg-orange-500",
+      borderColor: "border-gray",
+      buttonTextColor: "text-white",
+      variant: "primary",
+    },
+    {
+      title: "Basic",
+      price: "₹150",
+      period: "/month",
+      description: "Lorem ipsum dolor sit amet dolor sit conset cetur adip.",
+      features: [
+        "3 months Duration",
+        "213 Messages",
+        "Live Chats",
+        "2 Profile Views",
+        "Up to 3 team members",
+      ],
+      featureClr: "text-white",
+      buttonLabel: "Get started",
+      bgColor: "bg-darkBlue",
+      textColor: "text-white",
+      priceColor: "text-white",
+      buttonBgColor: "bg-white",
+      borderColor: "border-white",
+      buttonTextColor: "text-orange-900",
+      variant: "secondary",
+    },
+    {
+      title: "Premium",
+      price: "₹180",
+      period: "/month",
+      description: "Lorem ipsum dolor sit amet dolor sit conset cetur adip.",
+      features: [
+        "3 months Duration",
+        "213 Messages",
+        "Live Chats",
+        "2 Profile Views",
+        "Up to 3 team members",
+      ],
+      featureClr: "text-darkBlue",
+      buttonLabel: "Get started",
+      bgColor: "bg-white",
+      textColor: "text-gray-800",
+      priceColor: "text-primary",
+      buttonBgColor: "bg-orange-500",
+      borderColor: "border-gray",
+      buttonTextColor: "text-white",
+      variant: "primary",
+    },
+  ];
+
   return (
     <section className="relative py-16 border-b border-gray">
       {/* Background Image */}
@@ -19,7 +103,7 @@ const PricingPlans = () => {
           quality={100}
         />
       </div>
-      <div className="relative z-10 max-w-5xl mx-auto px-8 text-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-8 text-center">
         <h2 className="text-sm font-medium text-normal uppercase">
           Membership Plans
         </h2>
@@ -59,7 +143,6 @@ const PricingPlans = () => {
                 className={`mt-8 w-full`}
                 label={plan.buttonLabel}
                 variant={plan.variant}
-                onClick={() => router.push("/membership-plans/selected-plan")}
               />
             </div>
           ))}

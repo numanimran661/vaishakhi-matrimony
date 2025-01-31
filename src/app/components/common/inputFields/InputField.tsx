@@ -1,6 +1,17 @@
 import { InputFieldProps } from '@/types/formTypes';
 import React from 'react';
 
+type InputFieldProps = {
+  label: string;
+  name: string;
+  type?: 'text' | 'email' | 'password' | 'number';
+  value?: string | number;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  placeholder?: string;
+  className?: string;
+  classNameLabel?: string;
+};
+
 const InputField: React.FC<InputFieldProps> = ({
   label,
   name,

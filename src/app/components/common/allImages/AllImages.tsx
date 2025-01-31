@@ -15,6 +15,11 @@ import GoogleLogo from "../../../../../public/images/svg/Google-logo.svg";
 import CheckCircle from "../../../../../public/images/svg/check-circle-icon.svg";
 import Hamburger from "../../../../../public/images/svg/hamburger-icon.svg";
 import CloseIcon from "../../../../../public/images/svg/close-icon.svg";
+import VerifiedIcon from "../../../../../public/images/svg/verified-icon.svg";
+import MessageIcon from "../../../../../public/images/svg/message-icon.svg";
+import ReqSendIcon from "../../../../../public/images/svg/send-req-icon.svg";
+import BriefcaseIcon from "../../../../../public/images/svg/briefcase-icon.svg";
+import LocationMarker from "../../../../../public/images/svg/location-marker.svg";
 
 import AppLogo from "../../../../../public/images/png/app-logo.png";
 import LogoDark from "../../../../../public/images/png/logo-dark.png";
@@ -31,11 +36,6 @@ import DatingImg from "../../../../../public/images/png/dating-img.png";
 import basicInfo from "../../../../../public/images/svg/basic_info.svg";
 import personalInfo from "../../../../../public/images/svg/personal_info.svg";
 import partnerPref from "../../../../../public/images/svg/partner_pref.svg";
-import rightArrowWithoutBg from "../../../../../public/images/svg/right-arrow-without-bg.svg";
-import tick from "../../../../../public/images/svg/tick.svg";
-import radio from "../../../../../public/images/svg/radio.svg";
-import razorpayLogo from "../../../../../public/images/svg/razorpayLogo.svg";
-import orangePersonalDetails from "../../../../../public/images/svg/orange-personal-details.svg";
 
 export {
   AppLogo,
@@ -70,9 +70,4 @@ export {
   basicInfo,
   partnerPref,
   personalInfo,
-  rightArrowWithoutBg,
-  tick,
-  radio,
-  razorpayLogo,
-  orangePersonalDetails
 };

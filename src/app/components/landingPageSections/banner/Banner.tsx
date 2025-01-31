@@ -5,7 +5,7 @@ import Button from "../../common/buttons/Button";
 
 const Banner: React.FC = () => {
   return (
-    <section className="relative md:px-12 lg:px-20 px-6 mx-auto bg-lightgray py-20">
+    <section className="relative px-6 mx-auto bg-lightgray py-20 max-w-7xl">
       <div className="absolute inset-0">
         <Image
           src={BannerBg}
