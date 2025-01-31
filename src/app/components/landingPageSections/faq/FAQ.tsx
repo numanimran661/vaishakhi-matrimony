@@ -53,7 +53,7 @@ const FAQSection = () => {
                   : "bg-lightBlue text-gray-800"
               }`}
             >
-              <div className="flex justify-between items-center text-left">
+              <div className="flex justify-between items-start md:items-center text-left">
                 <div className="md:pe-6 lg:pe-14 pe-2">
                   <h3 className="text-lg font-regular">{faq.question}</h3>
                   {activeIndex === index && (

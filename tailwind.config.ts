@@ -13,6 +13,7 @@ export default {
         primary: "var(--themeColor)",
         secondary: "var(--themeColor2)",
         lightGray: "var(--bgColor)",
+        gray50: "var(--bgLight)",
         gray: "var(--border)",
         darkBlue: "var(--text)",
         darkGray: "var(--text2)",

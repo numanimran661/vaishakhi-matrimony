@@ -30,6 +30,7 @@ const ResetPassword: React.FC = () => {
             name="email"
             type="email"
             placeholder="Email Address"
+            className="mt-4"
           />
           <Button
             type="submit"

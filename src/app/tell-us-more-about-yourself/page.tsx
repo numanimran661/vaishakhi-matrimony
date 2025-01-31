@@ -116,7 +116,7 @@ const TellUsMoreAboutYourself: React.FC = () => {
                       {...field}
                       placeholder="Full Name"
                       onChange={handleInputChange("fullName")}
-                      className="w-full sm:w-[47%]"
+                      className="w-full sm:w-[47%] mt-4"
                     />
                   )}
                 />

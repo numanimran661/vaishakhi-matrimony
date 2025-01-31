@@ -72,12 +72,12 @@ const Header: React.FC = () => {
             <Link href="/about">
               <span className="text-gray-600 hover:text-gray-800">About</span>
             </Link>
-            <Link href="/success-stories">
+            <Link href="/home/success-stories">
               <span className="text-gray-600 hover:text-gray-800">
                 Success Stories
               </span>
             </Link>
-            <Link href="/pricing">
+            <Link href="/membership-plans">
               <span className="text-gray-600 hover:text-gray-800">Pricing</span>
             </Link>
             <Link href="/contact">

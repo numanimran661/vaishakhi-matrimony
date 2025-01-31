@@ -31,12 +31,14 @@ const LoginPage: React.FC = () => {
             name="email"
             type="email"
             placeholder="Email Address"
+            className="mt-4"
           />
           <InputField
             label="Password"
             name="password"
             type="password"
             placeholder="Password"
+            className="mt-4"
           />
           <div className="flex justify-end mt-3">
             <p className="text-primary font-regular">Forgot Password?</p>

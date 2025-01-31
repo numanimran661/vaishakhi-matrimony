@@ -9,10 +9,14 @@ import Button from "@/app/components/common/buttons/Button";
 const ContactPage: React.FC = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-      <div className="w-full max-w-3xl bg-white p-8 rounded-lg shadow-md">
-        <h2 className="text-3xl font-bold mb-7 text-center">Get in touch today</h2>
+      <div className="w-full max-w-7xl p-8">
+        <h2 className="text-center font-medium text-normal uppercase">Contact Us</h2>
+        <h2 className="text-4xl font-bold mb-7 text-center">
+          Get in touch today
+        </h2>
         <p className="text-center text-gray-500 mb-8">
-          Lorem ipsum dolor sit amet consectetur adipiscing elit nulla adipiscing tincidunt interdum tellus du.
+          Lorem ipsum dolor sit amet consectetur adipiscing elit nulla
+          adipiscing tincidunt interdum tellus du.
         </p>
         <Formik
           initialValues={{
@@ -23,7 +27,9 @@ const ContactPage: React.FC = () => {
           }}
           validationSchema={Yup.object({
             name: Yup.string().required("Required"),
-            email: Yup.string().email("Invalid email address").required("Required"),
+            email: Yup.string()
+              .email("Invalid email address")
+              .required("Required"),
             phone: Yup.string().matches(
               /^[0-9]{10}$/,
               "Phone must be 10 digits"
@@ -37,6 +43,8 @@ const ContactPage: React.FC = () => {
         >
           {({ isSubmitting }) => (
             <Form>
+              <div className="grid md:grid-cols-2 grid-cols-1 gap-3 md:gap-5">
+
               <InputField
                 label="Name"
                 name="name"
@@ -55,17 +63,19 @@ const ContactPage: React.FC = () => {
                 type="text"
                 placeholder="Your Phone Number"
               />
+              </div>
               <InputField
                 label="Message"
                 name="message"
                 type="textarea"
                 placeholder="Your Message"
+                className="md:mt-4"
               />
               <Button
                 type="submit"
                 disabled={isSubmitting}
                 label="Send message"
-                className="mt-4 w-full"
+                className="mt-7 w-full sm:w-auto"
               />
             </Form>
           )}
