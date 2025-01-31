@@ -7,8 +7,10 @@ import InputField from "@/app/components/common/inputFields/InputField";
 import Button from "@/app/components/common/buttons/Button";
 import { GoogleLogo } from "@/app/components/common/allImages/AllImages";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const SignupForm: React.FC = () => {
+  const router = useRouter()
   return (
     <Formik
       initialValues={{ email: "", password: "" }}
@@ -45,6 +47,7 @@ const SignupForm: React.FC = () => {
             disabled={isSubmitting}
             label="Sign Up"
             className="mt-4 w-full"
+            onClick={() => router.push("/tell-us-more-about-yourself")}
           />
           <Button
             type="button"
@@ -52,6 +55,7 @@ const SignupForm: React.FC = () => {
             icon={GoogleLogo}
             className="mt-4 w-full bg-lightBlue"
             variant="light"
+            onClick={() => router.push("/tell-us-more-about-yourself")}
           />
           <div className="mt-4 font-regular">
             <span>Already have an account?</span>{" "}

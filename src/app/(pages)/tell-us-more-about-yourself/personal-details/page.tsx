@@ -38,7 +38,7 @@ const PersonalDetails = () => {
             much detail as needed.
           </h2>
         </header>
-        <main className="w-full rounded-3xl sm:border-[0.5px] sm:border-gray mt-24 mb-40">
+        <main className="w-full rounded-3xl sm:border-[0.5px] sm:border-gray mt-14 mb-40">
           <div className="px-1 sm:px-12 py-1 sm:py-12">
             <div className="flex justify-between items-center space-x-4 px-6 sm:px-16 mb-5">
               <Image
