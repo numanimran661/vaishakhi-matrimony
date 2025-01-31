@@ -1,6 +1,8 @@
+'use client'
 import Image from "next/image";
 import Button from "../../common/buttons/Button";
 import { PricingBg } from "../../common/allImages/AllImages";
+import { useRouter } from "next/navigation";
 
 type planItem = {
   title: string;
@@ -90,6 +92,7 @@ const PricingPlans = () => {
       variant: "primary",
     },
   ];
+  const router = useRouter()
 
   return (
     <section className="relative py-16 border-b border-gray">
@@ -143,6 +146,7 @@ const PricingPlans = () => {
                 className={`mt-8 w-full`}
                 label={plan.buttonLabel}
                 variant={plan.variant}
+                onClick={() => router.push("/membership-plans/selected-plan")}
               />
             </div>
           ))}

@@ -9,9 +9,9 @@ import Button from "@/app/components/common/buttons/Button";
 const ContactPage: React.FC = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-      <div className="w-full max-w-7xl p-8">
+      <div className="w-full max-w-7xl">
         <h2 className="text-center font-medium text-normal uppercase">Contact Us</h2>
-        <h2 className="text-4xl font-bold mb-7 text-center">
+        <h2 className="text-2xl md:text-4xl font-bold mb-7 text-center">
           Get in touch today
         </h2>
         <p className="text-center text-gray-500 mb-8">
@@ -69,7 +69,7 @@ const ContactPage: React.FC = () => {
                 name="message"
                 type="textarea"
                 placeholder="Your Message"
-                className="md:mt-4"
+                className="mt-4"
               />
               <Button
                 type="submit"

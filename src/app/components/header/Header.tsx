@@ -9,10 +9,11 @@ import {
   LogoDark,
 } from "../common/allImages/AllImages";
 import Button from "../common/buttons/Button";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const Header: React.FC = () => {
   const router = useRouter();
+  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -57,32 +58,37 @@ const Header: React.FC = () => {
               height={130}
               loading="lazy"
               placeholder="blur"
+              onClick={() => router.push("/")}
             />
           </div>
 
           {/* Navigation Links */}
           <nav
-            className={`navbar lg:flex lg:flex-row lg:static lg:border-0 lg:p-0 p-4 border border-gray flex-col absolute left-0 top-20 bg-white gap-5 text-nowrap transition-all ${
-              isMenuOpen ? "flex" : "hidden"
+            className={`navbar w-56 lg:w-auto flex lg:flex-row lg:static lg:border-0 lg:p-0 lg:translate-x-0 p-3 pr-5 border border-gray flex-col absolute left-0 top-20 bg-white gap-5 text-nowrap transition-all duration-300 ease-in-out ${
+              isMenuOpen
+                ? "translate-x-0 opacity-100"
+                : "-translate-x-full opacity-0 lg:opacity-100"
             }`}
           >
-            <Link href="/home">
-              <span className="text-gray-600 hover:text-gray-800">Home</span>
-            </Link>
-            <Link href="/about">
-              <span className="text-gray-600 hover:text-gray-800">About</span>
-            </Link>
-            <Link href="/home/success-stories">
-              <span className="text-gray-600 hover:text-gray-800">
-                Success Stories
-              </span>
-            </Link>
-            <Link href="/membership-plans">
-              <span className="text-gray-600 hover:text-gray-800">Pricing</span>
-            </Link>
-            <Link href="/contact">
-              <span className="text-gray-600 hover:text-gray-800">Contact</span>
-            </Link>
+            {[
+              { href: "/home", label: "Home" },
+              { href: "/about", label: "About" },
+              { href: "/home/success-stories", label: "Success Stories" },
+              { href: "/membership-plans", label: "Pricing" },
+              { href: "/contact", label: "Contact" },
+            ].map((item, i) => (
+              <Link key={i} href={item.href}>
+                <div
+                  className={`lg:hover:text-primary lg:p-0 p-2 rounded-lg ${
+                    pathname === item.href
+                      ? "lg:text-primary lg:bg-opacity-0 lg:font-semibold text-darkBlue bg-orange-100" // Active style
+                      : "text-gray-600 hover:text-gray-800"
+                  }`}
+                >
+                  {item.label}
+                </div>
+              </Link>
+            ))}
           </nav>
 
           {/* Buttons */}
