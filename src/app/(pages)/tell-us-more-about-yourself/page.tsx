@@ -13,6 +13,7 @@ import SelectField from "@/app/components/common/inputFields/SelectField";
 import { initialValuesProps } from "@/types/formTypes";
 import { useFormik } from "formik";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const initialValues: initialValuesProps = {
   fullName: "",
@@ -27,6 +28,7 @@ const initialValues: initialValuesProps = {
   city: "",
 };
 const TellUsMoreAboutYourself: React.FC = () => {
+  const router = useRouter()
   const { handleChange, values, handleSubmit } = useFormik({
     initialValues,
     onSubmit: (value, action) => {
@@ -46,7 +48,7 @@ const TellUsMoreAboutYourself: React.FC = () => {
             much detail as needed.
           </h2>
         </header>
-        <main className="w-full rounded-3xl sm:border-[0.5px] sm:border-gray mt-24 mb-40">
+        <main className="w-full rounded-3xl sm:border-[0.5px] sm:border-gray mt-14 mb-40">
           <div className="px-1 sm:px-12 py-1 sm:py-12">
             <div className="flex justify-between items-center space-x-4 px-10 sm:px-16 mb-5">
               <Image
@@ -123,6 +125,7 @@ const TellUsMoreAboutYourself: React.FC = () => {
                 label="Continue"
                 type="submit"
                 className="w-full sm:w-[216px] h-[50px] bg-[#F97E27] text-white rounded-full absolute -bottom-20 -right-8"
+                onClick={() => router.push("/tell-us-more-about-yourself/personal-details")}
               />
             </form>
           </div>

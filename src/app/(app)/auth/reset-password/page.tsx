@@ -6,8 +6,10 @@ import * as Yup from "yup";
 import InputField from "@/app/components/common/inputFields/InputField";
 import Button from "@/app/components/common/buttons/Button";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const ResetPassword: React.FC = () => {
+  const router = useRouter()
   return (
     <Formik
       initialValues={{ email: "", password: "" }}
@@ -37,6 +39,7 @@ const ResetPassword: React.FC = () => {
             disabled={isSubmitting}
             label="Reset"
             className="mt-4 w-full"
+            onClick={() => router.push("/auth/reset-mail-sent")}
           />
           <div className="mt-4 font-regular">
             <span>Have Your Password?</span>{" "}

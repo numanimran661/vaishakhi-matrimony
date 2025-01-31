@@ -7,8 +7,10 @@ import InputField from "@/app/components/common/inputFields/InputField";
 import Button from "@/app/components/common/buttons/Button";
 import { GoogleLogo } from "@/app/components/common/allImages/AllImages";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const LoginPage: React.FC = () => {
+  const router = useRouter();
   return (
     <Formik
       initialValues={{ email: "", password: "" }}
@@ -41,13 +43,14 @@ const LoginPage: React.FC = () => {
             className="mt-4"
           />
           <div className="flex justify-end mt-3">
-            <p className="text-primary font-regular">Forgot Password?</p>
+            <p className="text-primary font-regular cursor-pointer" onClick={() => router.push("/auth/reset-password")}>Forgot Password?</p>
           </div>
           <Button
-            type="submit"
+            // type="submit"
             disabled={isSubmitting}
             label="Log in"
             className="mt-4 w-full"
+            onClick={() => router.push("/home")}
           />
           <Button
             type="button"
@@ -55,6 +58,7 @@ const LoginPage: React.FC = () => {
             icon={GoogleLogo}
             className="mt-4 w-full bg-lightBlue"
             variant="light"
+            onClick={() => router.push("/home")}
           />
           <div className="mt-4 font-regular">
             <span>Don't have an account?</span>{" "}
