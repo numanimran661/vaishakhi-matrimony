@@ -31,6 +31,11 @@ import DatingImg from "../../../../../public/images/png/dating-img.png";
 import basicInfo from "../../../../../public/images/svg/basic_info.svg";
 import personalInfo from "../../../../../public/images/svg/personal_info.svg";
 import partnerPref from "../../../../../public/images/svg/partner_pref.svg";
+import rightArrowWithoutBg from "../../../../../public/images/svg/right-arrow-without-bg.svg";
+import tick from "../../../../../public/images/svg/tick.svg";
+import radio from "../../../../../public/images/svg/radio.svg";
+import razorpayLogo from "../../../../../public/images/svg/razorpayLogo.svg";
+import orangePersonalDetails from "../../../../../public/images/svg/orange-personal-details.svg";
 
 export {
   AppLogo,
@@ -65,4 +70,9 @@ export {
   basicInfo,
   partnerPref,
   personalInfo,
+  rightArrowWithoutBg,
+  tick,
+  radio,
+  razorpayLogo,
+  orangePersonalDetails
 };

@@ -28,6 +28,10 @@ export default {
       minHeight: {
         large: '500px',
       },
+      screens: {
+        xsm: "638px",
+        mm: "450px",
+      }
     },
   },
   plugins: [],

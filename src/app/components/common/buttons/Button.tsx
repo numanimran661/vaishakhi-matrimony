@@ -6,7 +6,7 @@ type ButtonProps = {
   onClick?: () => void;
   icon?: string;
   type?: "button" | "submit" | "reset";
-  variant?: "primary" | "secondary" | "transparent" | "light";
+  variant?: "primary" | "secondary" | "transparent" | "light" | "transparentOrange";
   disabled?: boolean;
   className?: string;
 };
@@ -30,6 +30,7 @@ const Button: React.FC<ButtonProps> = ({
       "bg-white text-darkBlue hover:text-blue-900",
     light:
       "bg-lightBlue text-darkBlue hover:text-blue-900",
+    transparentOrange: "bg-transparent text-[var(--themeColor)] rounded-full border border-[var(--themeColor)]",
   };
 
   return (
