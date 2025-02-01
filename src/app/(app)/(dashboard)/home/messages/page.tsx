@@ -5,10 +5,10 @@ import Image from "next/image";
 import { StaticImageData } from "next/image";
 import {
   AboutImg2,
+  ArrowLeft,
   BannerImg,
   ClockIcon,
   DummyProfile,
-  LeftArrow,
   PaperPlane,
   SearchIcon,
   SmileIcon,
@@ -144,7 +144,7 @@ const MessagePage = () => {
       {/* Header with back button for mobile */}
       <div className="md:hidden bg-white p-4 flex items-center gap-4 border-b border-gray">
         <button onClick={() => setSelectedChat(null)}>
-          <Image src={LeftArrow} alt="back" width={24} height={24} />
+          <Image src={ArrowLeft} alt="back" width={24} height={24} />
         </button>
         <h1 className="text-lg font-semibold">Messages</h1>
       </div>

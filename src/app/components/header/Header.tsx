@@ -1,20 +1,58 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
   CloseIcon,
+  DummyProfile,
   Hamburger,
   LockIcon,
   LogoDark,
+  NotificationsIcon,
+  TablerMsgIcon,
 } from "../common/allImages/AllImages";
 import Button from "../common/buttons/Button";
 import { usePathname, useRouter } from "next/navigation";
+import NotificationsMenu from "./components/NotificationsMenu";
+import ProfileImage from "../common/profileImage/ProfileImage";
 
 const Header: React.FC = () => {
   const router = useRouter();
   const pathname = usePathname();
+  const notificationsRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showNotifications, setShowNotifications] = useState(false);
+
+  // useEffect(() => {
+  //   const handleClickOutside = (event: MouseEvent) => {
+  //     if (
+  //       notificationsRef.current &&
+  //       !notificationsRef.current.contains(event.target as Node)
+  //     ) {
+  //       setShowNotifications(false);
+  //     }
+  //   };
+
+  //   document.addEventListener("mousedown", handleClickOutside);
+  //   return () => document.removeEventListener("mousedown", handleClickOutside);
+  // }, []);
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        notificationsRef.current &&
+        !notificationsRef.current.contains(event.target as Node)
+      ) {
+        setShowNotifications(false);
+      }
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -64,6 +102,7 @@ const Header: React.FC = () => {
 
           {/* Navigation Links */}
           <nav
+            ref={menuRef}
             className={`navbar w-56 lg:w-auto flex lg:flex-row lg:static lg:border-0 lg:p-0 lg:translate-x-0 p-3 pr-5 border border-gray flex-col absolute left-0 top-20 bg-white gap-5 text-nowrap transition-all duration-300 ease-in-out ${
               isMenuOpen
                 ? "translate-x-0 opacity-100"
@@ -91,17 +130,54 @@ const Header: React.FC = () => {
             ))}
           </nav>
 
-          {/* Buttons */}
-          <div className="flex items-centers gap-1">
-            <Button
-              label="Login"
-              variant="transparent"
-              icon={LockIcon}
-              className="sm:flex hidden"
-              onClick={handleLoginClick}
-            />
-            <Button label="Get Started" onClick={handleSignUpClick} />
-          </div>
+          {pathname.includes("auth") ? (
+            <div className="flex items-centers gap-1">
+              <Button
+                label="Login"
+                variant="transparent"
+                icon={LockIcon}
+                className="sm:flex hidden"
+                onClick={handleLoginClick}
+              />
+              <Button label="Get Started" onClick={handleSignUpClick} />
+            </div>
+          ) : (
+            <div className="flex gap-3">
+              <div>
+                <div ref={notificationsRef} className="relative">
+                  <div className="bg-gray50 rounded-full p-2 cursor-pointer">
+                    <Image
+                      src={NotificationsIcon}
+                      alt="notifications Icon"
+                      onClick={() => setShowNotifications(!showNotifications)}
+                    />
+                  </div>
+                  <NotificationsMenu
+                    isOpen={showNotifications}
+                    onClose={() => setShowNotifications(false)}
+                  />
+                </div>
+              </div>
+              <div>
+                <div className="bg-gray50 rounded-full p-2 cursor-pointer">
+                  <Image
+                    src={TablerMsgIcon}
+                    alt="message Icon"
+                    onClick={() => router.push("/home/messages")}
+                  />
+                </div>
+              </div>
+              <div>
+                <div>
+                  <ProfileImage src={DummyProfile} alt="profile image" />
+                  {/* <NotificationsMenu
+                    isOpen={showNotifications}
+                    onClose={() => setShowNotifications(false)}
+                  /> */}
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </header>

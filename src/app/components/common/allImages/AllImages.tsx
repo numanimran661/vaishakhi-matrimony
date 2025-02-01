@@ -39,6 +39,8 @@ import rightArrowWithoutBg from "../../../../../public/images/svg/right-arrow-wi
 import razorpayLogo from "../../../../../public/images/svg/razorpayLogo.svg";
 import tick from "../../../../../public/images/svg/tick.svg";
 import radio from "../../../../../public/images/svg/radio.svg";
+import TablerMsgIcon from "../../../../../public/images/svg/tabler_message.svg";
+import NotificationsIcon from "../../../../../public/images/svg/notification-Icon.svg";
 
 import AppLogo from "../../../../../public/images/png/app-logo.png";
 import LogoDark from "../../../../../public/images/png/logo-dark.png";
@@ -121,5 +123,7 @@ export {
   razorpayLogo,
   tick,
   radio,
+  NotificationsIcon,
+  TablerMsgIcon
 };
 

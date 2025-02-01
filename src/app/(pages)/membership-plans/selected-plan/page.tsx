@@ -32,11 +32,11 @@ const BreadcrumbMain = () => {
 
 const SelectedPlans = () => {
   return (
-    <section className="px-4 md:px-0 max-w-[90%] w-full sm:max-w-[707px] mx-auto my-12 sm:my-24">
+    <section className="px-4 md:px-0 max-w-[90%] w-full sm:max-w-[707px] mx-auto my-6 sm:my-12">
       <BreadcrumbMain />
       <div className="rounded-3xl sm:border-[0.5px] sm:border-gray px-4 sm:px-10 py-6 sm:py-10">
         <div className="flex flex-col">
-          <h2 className="text-[20px] font-semibold text-[#1C264E]">
+          <h2 className="text-[20px] font-semibold text-darkBlue">
             Selected Plan
           </h2>
 

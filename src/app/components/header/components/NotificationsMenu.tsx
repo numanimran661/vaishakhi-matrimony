@@ -1,0 +1,133 @@
+import React from "react";
+
+interface Notification {
+  id: number;
+  type: "profile_view" | "new_match" | "compatibility" | "message";
+  title: string;
+  message: string;
+  time: string;
+  isRead: boolean;
+}
+
+const NotificationsMenu = ({
+  isOpen,
+  onClose,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+}) => {
+  const notifications: Notification[] = [
+    {
+      id: 1,
+      type: "profile_view",
+      title: "Profile View",
+      message: "Your profile was viewed! Someone may want to connect.",
+      time: "2h ago",
+      isRead: true,
+    },
+    {
+      id: 2,
+      type: "new_match",
+      title: "New Match Alert",
+      message:
+        "Someone new has matched with you! Check your profile for a potential match.",
+      time: "8h ago",
+      isRead: false,
+    },
+    {
+      id: 3,
+      type: "compatibility",
+      title: "Compatibility Update",
+      message:
+        "A new compatible match has been found based on your preferences. Take a look!",
+      time: "1d ago",
+      isRead: true,
+    },
+    {
+      id: 4,
+      type: "message",
+      title: "Message Received",
+      message:
+        "You've got new messages from John! Start a conversation with your match.",
+      time: "2d ago",
+      isRead: false,
+    },
+  ];
+
+  return (
+    <div
+      className={`absolute right-0 mt-2 w-96 bg-white rounded-2xl shadow-lg border border-gray z-50 transform transition-all duration-300 ease-in-out ${
+        isOpen
+          ? "translate-y-0 opacity-100 scale-100"
+          : "-translate-y-4 opacity-0 scale-95 pointer-events-none"
+      }`}
+    >
+      <div className="px-2">
+        <div className="flex items-center justify-between mb-4 p-4 border-b border-gray ">
+          <h2 className="text-lg font-semibold">All Notifications</h2>
+        </div>
+        <div className="flex gap-2 px-4 border-b border-gray ">
+          <button className="text-primary border-b-2 border-primary pb-2 px-3 transition-colors">
+            All
+          </button>
+          <button className="text-gray-500 hover:text-primary pb-2 px-3 transition-colors">
+            Unread
+          </button>
+        </div>
+      </div>
+
+      <div className="max-h-[400px] overflow-y-auto">
+        <div className="p-2">
+          <div className="text-sm text-gray-500 px-2 py-1">Today</div>
+          {notifications.map((notification, index) => (
+            <div
+              key={notification.id}
+              className="flex items-start p-3 hover:bg-gray-50 cursor-pointer rounded-lg transition-all duration-200 ease-in-out transform hover:scale-[1.02]"
+              style={{
+                animationDelay: `${index * 100}ms`,
+              }}
+            >
+              <div className="flex-shrink-0 mr-3">
+                {!notification.isRead && (
+                  <div className="relative">
+                    <div className="w-2 h-2 bg-red-500 rounded-full absolute -top-1 -left-1"></div>
+                    <div className="bg-red-100 rounded-full text-red-500 w-9 h-9 flex items-center justify-center mt-3">
+                      !
+                    </div>
+                  </div>
+                )}
+                {notification.isRead && (
+                  <div className="relative">
+                    {/* <div className="w-2 h-2 bg-red-500 rounded-full absolute -top-1 -left-1"></div> */}
+                    <div className="bg-green-100 rounded-full text-green-500 w-9 h-9 flex items-center justify-center mt-3">
+                      ✓
+                    </div>
+                  </div>
+                )}
+              </div>
+              <div className="flex-1">
+                <div className="flex justify-between">
+                  <p className="font-semibold text-sm">{notification.title}</p>
+                  <span className="text-xs text-gray-500">
+                    {notification.time}
+                  </span>
+                </div>
+                <p className="text-sm text-gray-600 mt-1">
+                  {notification.message}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="p-3 border-t border-gray">
+        {/* <button className="text-primary text-sm w-full text-center hover:opacity-80 transition-opacity">
+          See All
+        </button> */}
+      </div>
+    </div>
+  );
+};
+
+export default NotificationsMenu;

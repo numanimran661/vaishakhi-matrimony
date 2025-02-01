@@ -10,12 +10,12 @@ const BreadcrumbMain = () => {
     <nav className="hidden sm:block mb-4">
       <ul className="flex items-center space-x-2">
         <li>
-          <Link href="/" className="text-[#434343] font-semibold leading-4 text-[14px]">
+          <Link href="/" className="text-darkBlue leading-4 text-[14px]">
             Home
           </Link>
         </li>
         <Image src= {rightArrowWithoutBg} alt="right-arrow"/>
-        <li className="text-[#F97E27] text-[14px] font-semibold leading-4">Membership Plans</li>
+        <li className="text-primary text-[14px] leading-4">Membership Plans</li>
       </ul>
     </nav>
   );
