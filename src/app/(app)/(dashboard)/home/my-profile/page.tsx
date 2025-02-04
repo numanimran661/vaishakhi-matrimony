@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import { Tab } from "@headlessui/react";
-import Image from "next/image";
 import { ArrowLeft } from "@/app/components/common/allImages/AllImages";
 import Link from "next/link";
 import MainTabs from "./components/MainTabs";
@@ -25,13 +24,15 @@ export default function ProfileModule() {
   };
   const handleImageUpload = (files: FileList | null) => {
     if (!files) return;
-  
-    const newImages = Array.from(files).map((file) => URL.createObjectURL(file));
-  
+
+    const newImages = Array.from(files).map((file) =>
+      URL.createObjectURL(file)
+    );
+
     setUploadedImages((prevImages) => [...prevImages, ...newImages]);
     handleImagesChange([...uploadedImages, ...newImages]);
   };
-  
+
   const handleDeleteImage = (index: number) => {
     setUploadedImages((prevImages) => {
       const updatedImages = prevImages.filter((_, i) => i !== index);
@@ -39,7 +40,6 @@ export default function ProfileModule() {
       return updatedImages;
     });
   };
-  
 
   return (
     <div className="max-w-7xl mx-auto pb-6">
