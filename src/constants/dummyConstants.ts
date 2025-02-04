@@ -24,3 +24,9 @@ export const profiles = [
     },
     // Add more profiles as needed
 ];
+  
+export const dropdownOptions = [
+  { value: "Software Engineer", label: "Software Engineer" },
+  { value: "Electrical Engineer", label: "Electrical Engineer" },
+  { value: "Electronics Engineer", label: "Electronics Engineer" },
+];

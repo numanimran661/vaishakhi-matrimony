@@ -1,14 +1,14 @@
-import Image from "next/image";
-import React from "react";
+import React, { ElementType } from "react";
 
 type ButtonProps = {
   label: string;
   onClick?: () => void;
-  icon?: string;
+  icon?: ElementType;
   type?: "button" | "submit" | "reset";
   variant?: "primary" | "secondary" | "transparent" | "light" | "transparentOrange" | "dark";
   disabled?: boolean;
   className?: string;
+  size?: "sm" | "md" | "lg"
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -18,9 +18,10 @@ const Button: React.FC<ButtonProps> = ({
   variant = "primary",
   disabled = false,
   className = "",
-  icon,
+  icon: Icon,
+  size = "lg"
 }) => {
-  const baseStyle = "px-5 py-3 flex justify-center items-center gap-1 font-semibold rounded-full";
+  const baseStyle = "flex justify-center items-center gap-1 font-semibold rounded-full";
   const variantStyles = {
     primary:
       "bg-primary text-white hover:bg-orange-700",
@@ -34,19 +35,25 @@ const Button: React.FC<ButtonProps> = ({
       "bg-darkBlue text-white",
     transparentOrange: "bg-transparent text-primary border border-primary rounded-full"
   };
+  
+  const sizeClasses = {
+    sm: 'px-3 py-2 text-sm',
+    md: 'px-4 py-2',
+    lg: 'px-5 py-3',
+  };
 
   return (
     <button
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`${baseStyle} ${variantStyles[variant]} ${className} ${
+      className={`${baseStyle} ${variantStyles[variant]} ${sizeClasses[size]} ${className} ${
         disabled ? "opacity-50 cursor-not-allowed" : ""
       }`}
     >
-      {icon && (
+      {Icon && (
         <span>
-          <Image src={icon} alt={""} />
+          <Icon />
         </span>
       )}
       <span className="text-nowrap">{label}</span>

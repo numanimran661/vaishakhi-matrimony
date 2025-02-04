@@ -27,9 +27,7 @@ const FounderSection = () => {
               />
               <div className="lg:py-20 py-8 px-4 lg:px-12 relative">
                 <div>
-                  <Image
-                    src={ReviewIcon}
-                    alt="review icon"
+                  <ReviewIcon
                     className="absolute top-14 right-20 opacity-35"
                   />
                 </div>

@@ -35,12 +35,20 @@ import basicInfo from "../../../../../public/images/svg/basic_info.svg";
 import personalInfo from "../../../../../public/images/svg/personal_info.svg";
 import partnerPref from "../../../../../public/images/svg/partner_pref.svg";
 import orangePersonalDetails from "../../../../../public/images/svg/orange-personal-details.svg";
-import rightArrowWithoutBg from "../../../../../public/images/svg/right-arrow-without-bg.svg";
+import RightArrowWithoutBg from "../../../../../public/images/svg/right-arrow-without-bg.svg";
 import razorpayLogo from "../../../../../public/images/svg/razorpayLogo.svg";
-import tick from "../../../../../public/images/svg/tick.svg";
-import radio from "../../../../../public/images/svg/radio.svg";
+import Tick from "../../../../../public/images/svg/tick.svg";
+import Radio from "../../../../../public/images/svg/radio.svg";
 import TablerMsgIcon from "../../../../../public/images/svg/tabler_message.svg";
 import NotificationsIcon from "../../../../../public/images/svg/notification-Icon.svg";
+import ProfileIcon from "../../../../../public/images/svg/profile-icon.svg";
+import ConnectionsIcon from "../../../../../public/images/svg/connections-icon.svg";
+import ActiveStatusIcon from "../../../../../public/images/svg/active-status.svg";
+import MembershipPlansIcon from "../../../../../public/images/svg/membership-plans-icon.svg";
+import SuccessStoriesIcon from "../../../../../public/images/svg/success-stories-icon.svg";
+import PrivacyPolicyIcon from "../../../../../public/images/svg/privacy-policy-icon.svg";
+import LogoutIcon from "../../../../../public/images/svg/logout-icon.svg";
+import ClipboardIcon from "../../../../../public/images/svg/clipboard-icon.svg";
 
 import AppLogo from "../../../../../public/images/png/app-logo.png";
 import LogoDark from "../../../../../public/images/png/logo-dark.png";
@@ -61,6 +69,8 @@ import SuccessDetailImg from "../../../../../public/images/png/success-detail-im
 import FounderImg from "../../../../../public/images/png/founder-img.png";
 import AboutBannerImg from "../../../../../public/images/png/about-banner-bg.png";
 import MissionVisionImg from "../../../../../public/images/png/mission-vision-img.png";
+import RocketImg from "../../../../../public/images/png/rocket-img.png";
+import CloudUploadIcon from "../../../../../public/images/png/cloud-upload.png";
 
 export {
   AppLogo,
@@ -119,11 +129,21 @@ export {
   AboutBannerImg,
   BriefcaseIcon,
   orangePersonalDetails,
-  rightArrowWithoutBg,
+  RightArrowWithoutBg,
   razorpayLogo,
-  tick,
-  radio,
+  Tick,
+  Radio,
   NotificationsIcon,
-  TablerMsgIcon
+  TablerMsgIcon,
+  ProfileIcon,
+  ConnectionsIcon,
+  ActiveStatusIcon,
+  SuccessStoriesIcon,
+  MembershipPlansIcon,
+  PrivacyPolicyIcon,
+  LogoutIcon,
+  ClipboardIcon,
+  RocketImg,
+  CloudUploadIcon
 };
 

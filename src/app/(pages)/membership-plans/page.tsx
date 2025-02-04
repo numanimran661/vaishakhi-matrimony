@@ -3,7 +3,7 @@ import FAQSection from "@/app/components/landingPageSections/faq/FAQ";
 import PricingPlans from "@/app/components/landingPageSections/membershipPlans/MembershipPlans";
 import SuccessStories from "@/app/components/landingPageSections/successStories/SuccessStories";
 import Image from "next/image";
-import { rightArrowWithoutBg } from "@/app/components/common/allImages/AllImages";
+import { RightArrowWithoutBg } from "@/app/components/common/allImages/AllImages";
 
 const BreadcrumbMain = () => {
   return (
@@ -14,7 +14,7 @@ const BreadcrumbMain = () => {
             Home
           </Link>
         </li>
-        <Image src= {rightArrowWithoutBg} alt="right-arrow"/>
+        <RightArrowWithoutBg />
         <li className="text-primary text-[14px] leading-4">Membership Plans</li>
       </ul>
     </nav>

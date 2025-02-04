@@ -144,7 +144,7 @@ const MessagePage = () => {
       {/* Header with back button for mobile */}
       <div className="md:hidden bg-white p-4 flex items-center gap-4 border-b border-gray">
         <button onClick={() => setSelectedChat(null)}>
-          <Image src={ArrowLeft} alt="back" width={24} height={24} />
+          <ArrowLeft  width={24} height={24} />
         </button>
         <h1 className="text-lg font-semibold">Messages</h1>
       </div>
@@ -162,7 +162,7 @@ const MessagePage = () => {
               <h2 className="text-xl font-bold">
                 All Messages
               </h2>
-              <Image src={ThreeDotIcon} alt="menu icon" />
+              <ThreeDotIcon />
               </div>
               <div className="relative border-b px-6 py-4 border-gray">
                 <InputField
@@ -199,7 +199,7 @@ const MessagePage = () => {
                       </p>
 
                       <p className="text-sm text-normal mt-2 flex gap-1 items-center">
-                        <Image src={ClockIcon} alt="clock icon" />
+                        <ClockIcon />
                         {chat.time}
                         </p>
                     </div>
@@ -267,13 +267,13 @@ const MessagePage = () => {
                     onClick={() => setShowEmojiPicker(!showEmojiPicker)}
                     className="p-2 hover:bg-gray-200 border-r border-gray"
                   >
-                    <Image src={SmileIcon} alt="emoji" width={20} height={20} />
+                    <SmileIcon width={20} height={20} />
                   </button>
                   <button
                     onClick={handleSendMessage}
                     className="bg-darkBlue p-2 rounded-full"
                   >
-                    <Image src={PaperPlane} alt="send" width={14} height={14} />
+                    <PaperPlane width={14} height={14} />
                   </button>
                 </div>
               </div>

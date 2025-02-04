@@ -67,9 +67,7 @@ const ProfileDetail = () => {
             <div
               className={`text-sm text-white p-2 rounded-full absolute top-3 right-2 bg-gray`}
             >
-              <Image
-                src={VerifiedIcon}
-                alt="Verified Badge"
+              <VerifiedIcon
                 width={20}
                 height={20}
               />
@@ -89,11 +87,11 @@ const ProfileDetail = () => {
 
           <div className="flex gap-2">
             <span className="flex items-center gap-1 text-sm bg-slate-100 p-2 rounded-lg">
-              <Image src={BriefcaseIcon} alt="occupation" />
+              <BriefcaseIcon />
               Sales Manager
             </span>
             <span className="text-sm text-gray-600 flex items-center gap-1 bg-slate-100 p-2 rounded-lg">
-              <Image src={LocationMarker} alt="location" />
+              <LocationMarker />
               Mumbai, India
             </span>
           </div>

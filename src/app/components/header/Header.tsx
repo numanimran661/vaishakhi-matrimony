@@ -15,13 +15,17 @@ import Button from "../common/buttons/Button";
 import { usePathname, useRouter } from "next/navigation";
 import NotificationsMenu from "./components/NotificationsMenu";
 import ProfileImage from "../common/profileImage/ProfileImage";
+import ProfileMenu from "./components/ProfileMenu";
 
 const Header: React.FC = () => {
   const router = useRouter();
   const pathname = usePathname();
   const notificationsRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
+  const menuBtnRef = useRef<HTMLDivElement>(null);
+  const profileMenuRef = useRef<HTMLDivElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
 
   // useEffect(() => {
@@ -45,8 +49,18 @@ const Header: React.FC = () => {
       ) {
         setShowNotifications(false);
       }
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target as Node) &&
+        !menuBtnRef.current?.contains(event.target as Node)
+      ) {
         setIsMenuOpen(false);
+      }
+      if (
+        profileMenuRef.current &&
+        !profileMenuRef.current.contains(event.target as Node)
+      ) {
+        setIsProfileMenuOpen(false);
       }
     };
 
@@ -70,23 +84,16 @@ const Header: React.FC = () => {
       <div className="w-full fixed top-0 z-50 bg-white border-b border-gray">
         <div className="mx-auto px-4 py-4 flex justify-between items-center max-w-7xl">
           <div className="flex items-center">
-            <div>
-              <button
-                className="text-white lg:hidden"
-                onClick={toggleMenu}
-                aria-label="Toggle menu"
-              >
-                {isMenuOpen ? (
-                  <Image src={CloseIcon} alt="close" width={24} height={24} />
-                ) : (
-                  <Image
-                    src={Hamburger}
-                    alt="hamburger"
-                    width={24}
-                    height={24}
-                  />
-                )}
-              </button>
+            <div
+              ref={menuBtnRef}
+              className="text-white lg:hidden"
+              onClick={toggleMenu}
+            >
+              {isMenuOpen ? (
+                <CloseIcon alt="close" width={24} height={24} />
+              ) : (
+                <Hamburger alt="hamburger" width={24} height={24} />
+              )}
             </div>
             {/* Logo */}
             <Image
@@ -145,12 +152,11 @@ const Header: React.FC = () => {
             <div className="flex gap-3">
               <div>
                 <div ref={notificationsRef} className="relative">
-                  <div className="bg-gray50 rounded-full p-2 cursor-pointer">
-                    <Image
-                      src={NotificationsIcon}
-                      alt="notifications Icon"
-                      onClick={() => setShowNotifications(!showNotifications)}
-                    />
+                  <div
+                    className="bg-gray50 rounded-full p-2 cursor-pointer"
+                    onClick={() => setShowNotifications(!showNotifications)}
+                  >
+                    <NotificationsIcon />
                   </div>
                   <NotificationsMenu
                     isOpen={showNotifications}
@@ -159,21 +165,30 @@ const Header: React.FC = () => {
                 </div>
               </div>
               <div>
-                <div className="bg-gray50 rounded-full p-2 cursor-pointer">
-                  <Image
-                    src={TablerMsgIcon}
-                    alt="message Icon"
-                    onClick={() => router.push("/home/messages")}
-                  />
+                <div
+                  className="bg-gray50 rounded-full p-2 cursor-pointer"
+                  onClick={() => router.push("/home/messages")}
+                >
+                  <TablerMsgIcon />
                 </div>
               </div>
               <div>
-                <div>
-                  <ProfileImage src={DummyProfile} alt="profile image" />
-                  {/* <NotificationsMenu
-                    isOpen={showNotifications}
-                    onClose={() => setShowNotifications(false)}
-                  /> */}
+                <div className="relative" ref={profileMenuRef}>
+                  <div
+                    onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
+                    className="cursor-pointer"
+                  >
+                    <ProfileImage src={DummyProfile} alt="profile image" />
+                  </div>
+                  <ProfileMenu
+                    isOpen={isProfileMenuOpen}
+                    onClose={() => setIsProfileMenuOpen(false)}
+                    user={{
+                      name: "Sarah Bajk",
+                      id: "1234432",
+                      avatarUrl: DummyProfile,
+                    }}
+                  />
                 </div>
               </div>
             </div>

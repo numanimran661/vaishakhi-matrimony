@@ -71,9 +71,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
                 image ? "blur-bg" : "bg-gray"
               }`}
             >
-              <Image
-                src={VerifiedIcon}
-                alt="Verified Badge"
+              <VerifiedIcon
                 width={16}
                 height={16}
               />
@@ -86,21 +84,19 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
             <p className="text-sm text-normal">{`Age ${age}, ${height}`}</p>
           </div>
           <p className="text-sm text-normal flex items-center gap-1">
-            <Image src={BriefcaseIcon} alt="briefcase" />
+            <BriefcaseIcon />
             {occupation}
           </p>
           <div className="flex justify-between items-center">
             <p className="text-sm text-normal flex items-center gap-1">
-              <Image src={LocationMarker} alt="marker" />
+              <LocationMarker />
               {location}
             </p>
             <div className="flex gap-1 items-center">
               <span className="rounded-full bg-lightGray p-2 cursor-pointer">
-                <Image
+                <ReqSendIcon
                   width={14}
                   height={14}
-                  src={ReqSendIcon}
-                  alt="Send Request"
                 />
               </span>
               <span
@@ -110,11 +106,9 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
                   router.push("/home/messages");
                 }}
               >
-                <Image
+                <MessageIcon
                   width={14}
                   height={14}
-                  src={MessageIcon}
-                  alt="Message Icon"
                 />
               </span>
             </div>

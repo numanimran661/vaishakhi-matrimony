@@ -1,4 +1,6 @@
 import React from "react";
+import { ArrowLeft } from "../../common/allImages/AllImages";
+import Image from "next/image";
 
 interface Notification {
   id: number;
@@ -56,14 +58,17 @@ const NotificationsMenu = ({
 
   return (
     <div
-      className={`absolute right-0 mt-2 w-96 bg-white rounded-2xl shadow-lg border border-gray z-50 transform transition-all duration-300 ease-in-out ${
+      className={`sm:absolute sm:top-auto top-0 fixed right-0 sm:mt-2 w-full h-screen sm:w-96 bg-white sm:rounded-2xl sm:h-auto border border-gray z-50 transform transition-all duration-300 ease-in-out ${
         isOpen
           ? "translate-y-0 opacity-100 scale-100"
           : "-translate-y-4 opacity-0 scale-95 pointer-events-none"
       }`}
     >
       <div className="px-2">
-        <div className="flex items-center justify-between mb-4 p-4 border-b border-gray ">
+        <div className="flex items-center gap-2 mb-4 py-2 sm:p-4 border-b border-gray ">
+          <button onClick={onClose}>
+            <ArrowLeft width={20} height={20} />
+          </button>
           <h2 className="text-lg font-semibold">All Notifications</h2>
         </div>
         <div className="flex gap-2 px-4 border-b border-gray ">
@@ -76,7 +81,7 @@ const NotificationsMenu = ({
         </div>
       </div>
 
-      <div className="max-h-[400px] overflow-y-auto">
+      <div className="sm:max-h-[400px] overflow-y-auto">
         <div className="p-2">
           <div className="text-sm text-gray-500 px-2 py-1">Today</div>
           {notifications.map((notification, index) => (
@@ -121,7 +126,7 @@ const NotificationsMenu = ({
         </div>
       </div>
 
-      <div className="p-3 border-t border-gray">
+      <div className="sm:p-3 sm:border-t border-gray">
         {/* <button className="text-primary text-sm w-full text-center hover:opacity-80 transition-opacity">
           See All
         </button> */}

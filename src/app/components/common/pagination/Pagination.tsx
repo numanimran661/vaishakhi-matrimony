@@ -122,7 +122,7 @@ const Pagination: React.FC<PaginationProps> = ({
         className="flex items-center px-3 h-8 text-gray-600 hover:bg-gray-100 rounded-md disabled:opacity-50 disabled:hover:bg-transparent transition-colors"
         aria-label="Previous page"
       >
-        <Image src={ArrowLeft} alt="left arrow" />
+        <ArrowLeft />
         <span className="hidden sm:inline">Previous</span>
       </button>
 
@@ -137,7 +137,7 @@ const Pagination: React.FC<PaginationProps> = ({
         aria-label="Next page"
       >
         <span className="hidden sm:inline">Next</span>
-        <Image src={ArrowRight} alt="right arrow" />
+        <ArrowRight src={ArrowRight} alt="right arrow" />
       </button>
     </nav>
   );
