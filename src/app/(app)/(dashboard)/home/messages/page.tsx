@@ -144,7 +144,7 @@ const MessagePage = () => {
       {/* Header with back button for mobile */}
       <div className="md:hidden bg-white p-4 flex items-center gap-4 border-b border-gray">
         <button onClick={() => setSelectedChat(null)}>
-          <ArrowLeft  width={24} height={24} />
+          <ArrowLeft width={24} height={24} />
         </button>
         <h1 className="text-lg font-semibold">Messages</h1>
       </div>
@@ -159,10 +159,8 @@ const MessagePage = () => {
           >
             <div>
               <div className="flex justify-between items-center px-6 py-4 border-b border-gray">
-              <h2 className="text-xl font-bold">
-                All Messages
-              </h2>
-              <ThreeDotIcon />
+                <h2 className="text-xl font-bold">All Messages</h2>
+                <ThreeDotIcon />
               </div>
               <div className="relative border-b px-6 py-4 border-gray">
                 <InputField
@@ -201,7 +199,7 @@ const MessagePage = () => {
                       <p className="text-sm text-normal mt-2 flex gap-1 items-center">
                         <ClockIcon />
                         {chat.time}
-                        </p>
+                      </p>
                     </div>
                   </div>
                 ))}
@@ -217,7 +215,12 @@ const MessagePage = () => {
           >
             <div className="p-4 border-b border-gray flex justify-between items-center">
               <div className="flex items-center gap-3">
-                <ProfileImage src={DummyProfile} alt="My Image" size="md" active />
+                <ProfileImage
+                  src={DummyProfile}
+                  alt="My Image"
+                  size="md"
+                  active
+                />
                 <h2 className="text-lg font-bold">Jennifer Markus</h2>
               </div>
               <button className="text-sm text-primary">Block</button>
@@ -227,8 +230,12 @@ const MessagePage = () => {
               {messages.map((msg) => (
                 <div key={msg.id} className={`flex items-center justify-start`}>
                   {msg.sender !== "You" ? (
-                    
-                <ProfileImage src={msg.senderImg} alt="sender Image" size="md" active />
+                    <ProfileImage
+                      src={msg.senderImg}
+                      alt="sender Image"
+                      size="md"
+                      active
+                    />
                   ) : (
                     <div className="w-10 h-10 relative flex-shrink-0">
                       <Image
@@ -249,7 +256,10 @@ const MessagePage = () => {
 
             <div className="p-4 border-t border-gray">
               {showEmojiPicker && (
-                <div ref={emojiPickerRef} className="absolute bottom-20 right-4">
+                <div
+                  ref={emojiPickerRef}
+                  className="absolute bottom-20 right-4"
+                >
                   <EmojiPicker onEmojiClick={handleEmojiClick} />
                 </div>
               )}
