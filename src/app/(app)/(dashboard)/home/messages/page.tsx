@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { StaticImageData } from "next/image";
 import {
@@ -260,7 +260,9 @@ const MessagePage = () => {
                   ref={emojiPickerRef}
                   className="absolute bottom-20 right-4"
                 >
-                  <EmojiPicker onEmojiClick={handleEmojiClick} />
+                  <Suspense>
+                    <EmojiPicker onEmojiClick={handleEmojiClick} />
+                  </Suspense>
                 </div>
               )}
               <div className="flex items-center bg-gray50 rounded-lg p-1">
