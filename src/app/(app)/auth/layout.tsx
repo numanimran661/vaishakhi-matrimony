@@ -32,14 +32,14 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
           </h1>
           <ul className="space-y-2">
             <li className="flex items-center gap-2">
-              <Image src={CheckCircle} alt="check"/> All profiles are
+              <CheckCircle /> All profiles are
               verified.
             </li>
             <li className="flex items-center gap-2">
-            <Image src={CheckCircle} alt="check"/> Perfect Matching.
+            <CheckCircle /> Perfect Matching.
             </li>
             <li className="flex items-center gap-2">
-            <Image src={CheckCircle} alt="check"/> Use our mobile app.
+            <CheckCircle /> Use our mobile app.
             </li>
           </ul>
 

@@ -54,9 +54,7 @@ const SuccessStoriesPage = () => {
                   <div className="bg-primary custom-rounded text-left flex justify-between">
                     <div className="lg:py-20 py-8 px-4 lg:px-12 relative">
                       <div>
-                        <Image
-                          src={ReviewIcon}
-                          alt="review icon"
+                        <ReviewIcon
                           className="absolute top-14 right-20 opacity-35"
                         />
                       </div>
@@ -64,7 +62,7 @@ const SuccessStoriesPage = () => {
                         {Array(5)
                           .fill("")
                           .map((_, i) => (
-                            <Image src={StarIcon} key={i} alt="rating star" />
+                            <StarIcon key={i} />
                           ))}
                       </div>
                       <p className="text-white text-xl mt-9">

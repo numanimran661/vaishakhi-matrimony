@@ -28,8 +28,8 @@ const SuccessStories = () => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    nextArrow: <Image src={RightArrow} alt="right arrow" />,
-    prevArrow: <Image src={LeftArrow} alt="left arrow" />,
+    nextArrow: <RightArrow />,
+    prevArrow: <LeftArrow />,
   };
 
   return (
@@ -50,13 +50,13 @@ const SuccessStories = () => {
                 <div className="bg-primary custom-rounded text-left flex justify-between">
                   <div className="lg:py-20 py-8 px-4 lg:px-12 relative">
                     <div>
-                      <Image src={ReviewIcon} alt="review icon" className="absolute top-14 right-20 opacity-35" />
+                      <ReviewIcon className="absolute top-14 right-20 opacity-35" />
                     </div>
                     <div className="flex">
                       {Array(5)
                         .fill("")
                         .map((_, i) => (
-                          <Image src={StarIcon} key={i} alt="rating star" />
+                          <StarIcon key={i} />
                         ))}
                     </div>
                     <p className="text-white text-xl mt-9">{testimonial.review}</p>

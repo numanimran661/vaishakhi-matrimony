@@ -56,7 +56,7 @@ const GlobalModal: React.FC<ModalProps> = ({
                 onClick={onClose}
                 className=" top-2 right-2 text-gray-400 hover:text-gray-600"
               >
-                <Image src={CloseIcon} alt="close icon"/>
+                <CloseIcon />
               </button>
             </div>
 

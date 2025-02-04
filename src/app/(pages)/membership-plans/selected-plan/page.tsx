@@ -1,8 +1,8 @@
 import {
-  radio,
+  Radio,
   razorpayLogo,
-  rightArrowWithoutBg,
-  tick,
+  RightArrowWithoutBg,
+  Tick,
 } from "@/app/components/common/allImages/AllImages";
 import Button from "@/app/components/common/buttons/Button";
 import Image from "next/image";
@@ -21,7 +21,7 @@ const BreadcrumbMain = () => {
             Home
           </Link>
         </li>
-        <Image src={rightArrowWithoutBg} alt="right-arrow" />
+        <RightArrowWithoutBg />
         <li className="text-[#F97E27] text-[14px] font-semibold leading-4">
           Membership Plans
         </li>
@@ -32,11 +32,11 @@ const BreadcrumbMain = () => {
 
 const SelectedPlans = () => {
   return (
-    <section className="px-4 md:px-0 max-w-[90%] w-full sm:max-w-[707px] mx-auto my-12 sm:my-24">
+    <section className="px-4 md:px-0 max-w-[90%] w-full sm:max-w-[707px] mx-auto my-6 sm:my-12">
       <BreadcrumbMain />
       <div className="rounded-3xl sm:border-[0.5px] sm:border-gray px-4 sm:px-10 py-6 sm:py-10">
         <div className="flex flex-col">
-          <h2 className="text-[20px] font-semibold text-[#1C264E]">
+          <h2 className="text-[20px] font-semibold text-darkBlue">
             Selected Plan
           </h2>
 
@@ -60,7 +60,7 @@ const SelectedPlans = () => {
                 "2 profile views",
               ].map((item, index) => (
                 <div key={index} className="flex gap-2 items-center">
-                  <Image src={tick} alt="tick" className="size-8" />
+                  <Tick />
                   <p className="text-[#777777] text-[14px] font-semibold leading-5">
                     {item}
                   </p>
@@ -79,7 +79,7 @@ const SelectedPlans = () => {
           </h3>
           <div className="flex justify-between items-center rounded-2xl sm:border-[0.5px] sm:border-gray p-3">
             <div className="flex gap-2 items-center">
-              <Image src={radio} alt="radio-image" className="w-5 h-5" />
+              <Radio />
               <p className="text-[#434343] font-semibold text-[18px]">
                 Razorpay
               </p>

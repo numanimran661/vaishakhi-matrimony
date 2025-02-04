@@ -24,7 +24,7 @@ export type SelectFieldConstantsProps = {
 }[];
 
 export type SelectFieldProps = {
-  label: string;
+  label?: string;
   name: string;
   options: { value: string; label: string }[];
   className?: string;
@@ -50,3 +50,8 @@ export type initialValuesPersonalProps = {
   ai: string;
   wl: string;
 };
+
+
+export interface FormData {
+  [key: string]: string;
+}

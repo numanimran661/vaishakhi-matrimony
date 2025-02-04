@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, ElementType } from "react";
 import Image from "next/image";
 
 type InputFieldProps = {
@@ -10,8 +10,9 @@ type InputFieldProps = {
   placeholder?: string;
   className?: string;
   classNameLabel?: string;
-  icon?: string;
+  icon?: ElementType;
   altText?: string;
+  disabled?: boolean;
 };
 
 const InputField: React.FC<InputFieldProps> = ({
@@ -23,8 +24,9 @@ const InputField: React.FC<InputFieldProps> = ({
   placeholder = "",
   className = "",
   classNameLabel = "",
-  icon,
+  icon: Icon,
   altText = "icon",
+  disabled = false
 }) => {
   return (
     <div className={`flex flex-col ${className}`}>
@@ -44,8 +46,9 @@ const InputField: React.FC<InputFieldProps> = ({
             value={value}
             onChange={onChange}
             placeholder={placeholder}
+            disabled={disabled}
             className={`${
-              icon && "pl-10 "
+              Icon && "pl-10 "
             } px-3 py-2 border border-gray rounded-xl h-28 focus:outline-none w-full placeholder:text-top`}
           />
         ) : (
@@ -56,14 +59,15 @@ const InputField: React.FC<InputFieldProps> = ({
             value={value}
             onChange={onChange}
             placeholder={placeholder}
+            disabled={disabled}
             className={`${
-              icon && "pl-10 "
+              Icon && "pl-10 "
             } px-3 py-2 border border-gray rounded-xl h-12 focus:outline-none w-full pr-10`}
           />
         )}
-        {icon && (
+        {Icon && (
           <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
-            <Image src={icon} alt={altText} width={20} height={20} />
+            <Icon width={20} height={20} />
           </div>
         )}
       </div>

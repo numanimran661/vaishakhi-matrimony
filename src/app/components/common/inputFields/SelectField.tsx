@@ -6,17 +6,18 @@ const SelectField: React.FC<SelectFieldProps> = ({
   name,
   options,
   className = "",
-  onChange
+  onChange,
 }) => {
-
   return (
     <div className={`flex flex-col ${className} mt-4 text-[#949494]`}>
-      <label
-        htmlFor={name}
-        className="mb-2 text-[16px] text-[#1C264E] font-semibold leading-5"
-      >
-        {label}
-      </label>
+      {label && (
+        <label
+          htmlFor={name}
+          className="mb-2 text-sm text-darkBlue font-semibold leading-5"
+        >
+          {label}
+        </label>
+      )}
       <select
         id={name}
         onChange={onChange}
