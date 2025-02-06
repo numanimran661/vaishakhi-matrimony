@@ -1,18 +1,15 @@
-import { subTabs } from "@/constants/formConstants";
-import { Tab } from "@headlessui/react";
+import { Tab, TabList } from "@headlessui/react";
 
 interface SubTabsProps {
-  selectedSubTab: number;
-  setSelectedSubTab: (index: number) => void;
   tabsList: string[];
 }
 
 // Sub Tabs Component
-const SubTabs = ({ selectedSubTab, setSelectedSubTab, tabsList }: SubTabsProps) => (
-  <Tab.List className="flex space-x-4 border-b border-gray overflow-x-auto w-full">
+const SubTabs = ({ tabsList }: SubTabsProps) => (
+  <TabList className="flex space-x-4 border-b border-gray overflow-x-auto w-full">
     {tabsList.map((tab, index) => (
       <Tab
-        key={tab}
+        key={index}
         className={({ selected }: { selected: boolean }) =>
           `px-4 py-2 text-sm font-medium text-normal border-b-2 transition-all outline-none ${
             selected
@@ -24,7 +21,7 @@ const SubTabs = ({ selectedSubTab, setSelectedSubTab, tabsList }: SubTabsProps) 
         {tab}
       </Tab>
     ))}
-  </Tab.List>
+  </TabList>
 );
 
 export default SubTabs;

@@ -1,5 +1,5 @@
 import { FormData } from "@/types/formTypes";
-import { Tab } from "@headlessui/react";
+import { TabGroup, TabPanels } from "@headlessui/react";
 import React from "react";
 import SubTabs from "../SubTabs";
 import BasicPanel from "../panels/BasicPanel";
@@ -23,13 +23,11 @@ const PreferencesTab = ({
   handleChange,
 }: PreferencesTabProps) => {
   return (
-    <Tab.Group selectedIndex={selectedSubTab} onChange={setSelectedSubTab}>
+    <TabGroup selectedIndex={selectedSubTab} onChange={setSelectedSubTab}>
       <SubTabs
-        selectedSubTab={selectedSubTab}
-        setSelectedSubTab={setSelectedSubTab}
         tabsList={subTabs}
       />
-      <Tab.Panels className="mt-4">
+      <TabPanels className="mt-4">
         {selectedSubTab === 0 && (
           <BasicPanel formData={formData} handleChange={handleChange} />
         )}
@@ -45,8 +43,8 @@ const PreferencesTab = ({
         {selectedSubTab === 4 && (
           <CriteriaPanel formData={formData} handleChange={handleChange} />
         )}
-      </Tab.Panels>
-    </Tab.Group>
+      </TabPanels>
+    </TabGroup>
   );
 };
 

@@ -2,6 +2,7 @@ import { selectFields } from "@/app/components/common/allConstants/formConstants
 import DatePicker from "@/app/components/common/inputFields/DatePicker";
 import InputField from "@/app/components/common/inputFields/InputField";
 import SelectField from "@/app/components/common/inputFields/SelectField";
+import React from "react";
 
 interface PersonalDetailsProps {
   values: any;
@@ -37,15 +38,17 @@ const BasicInfoForm: React.FC<PersonalDetailsProps> = ({
         className="w-full sm:w-[47%]"
       />
 
-      {selectFields?.map((fieldData) => (
-        <SelectField
-          label={fieldData.label}
-          name={fieldData.name}
-          value={fieldData.name}
-          onChange={handleSelectChange}
-          options={fieldData.options}
-          className="w-full sm:w-[47%]"
-        />
+      {selectFields?.map((fieldData, i) => (
+        <React.Fragment key={i}>
+          <SelectField
+            label={fieldData.label}
+            name={fieldData.name}
+            value={fieldData.name}
+            onChange={handleSelectChange}
+            options={fieldData.options}
+            className="w-full sm:w-[47%]"
+          />
+        </React.Fragment>
       ))}
     </>
   );

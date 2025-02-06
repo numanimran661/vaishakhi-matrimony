@@ -1,8 +1,6 @@
 "use client";
-
-import React, { Suspense, useEffect, useRef, useState } from "react";
-import Image from "next/image";
-import { StaticImageData } from "next/image";
+import React, { useEffect, useRef, useState } from "react";
+import Image, { StaticImageData } from "next/image";
 import {
   AboutImg2,
   ArrowLeft,
@@ -151,7 +149,6 @@ const MessagePage = () => {
 
       <div className="bg-white border border-gray rounded-2xl h-[calc(100vh-10px)]">
         <div className="flex h-full">
-          {/* Sidebar */}
           <div
             className={`w-full md:w-1/3 border-r border-gray flex flex-col ${
               selectedChat ? "hidden md:flex" : "flex"
@@ -168,7 +165,6 @@ const MessagePage = () => {
                   type="text"
                   placeholder="Search"
                   icon={SearchIcon}
-                  altText="Search Icon"
                 />
               </div>
             </div>
@@ -192,14 +188,14 @@ const MessagePage = () => {
                       <div className="flex justify-between items-center">
                         <h3 className="font-semibold">{chat.name}</h3>
                       </div>
-                      <p className="text-sm text-gray-600 truncate mt-2">
+                      <div className="text-sm text-gray-600 truncate mt-2">
                         {chat.message}
-                      </p>
+                      </div>
 
-                      <p className="text-sm text-normal mt-2 flex gap-1 items-center">
+                      <div className="text-sm text-normal mt-2 flex gap-1 items-center">
                         <ClockIcon />
                         {chat.time}
-                      </p>
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -207,7 +203,6 @@ const MessagePage = () => {
             </div>
           </div>
 
-          {/* Chat Window */}
           <div
             className={`w-full md:w-2/3 flex flex-col ${
               !selectedChat ? "hidden md:flex" : "flex"
@@ -260,9 +255,7 @@ const MessagePage = () => {
                   ref={emojiPickerRef}
                   className="absolute bottom-20 right-4"
                 >
-                  <Suspense>
-                    <EmojiPicker onEmojiClick={handleEmojiClick} />
-                  </Suspense>
+                  <EmojiPicker onEmojiClick={handleEmojiClick} />
                 </div>
               )}
               <div className="flex items-center bg-gray50 rounded-lg p-1">
@@ -272,7 +265,7 @@ const MessagePage = () => {
                   className="flex-1 px-4 py-2 bg-transparent border-0 outline-none"
                   value={inputMessage}
                   onChange={(e) => setInputMessage(e.target.value)}
-                  onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
+                  onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
                 />
                 <div className="flex items-center gap-2 px-2">
                   <button

@@ -1,54 +1,55 @@
-import LockIcon from "../../../../../public/images/svg/lock-icon.svg";
-import ChatIcon from "../../../../../public/images/svg/chat.svg";
-import BrowseMatchIcon from "../../../../../public/images/svg/browse-match.svg";
-import FindLoveIcon from "../../../../../public/images/svg/find-love.svg";
-import CreateProfileIcon from "../../../../../public/images/svg/create-profile.svg";
-import ReviewIcon from "../../../../../public/images/svg/review-icon.svg";
-import StarIcon from "../../../../../public/images/svg/star-icon.svg";
-import LeftArrow from "../../../../../public/images/svg/left-arrow.svg";
-import RightArrow from "../../../../../public/images/svg/right-arrow.svg";
-import SecureProfileIcon from "../../../../../public/images/svg/secure-profile-icon.svg";
-import MatchingIcon from "../../../../../public/images/svg/matching-icon.svg";
-import AdvanceSearchIcon from "../../../../../public/images/svg/advance-search-icon.svg";
-import MobileFriendlyIcon from "../../../../../public/images/svg/mobile-friendly-icon.svg";
-import GoogleLogo from "../../../../../public/images/svg/Google-logo.svg";
-import CheckCircle from "../../../../../public/images/svg/check-circle-icon.svg";
-import Hamburger from "../../../../../public/images/svg/hamburger-icon.svg";
-import CloseIcon from "../../../../../public/images/svg/close-icon.svg";
-import VerifiedIcon from "../../../../../public/images/svg/verified-icon.svg";
-import MessageIcon from "../../../../../public/images/svg/message-icon.svg";
-import ReqSendIcon from "../../../../../public/images/svg/send-req-icon.svg";
-import BriefcaseIcon from "../../../../../public/images/svg/briefcase-icon.svg";
-import LocationMarker from "../../../../../public/images/svg/location-marker.svg";
-import ArrowLeft from "../../../../../public/images/svg/arrow-left.svg";
-import ArrowRight from "../../../../../public/images/svg/arrow-right.svg";
-import SearchIcon from "../../../../../public/images/svg/search.svg";
-import PaperPlane from "../../../../../public/images/svg/paper-plane.svg";
-import ThreeDotIcon from "../../../../../public/images/svg/three-dots.svg";
-import ClockIcon from "../../../../../public/images/svg/clock-icon.svg";
-import SmileIcon from "../../../../../public/images/svg/face-smile-wink.svg";
-import IntegrityIcon from "../../../../../public/images/svg/integrity-icon.svg";
-import InovationIcon from "../../../../../public/images/svg/inovation-icon.svg";
-import EmpathyIcon from "../../../../../public/images/svg/empathy-icon.svg";
-import InclusivityIcon from "../../../../../public/images/svg/inclusivity-icon.svg";
-import basicInfo from "../../../../../public/images/svg/basic_info.svg";
-import personalInfo from "../../../../../public/images/svg/personal_info.svg";
-import partnerPref from "../../../../../public/images/svg/partner_pref.svg";
-import orangePersonalDetails from "../../../../../public/images/svg/orange-personal-details.svg";
-import RightArrowWithoutBg from "../../../../../public/images/svg/right-arrow-without-bg.svg";
-import razorpayLogo from "../../../../../public/images/svg/razorpayLogo.svg";
-import Tick from "../../../../../public/images/svg/tick.svg";
-import Radio from "../../../../../public/images/svg/radio.svg";
-import TablerMsgIcon from "../../../../../public/images/svg/tabler_message.svg";
-import NotificationsIcon from "../../../../../public/images/svg/notification-Icon.svg";
-import ProfileIcon from "../../../../../public/images/svg/profile-icon.svg";
-import ConnectionsIcon from "../../../../../public/images/svg/connections-icon.svg";
-import ActiveStatusIcon from "../../../../../public/images/svg/active-status.svg";
-import MembershipPlansIcon from "../../../../../public/images/svg/membership-plans-icon.svg";
-import SuccessStoriesIcon from "../../../../../public/images/svg/success-stories-icon.svg";
-import PrivacyPolicyIcon from "../../../../../public/images/svg/privacy-policy-icon.svg";
-import LogoutIcon from "../../../../../public/images/svg/logout-icon.svg";
-import ClipboardIcon from "../../../../../public/images/svg/clipboard-icon.svg";
+
+import LockIcon from "@/assets/images/svg/lock-icon.svg";
+import ChatIcon from "@/assets/images/svg/chat.svg";
+import BrowseMatchIcon from "@/assets/images/svg/browse-match.svg";
+import FindLoveIcon from "@/assets/images/svg/find-love.svg";
+import CreateProfileIcon from "@/assets/images/svg/create-profile.svg";
+import ReviewIcon from "@/assets/images/svg/review-icon.svg";
+import StarIcon from "@/assets/images/svg/star-icon.svg";
+import LeftArrow from "@/assets/images/svg/left-arrow.svg";
+import RightArrow from "@/assets/images/svg/right-arrow.svg";
+import SecureProfileIcon from "@/assets/images/svg/secure-profile-icon.svg";
+import MatchingIcon from "@/assets/images/svg/matching-icon.svg";
+import AdvanceSearchIcon from "@/assets/images/svg/advance-search-icon.svg";
+import MobileFriendlyIcon from "@/assets/images/svg/mobile-friendly-icon.svg";
+import GoogleLogo from "@/assets/images/svg/Google-logo.svg";
+import CheckCircle from "@/assets/images/svg/check-circle-icon.svg";
+import Hamburger from "@/assets/images/svg/hamburger-icon.svg";
+import CloseIcon from "@/assets/images/svg/close-icon.svg";
+import VerifiedIcon from "@/assets/images/svg/verified-icon.svg";
+import MessageIcon from "@/assets/images/svg/message-icon.svg";
+import ReqSendIcon from "@/assets/images/svg/send-req-icon.svg";
+import BriefcaseIcon from "@/assets/images/svg/briefcase-icon.svg";
+import LocationMarker from "@/assets/images/svg/location-marker.svg";
+import ArrowLeft from "@/assets/images/svg/arrow-left.svg";
+import ArrowRight from "@/assets/images/svg/arrow-right.svg";
+import SearchIcon from "@/assets/images/svg/search.svg";
+import PaperPlane from "@/assets/images/svg/paper-plane.svg";
+import ThreeDotIcon from "@/assets/images/svg/three-dots.svg";
+import ClockIcon from "@/assets/images/svg/clock-icon.svg";
+import SmileIcon from "@/assets/images/svg/face-smile-wink.svg";
+import IntegrityIcon from "@/assets/images/svg/integrity-icon.svg";
+import InovationIcon from "@/assets/images/svg/inovation-icon.svg";
+import EmpathyIcon from "@/assets/images/svg/empathy-icon.svg";
+import InclusivityIcon from "@/assets/images/svg/inclusivity-icon.svg";
+import basicInfo from "@/assets/images/svg/basic_info.svg";
+import personalInfo from "@/assets/images/svg/personal_info.svg";
+import partnerPref from "@/assets/images/svg/partner_pref.svg";
+import orangePersonalDetails from "@/assets/images/svg/orange-personal-details.svg";
+import RightArrowWithoutBg from "@/assets/images/svg/right-arrow-without-bg.svg";
+import RazorpayLogo from "@/assets/images/svg/razorpayLogo.svg";
+import Tick from "@/assets/images/svg/tick.svg";
+import Radio from "@/assets/images/svg/radio.svg";
+import TablerMsgIcon from "@/assets/images/svg/tabler_message.svg";
+import NotificationsIcon from "@/assets/images/svg/notification-Icon.svg";
+import ProfileIcon from "@/assets/images/svg/profile-icon.svg";
+import ConnectionsIcon from "@/assets/images/svg/connections-icon.svg";
+import ActiveStatusIcon from "@/assets/images/svg/active-status.svg";
+import MembershipPlansIcon from "@/assets/images/svg/membership-plans-icon.svg";
+import SuccessStoriesIcon from "@/assets/images/svg/success-stories-icon.svg";
+import PrivacyPolicyIcon from "@/assets/images/svg/privacy-policy-icon.svg";
+import LogoutIcon from "@/assets/images/svg/logout-icon.svg";
+import ClipboardIcon from "@/assets/images/svg/clipboard-icon.svg";
 
 import AppLogo from "../../../../../public/images/png/app-logo.png";
 import LogoDark from "../../../../../public/images/png/logo-dark.png";
@@ -130,7 +131,7 @@ export {
   BriefcaseIcon,
   orangePersonalDetails,
   RightArrowWithoutBg,
-  razorpayLogo,
+  RazorpayLogo,
   Tick,
   Radio,
   NotificationsIcon,

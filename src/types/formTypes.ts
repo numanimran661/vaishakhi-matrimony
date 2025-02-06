@@ -28,8 +28,8 @@ export type SelectFieldProps = {
   name: string;
   options: { value: string; label: string }[];
   className?: string;
-  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-  value: string;
+  onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  value?: string;
 };
 
 export type InputFieldProps = {

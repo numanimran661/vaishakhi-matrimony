@@ -1,5 +1,4 @@
 import React, { ChangeEvent, ElementType } from "react";
-import Image from "next/image";
 
 type InputFieldProps = {
   label?: string;
@@ -11,7 +10,6 @@ type InputFieldProps = {
   className?: string;
   classNameLabel?: string;
   icon?: ElementType;
-  altText?: string;
   disabled?: boolean;
 };
 
@@ -25,7 +23,6 @@ const InputField: React.FC<InputFieldProps> = ({
   className = "",
   classNameLabel = "",
   icon: Icon,
-  altText = "icon",
   disabled = false
 }) => {
   return (

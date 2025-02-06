@@ -10,7 +10,7 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import BasicInfoForm from "./components/BasicInfo";
 import PersonalDetailForm from "./components/PersonalDetailForm";
-import PartnerPreferencesForm from "./components/PartnerPreferencesForm";
+import PartnerPreferences from "./components/PartnerPreferencesForm";
 
 const initialValues: initialValuesProps = {
   fullName: "",
@@ -68,7 +68,7 @@ const TellUsMoreAboutYourself: React.FC = () => {
           </h2>
         </header>
         <main className="w-full rounded-3xl sm:border-[0.5px] sm:border-gray mt-14 mb-40">
-          <div className="px-1 sm:px-12 py-1 sm:py-12">
+          <div className="px-1 sm:px-12 py-1 sm:py-9">
             {/* Progress Icons */}
             <div className="flex justify-between items-center space-x-4 px-10 sm:px-16 mb-5">
               {steps.map(({ id, Icon }) => {
@@ -76,10 +76,13 @@ const TellUsMoreAboutYourself: React.FC = () => {
                 return (
                   <Icon
                     key={id}
-                    className="w-10 h-10"
+                    className={`${
+                      isActive
+                        ? "text-white stroke-white"
+                        : "text-gray stroke-gray"
+                    }`}
                     style={{
                       fill: isActive ? "var(--themeColor)" : "var(--bgLight)",
-                      stroke: isActive ? "var(--white)" : "var(--border)",
                     }}
                   />
                 );
@@ -89,7 +92,7 @@ const TellUsMoreAboutYourself: React.FC = () => {
             {/* Progress Bar */}
             <div className="w-[94%] sm:w-[83%] h-[8px] bg-gray rounded-full mb-4 mx-auto">
               <div
-                className="bg-[#F97E27] h-[8px] rounded-full transition-all duration-300"
+                className="bg-primary h-[8px] rounded-full transition-all duration-300"
                 style={{
                   width: `${
                     step === 1 ? 5 : ((step - 1) / (steps.length - 1)) * 100
@@ -99,12 +102,12 @@ const TellUsMoreAboutYourself: React.FC = () => {
             </div>
 
             {/* Step Titles */}
-            <div className="flex justify-between text-[14px] leading-5 sm:border-b sm:border-b-gray pb-12 font-semibold sm:px-8">
+            <div className="flex justify-between text-[14px] leading-5 sm:border-b sm:border-b-gray pb-6 font-semibold sm:px-8">
               {steps.map(({ id, label }) => (
                 <h3
                   key={id}
                   className={`text-nowrap ${
-                    step === id ? "text-[#F97E27]" : "text-[#ABB7C2]"
+                    step >= id ? "text-[#F97E27]" : "text-[#ABB7C2]"
                   }`}
                 >
                   {label}
@@ -116,7 +119,7 @@ const TellUsMoreAboutYourself: React.FC = () => {
           <div className="px-7">
             <form
               onSubmit={handleSubmit}
-              className="flex flex-wrap gap-y-6 gap-x-8 pb-20 relative xsm:ml-4"
+              className="flex flex-wrap gap-y-6 gap-x-8 pb-20 relative"
             >
               {step === 1 && (
                 <BasicInfoForm
@@ -134,7 +137,7 @@ const TellUsMoreAboutYourself: React.FC = () => {
                 />
               )}
               {step === 3 && (
-                <PartnerPreferencesForm
+                <PartnerPreferences
                   values={values}
                   handleInputChange={handleInputChange}
                   handleSelectChange={handleSelectChange}
@@ -148,7 +151,7 @@ const TellUsMoreAboutYourself: React.FC = () => {
                     <Button
                       label="Back"
                       type="button"
-                      className="w-[100px] bg-gray50 text-white rounded-full"
+                      variant="light"
                       onClick={prevStep}
                     />
                   )}
@@ -157,7 +160,6 @@ const TellUsMoreAboutYourself: React.FC = () => {
                 <Button
                   label={step === steps.length ? "Submit" : "Continue"}
                   type="button"
-                  className="w-[216px] h-[50px] bg-[#F97E27] text-white rounded-full"
                   onClick={step === steps.length ? handleSubmit : nextStep}
                 />
               </div>

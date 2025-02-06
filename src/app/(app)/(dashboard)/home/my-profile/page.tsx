@@ -1,18 +1,18 @@
 "use client";
 import { useState } from "react";
-import { Tab } from "@headlessui/react";
+import { TabGroup, TabPanels } from "@headlessui/react";
 import { ArrowLeft } from "@/app/components/common/allImages/AllImages";
 import Link from "next/link";
 import MainTabs from "./components/MainTabs";
 import { FormData } from "@/types/formTypes";
 import PreferencesTab from "./components/tabs/PreferencesTab";
 import BasicInfoTab from "./components/tabs/BasicInfoTab";
-import MyProfilePanel from "./components/panels/MyProfilePanel";
+import MyAccountTab from "./components/tabs/MyAccountTab";
 
 // Main Profile Module Component
-export default function ProfileModule() {
-  const [selectedMainTab, setSelectedMainTab] = useState<number>(2);
-  const [selectedSubTab, setSelectedSubTab] = useState<number>(1);
+const ProfilePage = () => {
+  const [selectedMainTab, setSelectedMainTab] = useState<number>(0);
+  const [selectedSubTab, setSelectedSubTab] = useState<number>(0);
   const [formData, setFormData] = useState<FormData>({});
   const [uploadedImages, setUploadedImages] = useState<string[]>([]);
 
@@ -62,20 +62,18 @@ export default function ProfileModule() {
           <ArrowLeft />
           <h2 className="text-lg font-semibold">Profile</h2>
         </div>
-        {/* Main Tabs */}
-        <Tab.Group
+        <TabGroup
           selectedIndex={selectedMainTab}
-          onChange={setSelectedMainTab}
+          onChange={(tab) => {
+            setSelectedMainTab(tab)
+            setSelectedSubTab(0)
+          }}
         >
           <div className="flex p-6">
-            <MainTabs
-              selectedMainTab={selectedMainTab}
-              setSelectedMainTab={setSelectedMainTab}
-            />
-            <Tab.Panels className="px-5 py-0 w-4/5">
-              {/* My Account Section */}
+            <MainTabs/>
+            <TabPanels className="px-5 py-0 w-4/5">
               {selectedMainTab === 0 && (
-                <MyProfilePanel
+                <MyAccountTab
                   formData={formData}
                   images={uploadedImages}
                   handleChange={handleChange}
@@ -83,7 +81,6 @@ export default function ProfileModule() {
                   handleImageUpload={handleImageUpload}
                 />
               )}
-              {/* Basic Info Section */}
               {selectedMainTab === 1 && (
                 <BasicInfoTab
                   selectedSubTab={selectedSubTab}
@@ -92,7 +89,6 @@ export default function ProfileModule() {
                   handleChange={handleChange}
                 />
               )}
-              {/* Preferences Section */}
               {selectedMainTab === 2 && (
                 <PreferencesTab
                   selectedSubTab={selectedSubTab}
@@ -101,10 +97,12 @@ export default function ProfileModule() {
                   handleChange={handleChange}
                 />
               )}
-            </Tab.Panels>
+            </TabPanels>
           </div>
-        </Tab.Group>
+        </TabGroup>
       </div>
     </div>
   );
-}
+};
+
+export default ProfilePage;

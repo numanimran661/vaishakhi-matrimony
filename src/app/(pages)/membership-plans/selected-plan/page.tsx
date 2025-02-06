@@ -1,6 +1,6 @@
 import {
   Radio,
-  razorpayLogo,
+  RazorpayLogo,
   RightArrowWithoutBg,
   Tick,
 } from "@/app/components/common/allImages/AllImages";
@@ -84,11 +84,7 @@ const SelectedPlans = () => {
                 Razorpay
               </p>
             </div>
-            <Image
-              src={razorpayLogo}
-              alt="razorpay-logo"
-              className="w-14 h-6"
-            />
+            <RazorpayLogo />
           </div>
         </div>
 
