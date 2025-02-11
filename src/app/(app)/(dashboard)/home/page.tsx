@@ -11,7 +11,7 @@ const HomePage = () => {
     setActiveTab(homeTabs[index])
   }
   return (
-    <div className="bg-gray-100">
+    <div className="bg-gray-100 px-5">
       <TabsList tabs={homeTabs} activeTab={activeTab} handleTabChange={handleTabChange} />
 
       <activeTab.component/>

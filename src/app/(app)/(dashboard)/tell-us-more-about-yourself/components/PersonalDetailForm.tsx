@@ -21,8 +21,9 @@ const PersonalDetailForm: React.FC<PersonalDetailsProps> = ({
         Personal Details
       </h2>
 
-      {personalPanelFields?.map((fieldData) => (
+      {personalPanelFields?.map((fieldData, index) => (
         <SelectField
+        key={index}
           label={fieldData.label}
           name={fieldData.name}
           value={values[fieldData.name]}

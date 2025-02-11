@@ -110,7 +110,7 @@ const PricingPlans = () => {
         <h2 className="text-sm font-medium text-normal uppercase">
           Membership Plans
         </h2>
-        <h2 className="text-4xl font-bold mt-2">Unlock Your Love Journey</h2>
+        <h2 className="md:text-4xl text-2xl font-bold mt-2">Unlock Your Love Journey</h2>
 
         <div className="flex justify-center gap-2 mt-6">
           <Button label="Monthly Plan" />

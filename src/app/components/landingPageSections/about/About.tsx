@@ -29,7 +29,7 @@ const AboutSection: React.FC = () => {
             <h2 className="text-base font-medium text-normal uppercase">
               About Us
             </h2>
-            <h3 className="text-3xl font-bold text-gray-900 mt-2">
+            <h3 className="md:text-3xl text-xl font-bold text-gray-900 mt-2">
               Join today and start your journey towards love
             </h3>
             <p className="mt-4 text-darkGray">

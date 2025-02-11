@@ -12,7 +12,7 @@ const StartNow = () => {
   };
 
   return (
-    <section className="py-16 px-8 relative">
+    <section className="md:py-16 md:px-8 px-3 py-8 relative">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image

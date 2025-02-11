@@ -65,7 +65,7 @@ const SuccessStoriesPage = () => {
                             <StarIcon key={i} />
                           ))}
                       </div>
-                      <p className="text-white text-xl mt-9">
+                      <p className="text-white md:text-xl text-base md:mt-9 mt-4">
                         {testimonial.review}
                       </p>
                       <h4 className="text-xl text-white font-semibold text-gray-900 mt-7">

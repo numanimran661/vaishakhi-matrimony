@@ -102,11 +102,11 @@ const TellUsMoreAboutYourself: React.FC = () => {
             </div>
 
             {/* Step Titles */}
-            <div className="flex justify-between text-[14px] leading-5 sm:border-b sm:border-b-gray pb-6 font-semibold sm:px-8">
+            <div className="flex justify-between text-[14px] gap-2 leading-5 sm:border-b sm:border-b-gray pb-6 font-semibold sm:px-8">
               {steps.map(({ id, label }) => (
                 <h3
                   key={id}
-                  className={`text-nowrap ${
+                  className={`md:text-nowrap text-wrap text-center ${
                     step >= id ? "text-[#F97E27]" : "text-[#ABB7C2]"
                   }`}
                 >
@@ -116,10 +116,10 @@ const TellUsMoreAboutYourself: React.FC = () => {
             </div>
           </div>
 
-          <div className="px-7">
+          <div className="md:px-7">
             <form
               onSubmit={handleSubmit}
-              className="flex flex-wrap gap-y-6 gap-x-8 pb-20 relative"
+              className="flex flex-wrap gap-y-6 gap-x-8 md:pb-20 relative"
             >
               {step === 1 && (
                 <BasicInfoForm

@@ -40,7 +40,7 @@ const OurFeatures: React.FC = () => {
           <h2 className="text-sm font-medium text-normal uppercase">
             our features
           </h2>
-          <h3 className="text-3xl font-bold text-gray-900 mt-2">
+          <h3 className="md:text-3xl text-2xl font-bold text-gray-900 mt-2">
             Why Choose us
           </h3>
         </div>
@@ -48,7 +48,7 @@ const OurFeatures: React.FC = () => {
           {steps.map((step, index) => (
             <div
               key={index}
-              className="px-8 py-12 border border-gray rounded-lg text-center"
+              className="lg:px-8 lg:py-12 px-4 py-8 border border-gray rounded-lg text-center"
             >
               <div className="flex justify-center items-center lg:h-32 lg:w-32 w-24 h-24 mx-auto bg-orange-100 rounded-full">
                 <step.icon

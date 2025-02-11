@@ -125,8 +125,8 @@ const MessagePage = () => {
   }, []);
 
   return (
-    <div className="max-w-7xl mx-auto h-screen bg-gray-50 mb-20 px-4">
-      <ul className="flex items-center gap-2 text-sm my-8">
+    <div className="max-w-7xl mx-auto h-auto bg-gray-50 mb-20 md:px-4">
+      <ul className="hidden md:flex items-center gap-2 text-sm my-8">
         <li>
           <Link href="/home" className="hover:text-primary">
             Home
@@ -140,17 +140,19 @@ const MessagePage = () => {
         </li>
       </ul>
       {/* Header with back button for mobile */}
-      <div className="md:hidden bg-white p-4 flex items-center gap-4 border-b border-gray">
-        <button onClick={() => setSelectedChat(null)}>
-          <ArrowLeft width={24} height={24} />
-        </button>
-        <h1 className="text-lg font-semibold">Messages</h1>
-      </div>
+      {selectedChat && (
+        <div className="md:hidden bg-white p-4 flex items-center gap-4 md:border-b border-gray">
+          <button onClick={() => setSelectedChat(null)}>
+            <ArrowLeft width={24} height={24} />
+          </button>
+          <h1 className="text-lg font-semibold">Messages</h1>
+        </div>
+      )}
 
-      <div className="bg-white border border-gray rounded-2xl h-[calc(100vh-10px)]">
+      <div className="bg-white md:border border-gray rounded-2xl h-[calc(100vh-190px)]">
         <div className="flex h-full">
           <div
-            className={`w-full md:w-1/3 border-r border-gray flex flex-col ${
+            className={`w-full md:w-1/3 md:border-r border-gray flex flex-col ${
               selectedChat ? "hidden md:flex" : "flex"
             }`}
           >

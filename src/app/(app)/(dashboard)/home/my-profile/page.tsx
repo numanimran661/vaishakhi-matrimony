@@ -42,7 +42,7 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto pb-6">
+    <div className="max-w-7xl mx-auto pb-6 px-4">
       <ul className="flex items-center gap-2 text-sm my-8">
         <li>
           <Link href="/home" className="hover:text-primary">

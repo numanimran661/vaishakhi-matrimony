@@ -2,7 +2,6 @@ import Link from "next/link";
 import FAQSection from "@/app/components/landingPageSections/faq/FAQ";
 import PricingPlans from "@/app/components/landingPageSections/membershipPlans/MembershipPlans";
 import SuccessStories from "@/app/components/landingPageSections/successStories/SuccessStories";
-import Image from "next/image";
 import { RightArrowWithoutBg } from "@/app/components/common/allImages/AllImages";
 
 const BreadcrumbMain = () => {

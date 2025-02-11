@@ -11,6 +11,8 @@ type InputFieldProps = {
   classNameLabel?: string;
   icon?: ElementType;
   disabled?: boolean;
+  error?: string; // Add error prop
+  touched?: boolean; // Add touched prop
 };
 
 const InputField: React.FC<InputFieldProps> = ({
@@ -23,7 +25,9 @@ const InputField: React.FC<InputFieldProps> = ({
   className = "",
   classNameLabel = "",
   icon: Icon,
-  disabled = false
+  disabled = false,
+  error, // Destructure error
+  touched, // Destructure touched
 }) => {
   return (
     <div className={`flex flex-col ${className}`}>
@@ -46,7 +50,9 @@ const InputField: React.FC<InputFieldProps> = ({
             disabled={disabled}
             className={`${
               Icon && "pl-10 "
-            } px-3 py-2 border border-gray rounded-xl h-28 focus:outline-none w-full placeholder:text-top`}
+            } px-3 py-2 border ${
+              error && touched ? "border-red-500" : "border-gray"
+            } rounded-xl h-28 focus:outline-none w-full placeholder:text-top`}
           />
         ) : (
           <input
@@ -59,7 +65,9 @@ const InputField: React.FC<InputFieldProps> = ({
             disabled={disabled}
             className={`${
               Icon && "pl-10 "
-            } px-3 py-2 border border-gray rounded-xl h-12 focus:outline-none w-full pr-10`}
+            } px-3 py-2 border ${
+              error && touched ? "border-red-500" : "border-gray"
+            } rounded-xl h-12 focus:outline-none w-full pr-10`}
           />
         )}
         {Icon && (
@@ -68,19 +76,10 @@ const InputField: React.FC<InputFieldProps> = ({
           </div>
         )}
       </div>
-    {/* <div className={`flex flex-col ${className} mt-4`}>
-      <label htmlFor={name} className={`mb-2 text-[16px] text-[#1C264E] font-semibold leading-5${classNameLabel}`}>
-        {label}
-      </label>
-      <input
-        type={type}
-        id={name}
-        name={name}
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        className="px-3 py-2 border border-gray rounded-xl h-12 focus:outline-none"
-      /> */}
+      {/* Display error message if error exists and the field has been touched */}
+      {error && touched && (
+        <div className="text-red-500 text-sm mt-1">{error}</div>
+      )}
     </div>
   );
 };

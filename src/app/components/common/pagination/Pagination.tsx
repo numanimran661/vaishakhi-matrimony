@@ -137,7 +137,7 @@ const Pagination: React.FC<PaginationProps> = ({
         aria-label="Next page"
       >
         <span className="hidden sm:inline">Next</span>
-        <ArrowRight src={ArrowRight} alt="right arrow" />
+        <ArrowRight />
       </button>
     </nav>
   );

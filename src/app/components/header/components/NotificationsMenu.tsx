@@ -66,7 +66,7 @@ const NotificationsMenu = ({
     >
       <div className="px-2">
         <div className="flex items-center gap-2 mb-4 py-2 sm:p-4 border-b border-gray ">
-          <button onClick={onClose}>
+          <button onClick={onClose} className="md:hidden block">
             <ArrowLeft width={20} height={20} />
           </button>
           <h2 className="text-lg font-semibold">All Notifications</h2>

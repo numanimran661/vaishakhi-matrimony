@@ -1,20 +1,14 @@
 import Image, { StaticImageData } from "next/image";
 import React from "react";
 import {
-  ActiveStatusIcon,
   ClipboardIcon,
-  ConnectionsIcon,
   LogoutIcon,
-  MembershipPlansIcon,
-  PrivacyPolicyIcon,
-  ProfileIcon,
-  RocketImg,
-  SuccessStoriesIcon,
 } from "../../common/allImages/AllImages";
 import ProfileImage from "../../common/profileImage/ProfileImage";
 import Link from "next/link";
 import Button from "../../common/buttons/Button";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { menuItems } from "@/constants/utilConstants";
 
 interface ProfileMenuProps {
   isOpen: boolean;
@@ -27,39 +21,8 @@ interface ProfileMenuProps {
 }
 
 const ProfileMenu: React.FC<ProfileMenuProps> = ({ isOpen, onClose, user }) => {
+  const router = useRouter()
   const pathname = usePathname();
-  const menuItems = [
-    {
-      icon: <ProfileIcon />,
-      label: "Profile",
-      path: "/home/my-profile",
-    },
-    {
-      icon: <ActiveStatusIcon />,
-      label: "Active Status",
-      path: "/home/active-status",
-    },
-    {
-      icon: <ConnectionsIcon />,
-      label: "Connections",
-      path: "/home/connections",
-    },
-    {
-      icon: <MembershipPlansIcon />,
-      label: "Membership Plan",
-      path: "/home/membership-plans",
-    },
-    {
-      icon: <SuccessStoriesIcon />,
-      label: "Success Stories",
-      path: "/home/success-stories",
-    },
-    {
-      icon: <PrivacyPolicyIcon />,
-      label: "Privacy & Policy",
-      path: "/home/privacy-policy",
-    },
-  ];
 
   return (
     <div
@@ -75,13 +38,13 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ isOpen, onClose, user }) => {
             <ProfileImage src={user.avatarUrl} alt="Profile" size="lg" />
             <div>
               <h3 className="font-medium text-sm md:text-base">{user.name}</h3>
-              <div className="flex gap-1 bg-gray50 rounded-2xl my-1 px-2">
+              <div className="flex items-center gap-1 bg-gray50 rounded-2xl my-1 px-2">
                 <p className="text-sm text-darkGray">{user.id}</p>
                 <ClipboardIcon width={14} height={14} className="cursor-pointer" />
               </div>
             </div>
           </div>
-          <Button label="Upgrade Now" variant="secondary" className="md:w-full md:mt-3 px-2 py-2 md:px-5 md:py-3 text-xs" size="sm"/>
+          <Button label="Upgrade Now" variant="secondary" className="md:w-full md:mt-3 px-2 py-2 md:px-5 md:py-3 text-xs" size="sm" onClick={() => router.push("/membership-plans")}/>
         </div>
 
         <div className="px-4 pb-3">

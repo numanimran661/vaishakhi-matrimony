@@ -52,11 +52,6 @@ const Footer = () => {
               </li>
               <li>
                 <a href="#" className="text-sm text-gray-300 hover:text-white">
-                  Blogs
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-sm text-gray-300 hover:text-white">
                   Terms of Service
                 </a>
               </li>

@@ -17,12 +17,12 @@ const Banner: React.FC = () => {
       </div>
       <div className="flex flex-wrap items-center">
         {/* Text Section */}
-        <div className="w-full lg:w-2/3 mb-8 lg:pe-36 lg:mb-0 text-left flex flex-col gap-5">
+        <div className="w-full lg:w-2/3 mb-8 lg:pe-36 lg:mb-0 text-left flex flex-col md:gap-5 gap-3">
           <p className="text-sm text-gray-500 font-light uppercase mb-2">Over 20K Users</p>
-          <h1 className="text-5xl font-bold text-darkblue mb-4">
+          <h1 className="md:text-5xl text-xl font-bold text-darkblue md:mb-4">
             Find Your Perfect Match Today!
           </h1>
-          <p className="text-lg text-gray-700 mb-6">
+          <p className="md:text-lg text-base text-gray-700 mb-6">
             Discover your ideal partner with our advanced matchmaking
             algorithms. Join now and start your journey to love!
           </p>

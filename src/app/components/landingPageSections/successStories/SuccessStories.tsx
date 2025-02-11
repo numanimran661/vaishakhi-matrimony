@@ -28,8 +28,8 @@ const SuccessStories = () => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    nextArrow: <RightArrow />,
-    prevArrow: <LeftArrow />,
+    nextArrow: <div><RightArrow /></div>,
+    prevArrow: <div><LeftArrow /></div>,
   };
 
   return (
@@ -39,14 +39,14 @@ const SuccessStories = () => {
           <h2 className="text-sm font-medium text-normal uppercase">
             Success Stories
           </h2>
-          <h3 className="text-3xl font-bold text-gray-900 mt-2">
+          <h3 className="md:text-3xl text-2xl font-bold text-gray-900 mt-2">
             Heartwarming Journeys
           </h3>
         </div>
         <div className="mt-10"> 
           <Slider {...settings}>
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="flex justify-center w-full">
+              <div key={index} className="flex justify-center w-full px-2">
                 <div className="bg-primary custom-rounded text-left flex justify-between">
                   <div className="lg:py-20 py-8 px-4 lg:px-12 relative">
                     <div>
@@ -59,7 +59,7 @@ const SuccessStories = () => {
                           <StarIcon key={i} />
                         ))}
                     </div>
-                    <p className="text-white text-xl mt-9">{testimonial.review}</p>
+                    <p className="text-white md:text-xl text-base mt-9">{testimonial.review}</p>
                     <h4 className="text-xl text-white font-semibold text-gray-900 mt-7">
                       {testimonial.name}
                     </h4>

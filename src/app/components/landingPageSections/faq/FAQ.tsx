@@ -42,7 +42,7 @@ const FAQSection = () => {
         <h2 className="text-sm font-medium text-normal uppercase">
           Frequently Asked Questions
         </h2>
-        <h2 className="text-4xl font-bold mt-2">Curious? Find Out More Here</h2>
+        <h2 className="md:text-4xl text-2xl font-bold mt-2">Curious? Find Out More Here</h2>
         <div className="mt-8 space-y-4">
           {faqs.map((faq, index) => (
             <div

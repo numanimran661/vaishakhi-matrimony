@@ -8,10 +8,10 @@ import Button from "@/app/components/common/buttons/Button";
 
 const ContactPage: React.FC = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-4">
       <div className="w-full max-w-7xl">
         <h2 className="text-center font-medium text-normal uppercase">Contact Us</h2>
-        <h2 className="text-2xl md:text-4xl font-bold mb-7 text-center">
+        <h2 className="text-xl md:text-4xl font-bold md:mb-7 mb-3 text-center">
           Get in touch today
         </h2>
         <p className="text-center text-gray-500 mb-8">
