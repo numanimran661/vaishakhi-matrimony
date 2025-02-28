@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import InputField from "@/app/components/common/inputFields/InputField";
@@ -8,7 +8,10 @@ import Button from "@/app/components/common/buttons/Button";
 import { GoogleLogo } from "@/app/components/common/allImages/AllImages";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { register } from "@/app/lib/api/auth/route";
+import { register, socialLogin } from "@/app/lib/api/authRoutes";
+import { signIn, useSession } from "next-auth/react";
+import { showToast } from "@/app/components/ui/CustomToast";
+import { useAuth } from "@/context/AuthContext";
 
 interface SignUpValues {
   name: string;
@@ -19,7 +22,36 @@ interface SignUpValues {
 
 const SignupForm: React.FC = () => {
   const router = useRouter();
-  const [error, setError] = useState<string | null>(null);
+  const { loginInternal } = useAuth();
+  const { data: session } = useSession();
+  const [loading, setLoading] = useState<boolean>(false);
+  const [googleAuthCompleted, setGoogleAuthCompleted] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (session?.user?.email && !googleAuthCompleted) {
+      setGoogleAuthCompleted(true);
+      saveUserToBackend(session?.user?.email);
+    }
+  }, [session?.user?.email]);
+  const saveUserToBackend = async (email: string) => {
+    try {
+      const obj = {
+        email,
+      };
+      const response = await socialLogin(obj);
+
+      if (response?.status === 200 || response?.status === 201) {
+        showToast("Logged In successfully", "success");
+        loginInternal(response?.data?.token, response?.data?.user);
+        router.push("/home");
+      } else {
+        showToast("Something went wrong. Please try again.", "error");
+      }
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
+  };
   const initialValues: SignUpValues = {
     name: "",
     email: "",
@@ -40,22 +72,30 @@ const SignupForm: React.FC = () => {
       .min(6, "Password must be at least 6 characters")
       .required("Password is required"),
   });
+  const handleGoogleLogin = async () => {
+    try {
+      setLoading(true);
+      await signIn("google", { redirect: false });
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={async (values, { setSubmitting }) => {
-        console.log("Form submitted", values); // Debug log
-        setError(null);
         try {
           const response = await register(values);
-          if (response?.token) {
+          if (response?.status === 200 || response?.status === 201) {
+            loginInternal(response?.data?.token, response?.data?.user);
+            showToast("Signed up successfully", "success");
             router.push("/home");
           } else {
-            setError("Invalid credentials");
+            showToast("Something went wrong. Please try again.", "error");
           }
         } catch (err: any) {
-          setError(err.response?.data?.error || "Login failed");
         } finally {
           setSubmitting(false);
         }
@@ -107,16 +147,16 @@ const SignupForm: React.FC = () => {
           <Button
             type="submit"
             disabled={isSubmitting}
-            label="Sign Up"
+            label={isSubmitting ? "Signing Up..." : "Sign Up"}
             className="mt-4 w-full"
           />
           <Button
             type="button"
-            label="Sign Up with google"
+            label={loading ? "Signing Up..." : "Sign Up with google"}
             icon={GoogleLogo}
             className="mt-4 w-full bg-lightBlue"
             variant="light"
-            onClick={() => router.push("/tell-us-more-about-yourself")}
+            onClick={handleGoogleLogin}
           />
           <div className="mt-4 font-regular">
             <span>Already have an account?</span>{" "}

@@ -6,7 +6,10 @@ const SelectField: React.FC<SelectFieldProps> = ({
   name,
   options,
   className = "",
+  value,
   onChange,
+  error,
+  touched,
 }) => {
   return (
     <div className={`flex flex-col ${className} mt-4 text-[#949494]`}>
@@ -20,10 +23,13 @@ const SelectField: React.FC<SelectFieldProps> = ({
       )}
       <select
         id={name}
+        value={value}
         onChange={onChange}
-        className="px-3 py-2 border border-gray rounded-xl h-12 focus:outline-none bg-white"
+        className={`px-3 py-2 border border-gray rounded-xl h-12 focus:outline-none bg-white ${
+          error && touched ? "border-red-500" : "border-gray"
+        }`}
       >
-        <option value="" disabled>
+        <option value="">
           Select an option
         </option>
         {options.map((option) => (
@@ -32,6 +38,9 @@ const SelectField: React.FC<SelectFieldProps> = ({
           </option>
         ))}
       </select>
+      {error && touched && (
+        <div className="text-red-500 text-sm mt-1">{error}</div>
+      )}
     </div>
   );
 };

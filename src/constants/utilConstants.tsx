@@ -10,6 +10,17 @@ import {
   SuccessStoriesIcon,
 } from "@/app/components/common/allImages/AllImages";
 
+export const getFieldsForTab = (tabIndex: number) => {
+  const tabFieldsMap: Record<number, string[]> = {
+    0: ["fullName", "dateOfBirth", "gender"], // Fields in Tab 1 (Basic Info)
+    1: ["education", "occupation", "annual_income"], // Fields in Tab 2 (Education & Occupation)
+    2: ["address", "city", "state"], // Fields in Tab 3 (Address Details)
+  };
+
+  return tabFieldsMap[tabIndex] || [];
+};
+
+
 export const homeTabs = [
   {
     title: "New Join",

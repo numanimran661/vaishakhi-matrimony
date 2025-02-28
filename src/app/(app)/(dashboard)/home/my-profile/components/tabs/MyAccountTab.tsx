@@ -47,37 +47,33 @@ const MyAccountTab = ({
 
       <h3 className="text-lg font-semibold mb-6">Account Info</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <InputField
+        {/* <InputField
           label="Profile ID"
           name="profileId"
           value={formData.profileId}
           disabled
-        />
+        /> */}
         <InputField
           label="Full Name"
-          name="fullName"
-          value={formData.fullName}
-          onChange={(e) => handleChange("fullName", e.target.value)}
+          name="name"
+          value={formData.name}
         />
         <InputField
           label="Email Address"
           name="email"
           value={formData.email}
-          onChange={(e) => handleChange("email", e.target.value)}
         />
         <InputField
           label="Phone Number"
           name="phone"
           value={formData.phone}
-          onChange={(e) => handleChange("phone", e.target.value)}
         />
-        <InputField
+        {/* <InputField
           label="Password"
           name="password"
           type="password"
           value={formData.password}
-          onChange={(e) => handleChange("password", e.target.value)}
-        />
+        /> */}
       </div>
 
       <Button label="Save Changes" className="mt-5" />

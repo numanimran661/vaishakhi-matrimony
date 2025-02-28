@@ -5,24 +5,71 @@ import {
   personalInfo,
 } from "@/app/components/common/allImages/AllImages";
 import Button from "@/app/components/common/buttons/Button";
-import { initialValuesProps } from "@/types/formTypes";
-import { useFormik } from "formik";
+import { Formik, useFormik } from "formik";
 import { useState } from "react";
 import BasicInfoForm from "./components/BasicInfo";
 import PersonalDetailForm from "./components/PersonalDetailForm";
 import PartnerPreferences from "./components/PartnerPreferencesForm";
+import { InitialValuesProps } from "@/types/formTypes";
+import { completeProfile } from "@/app/lib/api/authRoutes";
+import { showToast } from "@/app/components/ui/CustomToast";
+import { useRouter } from "next/navigation";
+import { completeProfileValidation } from "@/constants/validationSchemas";
 
-const initialValues: initialValuesProps = {
+const initialValues: InitialValuesProps = {
+  gender: "",
+  dateOfBirth: "",
+  occupation: "",
+  employedIn: "",
+  annualIncome: "",
+  workLocation: "",
   fullName: "",
   age: "",
-  gender: "",
-  height: "",
-  dob: "",
   maritalStatus: "",
   religion: "",
+  height: "",
   motherTongue: "",
-  cast: "",
+  sect: "",
   city: "",
+  highestDegree: "",
+  ageFrom: "",
+  ageTo: "",
+  heightFrom: "",
+  heightTo: "",
+  lookingFor: "",
+  physicalStatus: "",
+  food: "",
+  smoking: "",
+  drinking: "",
+  familyType: "",
+  familyStatus: "",
+  familyValue: "",
+  fathersOccupation: "",
+  horoscopeDetails: {
+    dosh: "",
+    star: "",
+    birthTime: "",
+    birthPlace: "",
+    religion: "",
+    caste: "",
+    motherTongue: "",
+    manglik: "",
+  },
+  FamilyDetails: {
+    // numOfBrothers: "",
+    // numOfMarriedBrothers: "",
+    // numOfSisters: "",
+    // numOfMarriedSisters: "",
+    country: "",
+    state: "",
+    city: "",
+  },
+  Education: {
+    education: "",
+    occupation: "",
+    income: "",
+  },
+  partnerExpectation: "",
 };
 const steps = [
   { id: 1, label: "Basic Info", Icon: basicInfo },
@@ -30,8 +77,10 @@ const steps = [
   { id: 3, label: "Partner Preferences", Icon: partnerPref },
 ];
 const TellUsMoreAboutYourself: React.FC = () => {
+  const router = useRouter();
   const [step, setStep] = useState(1);
-  const { handleChange, values, handleSubmit } = useFormik({
+  const [activeSubTab, setSubActiveTab] = useState(1);
+  const { handleChange, handleSubmit } = useFormik({
     initialValues,
     onSubmit: (value, action) => {
       console.log(value);
@@ -49,10 +98,17 @@ const TellUsMoreAboutYourself: React.FC = () => {
 
   const nextStep = () => {
     if (step < steps.length) setStep(step + 1);
+
+    if (step === steps.length && activeSubTab < 5)
+      setSubActiveTab(activeSubTab + 1);
   };
 
   const prevStep = () => {
-    if (step > 1) setStep(step - 1);
+    // if (step > 1) setStep(step - 1);
+    if (step > 1 && activeSubTab <= 1) setStep(step - 1);
+
+    if (step === steps.length && activeSubTab > 1)
+      setSubActiveTab(activeSubTab - 1);
   };
 
   return (
@@ -117,53 +173,99 @@ const TellUsMoreAboutYourself: React.FC = () => {
           </div>
 
           <div className="md:px-7">
-            <form
-              onSubmit={handleSubmit}
-              className="flex flex-wrap gap-y-6 gap-x-8 md:pb-20 relative"
+            <Formik
+              initialValues={initialValues}
+              validationSchema={completeProfileValidation}
+              onSubmit={async (values, { setSubmitting }) => {
+                try {
+                  const response = await completeProfile(values);
+                  if (response?.status === 200) {
+                    showToast(
+                      "Congratulation! Your profile is completed successfully.",
+                      "success"
+                    );
+                    localStorage.setItem("user", JSON.stringify(response?.data));
+                    router.push("/home");
+                  } else {
+                    showToast(
+                      "Something went wrong. Please try again.",
+                      "error"
+                    );
+                  }
+                } catch (err: any) {
+                } finally {
+                  setSubmitting(false);
+                }
+              }}
             >
-              {step === 1 && (
-                <BasicInfoForm
-                  values={values}
-                  handleInputChange={handleInputChange}
-                  handleSelectChange={handleSelectChange}
-                />
-              )}
-
-              {step === 2 && (
-                <PersonalDetailForm
-                  values={values}
-                  handleInputChange={handleInputChange}
-                  handleSelectChange={handleSelectChange}
-                />
-              )}
-              {step === 3 && (
-                <PartnerPreferences
-                  values={values}
-                  handleInputChange={handleInputChange}
-                  handleSelectChange={handleSelectChange}
-                />
-              )}
-
-              {/* Navigation Buttons */}
-              <div className="w-full flex justify-between mt-6">
-                <div>
-                  {step > 1 && (
-                    <Button
-                      label="Back"
-                      type="button"
-                      variant="light"
-                      onClick={prevStep}
+              {({ isSubmitting, values, errors, touched, handleSubmit }) => (
+                <form
+                  onSubmit={handleSubmit}
+                  className="flex flex-wrap gap-y-6 gap-x-8 md:pb-20 relative"
+                >
+                  {step === 1 && (
+                    <BasicInfoForm
+                      values={values}
+                      handleChange={handleInputChange}
+                      errors={errors}
+                      touched={touched}
                     />
                   )}
-                </div>
 
-                <Button
-                  label={step === steps.length ? "Submit" : "Continue"}
-                  type="button"
-                  onClick={step === steps.length ? handleSubmit : nextStep}
-                />
-              </div>
-            </form>
+                  {step === 2 && (
+                    <PersonalDetailForm
+                      values={values}
+                      handleChange={handleInputChange}
+                      errors={errors}
+                      touched={touched}
+                    />
+                  )}
+                  {step === 3 && (
+                    <PartnerPreferences
+                      values={values}
+                      activeTab={activeSubTab}
+                      setActiveTab={setSubActiveTab}
+                      handleChange={handleInputChange}
+                      errors={errors}
+                      touched={touched}
+                    />
+                  )}
+
+                  {/* Navigation Buttons */}
+                  <div className="w-full flex justify-between mt-6">
+                    <div>
+                      {step > 1 && (
+                        <Button
+                          label="Back"
+                          type="button"
+                          variant="light"
+                          onClick={prevStep}
+                        />
+                      )}
+                    </div>
+
+                    <Button
+                      disabled={isSubmitting}
+                      label={
+                        step === steps.length && activeSubTab === 5
+                          ? "Submit"
+                          : "Continue"
+                      }
+                      type={
+                        step === steps.length && activeSubTab === 5
+                          ? "submit"
+                          : "button"
+                      }
+                      onClick={
+                        step === steps.length && activeSubTab === 5
+                          ? handleSubmit
+                          : nextStep
+                      }
+                    />
+                  </div>
+                </form>
+              )}
+            </Formik>
           </div>
         </main>
       </div>

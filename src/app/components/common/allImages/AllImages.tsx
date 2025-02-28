@@ -50,6 +50,8 @@ import SuccessStoriesIcon from "@/assets/images/svg/success-stories-icon.svg";
 import PrivacyPolicyIcon from "@/assets/images/svg/privacy-policy-icon.svg";
 import LogoutIcon from "@/assets/images/svg/logout-icon.svg";
 import ClipboardIcon from "@/assets/images/svg/clipboard-icon.svg";
+import ToastCheck from "@/assets/images/svg/toast-check.svg";
+import ToastCross from "@/assets/images/svg/toast-cross.svg";
 
 import AppLogo from "../../../../../public/images/png/app-logo.png";
 import LogoDark from "../../../../../public/images/png/logo-dark.png";
@@ -145,6 +147,8 @@ export {
   LogoutIcon,
   ClipboardIcon,
   RocketImg,
-  CloudUploadIcon
+  CloudUploadIcon,
+  ToastCheck,
+  ToastCross
 };
 

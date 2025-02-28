@@ -7,7 +7,7 @@ import { Tab, TabList } from "@headlessui/react";
 // }
 // Main Tabs Component
 const MainTabs = () => (
-  <TabList className="flex flex-col pb-2 overflow-x-auto border-r border-gray w-1/5">
+  <TabList className="hidden md:flex flex-col pb-2 overflow-x-auto border-r border-gray w-1/5">
     {mainTabs.map((tab, index) => (
       <Tab
         key={index}

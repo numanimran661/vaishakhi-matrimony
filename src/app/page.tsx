@@ -1,3 +1,5 @@
+'use client'
+import Cookies from "js-cookie";
 import AboutSection from "./components/landingPageSections/about/About";
 import Banner from "./components/landingPageSections/banner/Banner";
 import FAQSection from "./components/landingPageSections/faq/FAQ";
@@ -8,16 +10,18 @@ import StartNow from "./components/landingPageSections/startNow/StartNow";
 import SuccessStories from "./components/landingPageSections/successStories/SuccessStories";
 
 const MainPage = () => {
+  const token = Cookies.get("token");
+  
   return (
     <>
-    <Banner />
-    <AboutSection />
-    <ProcessSection />
-    <SuccessStories />
-    <OurFeatures />
-    <PricingPlans />
-    <FAQSection />
-    <StartNow />
+      <Banner />
+      <AboutSection />
+      <ProcessSection />
+      <SuccessStories />
+      <OurFeatures />
+      <PricingPlans />
+      <FAQSection />
+      {!token && <StartNow />}
     </>
   );
 };

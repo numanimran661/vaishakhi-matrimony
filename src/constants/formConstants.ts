@@ -1,51 +1,49 @@
+import { ageOptions, castOptions, cityOptions, degreeOptions, doshOptions, employmentOptions, familyStatusOptions, familyTypeOptions, familyValueOptions, foodPreferencesOptions, genderOptions, heightOptions, incomeRangeOptions, lookingForOptions, manglikOptions, maritalStatus, motherTongueOptions, occupationOptions, physicalStatusOptions, religionOptions, starOptions, yesNoOptions } from "./dummyConstants";
 
 export const mainTabs: string[] = ["My Account", "Basic Info", "Preferences"];
 export const subTabs: string[] = ["Basic", "Religion", "Location", "Education", "Criteria"];
 export const basicInfoTabs: string[] = ["Basic", "Personal"];
 export const religionFormFields = [
-  { label: "Religion", name: "religion" },
-  { label: "Caste", name: "caste" },
-  { label: "Mother Tongue", name: "motherTongue" },
-  { label: "Manglik", name: "manglik" },
-  { label: "Star", name: "star" },
-  { label: "Dosh", name: "dosh" },
-  { label: "Birth Place", name: "birthPlace" },
-  { label: "Birth Time", name: "birthTime" },
+  { label: "Religion", name: "religion", options: religionOptions },
+  { label: "Caste", name: "caste", options: castOptions },
+  { label: "Mother Tongue", name: "motherTongue", options: motherTongueOptions },
+  { label: "Manglik", name: "manglik", options: manglikOptions },
+  { label: "Star", name: "star", options: starOptions },
+  { label: "Dosh", name: "dosh", options: doshOptions },
+  { label: "Birth Place", name: "birthPlace", options: cityOptions },
 ];
 export const basicPanelFormFields = [
-    { label: "Age", name: "age", isRange: true },
-    { label: "Height", name: "height", isRange: true },
-    { label: "Looking For", name: "lookingFor" },
-    { label: "Physical Status", name: "physicalStatus" },
-    { label: "Food", name: "food" },
-    { label: "Smoking", name: "smoking" },
-    { label: "Drinking", name: "drinking" },
-    { label: "Family Type", name: "familyType" },
-    { label: "Family Status", name: "familyStatus" },
-    { label: "Family Value", name: "familyValue" },
-    { label: "Father’s Occupation", name: "fathersOccupation" },
-    { label: "Weight", name: "weight" },
-    { label: "Body Type", name: "bodyType" },
-    { label: "Complexion", name: "complexion" },
+    { label: "Age", name: "age", isRange: true, options: ageOptions },
+    { label: "Height", name: "height", isRange: true, options: heightOptions  },
+    { label: "Looking For", name: "lookingFor", options: lookingForOptions },
+    { label: "Physical Status", name: "physicalStatus", options: physicalStatusOptions },
+    { label: "Food", name: "food", options: foodPreferencesOptions },
+    { label: "Smoking", name: "smoking", options: yesNoOptions },
+    { label: "Drinking", name: "drinking", options: yesNoOptions },
+    { label: "Family Type", name: "familyType", options: familyTypeOptions },
+    { label: "Family Status", name: "familyStatus", options: familyStatusOptions },
+    { label: "Family Value", name: "familyValue", options: familyValueOptions },
+    { label: "Father’s Occupation", name: "fathersOccupation", options: occupationOptions },
+    // { label: "Weight", name: "weight" },
+    // { label: "Body Type", name: "bodyType" },
+    // { label: "Complexion", name: "complexion" },
   ];
 export const basicInfoFormFields = [
-    { label: "Full Name", name: "full_name" },
-    { label: "Age", name: "age" },
-    { label: "Gender", name: "gender" },
-    { label: "Height", name: "height" },
-    { label: "Date of Birth", name: "date_of_birth" },
-    { label: "Martial Status", name: "martial_status" },
-    { label: "Religion", name: "religion" },
-    { label: "Mother Tongue", name: "mother_tongue" },
-    { label: "Cast", name: "cast" },
-    { label: "City", name: "city" },
+    { label: "Age", name: "age", options: ageOptions },
+    { label: "Gender", name: "gender", options: genderOptions },
+    { label: "Height", name: "height", options: heightOptions },
+    { label: "Martial Status", name: "maritalStatus", options: maritalStatus },
+    { label: "Religion", name: "religion", options: religionOptions },
+    { label: "Mother Tongue", name: "motherTongue", options: motherTongueOptions },
+    { label: "Cast", name: "sect", options: castOptions },
+    { label: "City", name: "city", options: cityOptions },
   ];
 export const personalPanelFields = [
-    { label: "Highest Degree", name: "highest_degree" },
-    { label: "Occupation", name: "occupation" },
-    { label: "Employment", name: "employment" },
-    { label: "Annual Income", name: "annual_income" },
-    { label: "Work Location", name: "work_location" },
+    { label: "Highest Degree", name: "highestDegree", options: degreeOptions },
+    { label: "Occupation", name: "occupation", options: occupationOptions },
+    { label: "Employment", name: "employedIn", options: employmentOptions },
+    { label: "Annual Income", name: "annualIncome", options: incomeRangeOptions },
+    { label: "Work Location", name: "workLocation", options: cityOptions },
   ];
 export const locaitonFields = [
     { label: "Country", name: "country" },
@@ -57,3 +55,4 @@ export const educationFields = [
     { label: "Occupation", name: "occupation" },
     { label: "Annual Income", name: "annual_income" },
   ];
+  

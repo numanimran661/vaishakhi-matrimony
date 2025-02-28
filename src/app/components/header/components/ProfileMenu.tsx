@@ -1,28 +1,36 @@
-import Image, { StaticImageData } from "next/image";
+"use Client";
+import { StaticImageData } from "next/image";
 import React from "react";
-import {
-  ClipboardIcon,
-  LogoutIcon,
-} from "../../common/allImages/AllImages";
+import { ClipboardIcon, LogoutIcon } from "../../common/allImages/AllImages";
 import ProfileImage from "../../common/profileImage/ProfileImage";
 import Link from "next/link";
 import Button from "../../common/buttons/Button";
 import { usePathname, useRouter } from "next/navigation";
 import { menuItems } from "@/constants/utilConstants";
+import { logout } from "@/app/lib/api/authRoutes";
+import { useAuth } from "@/context/AuthContext";
 
 interface ProfileMenuProps {
   isOpen: boolean;
   onClose: () => void;
-  user: {
-    name: string;
-    id: string;
-    avatarUrl: StaticImageData;
-  };
 }
 
-const ProfileMenu: React.FC<ProfileMenuProps> = ({ isOpen, onClose, user }) => {
-  const router = useRouter()
+const ProfileMenu: React.FC<ProfileMenuProps> = ({ isOpen, onClose }) => {
+  const router = useRouter();
   const pathname = usePathname();
+  const { logoutInternal } = useAuth();
+  const user = localStorage.getItem("user");
+  const userObj = user ? JSON.parse(user) : null;
+
+  const handleLogout = async () => {
+    try {
+      const response = await logout(user);
+      if (response?.status === 200) {
+        logoutInternal();
+        router.push("/auth/login");
+      }
+    } catch (error) {}
+  };
 
   return (
     <div
@@ -35,16 +43,26 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ isOpen, onClose, user }) => {
       <div className="">
         <div className="p-4 flex items-center justify-between md:flex-col md:items-start mb-2 border-b border-gray mt-3">
           <div className="flex items-center md:gap-3 gap-1">
-            <ProfileImage src={user.avatarUrl} alt="Profile" size="lg" />
+            <ProfileImage src={userObj?.userImages[0]} alt="Profile" size="lg" />
             <div>
-              <h3 className="font-medium text-sm md:text-base">{user.name}</h3>
+              <h3 className="font-medium text-sm md:text-base">{userObj?.name}</h3>
               <div className="flex items-center gap-1 bg-gray50 rounded-2xl my-1 px-2">
-                <p className="text-sm text-darkGray">{user.id}</p>
-                <ClipboardIcon width={14} height={14} className="cursor-pointer" />
+                <p className="text-sm text-darkGray">{userObj?._id}</p>
+                <ClipboardIcon
+                  width={14}
+                  height={14}
+                  className="cursor-pointer"
+                />
               </div>
             </div>
           </div>
-          <Button label="Upgrade Now" variant="secondary" className="md:w-full md:mt-3 px-2 py-2 md:px-5 md:py-3 text-xs" size="sm" onClick={() => router.push("/membership-plans")}/>
+          <Button
+            label="Upgrade Now"
+            variant="secondary"
+            className="md:w-full md:mt-3 px-2 py-2 md:px-5 md:py-3 text-xs"
+            size="sm"
+            onClick={() => router.push("/membership-plans")}
+          />
         </div>
 
         <div className="px-4 pb-3">
@@ -65,7 +83,7 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ isOpen, onClose, user }) => {
               <span className="text-sm text-gray-700">{item.label}</span>
             </Link>
           ))}
-          <div className="flex items-center gap-3 p-3 hover:bg-gray-50 cursor-pointer rounded-lg transition-all duration-200 ease-in-out transform hover:scale-[1.02] text-red-600">
+          <div onClick={handleLogout} className="flex items-center gap-3 p-3 hover:bg-gray-50 cursor-pointer rounded-lg transition-all duration-200 ease-in-out transform hover:scale-[1.02] text-red-600">
             <LogoutIcon />
             <span className="text-sm">Log out</span>
           </div>

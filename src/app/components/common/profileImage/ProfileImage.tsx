@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { StaticImageData } from 'next/image';
+import { FemalePlaceholder, MalePlaceholder } from '../allImages/AllImages';
 
 interface ProfileImageProps {
   src: StaticImageData;
@@ -20,11 +21,13 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
     md: 'w-10 h-10',
     lg: 'w-12 h-12',
   };
+  const user = localStorage.getItem("user");
+  const userObj = user ? JSON.parse(user) : null;
 
   return (
     <div className={`relative flex-shrink-0 ${sizeClasses[size]}`}>
       <Image
-        src={src}
+        src={src? src : userObj?.gender === "male" ? MalePlaceholder : FemalePlaceholder}
         alt={alt}
         className="rounded-full object-cover"
         fill

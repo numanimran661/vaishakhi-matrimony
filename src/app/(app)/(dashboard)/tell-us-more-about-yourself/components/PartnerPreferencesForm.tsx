@@ -1,7 +1,10 @@
+import DatePicker from "@/app/components/common/inputFields/DatePicker";
+import InputField from "@/app/components/common/inputFields/InputField";
 import RadioField from "@/app/components/common/inputFields/RadioInput";
 import SelectField from "@/app/components/common/inputFields/SelectField";
-import { dropdownOptions } from "@/constants/dummyConstants";
+import { cityOptions, doshOptions, dropdownOptions, incomeRangeOptions, manglikOptions, motherTongueOptions, occupationOptions, religionOptions, starOptions, stateOptions } from "@/constants/dummyConstants";
 import { basicPanelFormFields } from "@/constants/formConstants";
+import { Field, useFormikContext } from "formik";
 import { useState } from "react";
 
 const tabs = [
@@ -12,21 +15,30 @@ const tabs = [
   { id: 5, label: "Family Details" },
 ];
 
+interface SubTabProps {
+  values: any;
+  handleChange: (e: React.ChangeEvent<any>) => void;
+  errors: any;
+  touched: any;
+}
 interface PartnerPreferencesProps {
   values: any;
-  handleSelectChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  handleInputChange: (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => void;
+  activeTab: number;
+  setActiveTab: (tab: number) => void;
+  handleChange: (e: React.ChangeEvent<any>) => void;
+  errors: any;
+  touched: any;
 }
 
 const PartnerPreferences: React.FC<PartnerPreferencesProps> = ({
   values,
-  handleInputChange,
-  handleSelectChange,
+  handleChange,
+  errors,
+  touched,
+  activeTab,
+  setActiveTab,
 }) => {
-  const [activeTab, setActiveTab] = useState(1);
-
+  
   return (
     <div className="w-full mx-auto">
       <h2 className="text-2xl font-bold text-darkBlue">Partner Preferences</h2>
@@ -59,70 +71,116 @@ const PartnerPreferences: React.FC<PartnerPreferencesProps> = ({
 
       {/* Tab Content */}
       <div>
-        {activeTab === 1 && <BasicInfo />}
-        {activeTab === 2 && <ReligionInfo />}
-        {activeTab === 3 && <LifestyleHabits />}
-        {activeTab === 4 && <LocationReligion />}
-        {activeTab === 5 && <FamilyDetails />}
+        {activeTab === 1 && (
+          <BasicInfo
+            values={values}
+            handleChange={handleChange}
+            errors={errors}
+            touched={touched}
+          />
+        )}
+        {activeTab === 2 && (
+          <ReligionInfo
+            values={values}
+            handleChange={handleChange}
+            errors={errors}
+            touched={touched}
+          />
+        )}
+        {activeTab === 3 && (
+          <LocationInfo
+            values={values}
+            handleChange={handleChange}
+            errors={errors}
+            touched={touched}
+          />
+        )}
+        {activeTab === 4 && (
+          <EducationInfo
+            values={values}
+            handleChange={handleChange}
+            errors={errors}
+            touched={touched}
+          />
+        )}
+        {activeTab === 5 && (
+          <CriteriaInfo
+            values={values}
+            handleChange={handleChange}
+            errors={errors}
+            touched={touched}
+          />
+        )}
       </div>
     </div>
   );
 };
 export default PartnerPreferences;
 
-function BasicInfo() {
+function BasicInfo({ values, handleChange, errors, touched }: SubTabProps) {
   return (
     <div>
       <h3 className="text-lg font-semibold mb-4">Basic Info</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {basicPanelFormFields.map((item, i) => (
-          <div
-            key={i}
-            className={item.isRange ? "grid grid-cols-2 gap-2 items-end" : ""}
-          >
-            <SelectField
-              label={item.label}
-              name={item.name}
-              // value={formData[item.name]}
-              // onChange={(e) => handleChange(item.name, e.target.value)}
-              options={dropdownOptions}
-              className="w-full"
-            />
-            {item.isRange && (
-              <div className="flex items-center gap-2">
-                <label
-                  htmlFor={`${item.name}To`}
-                  className="text-sm text-darkBlue font-semibold leading-5 mt-2"
-                >
-                  To
-                </label>
-                <SelectField
-                  name={`${item.name}To`}
-                  // value={formData[`${item.name}To`]}
-                  // onChange={(e) => handleChange(`${item.name}To`, e.target.value)}
-                  options={dropdownOptions}
-                  className={`max-w-48`}
-                />
-              </div>
-            )}
-          </div>
-        ))}
+        {basicPanelFormFields.map((item, i) => {
+          const fieldName =
+            item.name === "age"
+              ? "ageFrom"
+              : item.name === "height"
+              ? "heightFrom"
+              : item.name;
+
+          return (
+            <div
+              key={i}
+              className={item.isRange ? "grid grid-cols-2 gap-2 items-end" : ""}
+            >
+              <Field
+                as={SelectField}
+                label={item.label}
+                name={fieldName}
+                value={values[fieldName]}
+                options={item.options}
+                className="w-full"
+              />
+              {item.isRange && (
+                <div className="flex items-center gap-2">
+                  <label
+                    htmlFor={`${item.name}To`}
+                    className="text-sm text-darkBlue font-semibold leading-5 mt-2"
+                  >
+                    To
+                  </label>
+                  <Field
+                    as={SelectField}
+                    name={`${item.name}To`}
+                    value={values[`${item.name}To`]}
+                    options={item.options}
+                    className={`max-w-48`}
+                  />
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
 }
 
-function ReligionInfo() {
+function ReligionInfo({ values, handleChange, errors, touched }: SubTabProps) {
+  const { setFieldValue } = useFormikContext();
   return (
     <div>
       <h3 className="text-lg font-semibold mb-4">Religion Info</h3>
       <div className="grid grid-cols-2 gap-4">
-        <SelectField
+        <Field
+          as={SelectField}
           label={"Religion"}
-          name={"religion"}
-          // value={formData[item.name]}
+          name={"horoscopeDetails.religion"}
+          value={values?.horoscopeDetails.religion}
           // onChange={(e) => handleChange(item.name, e.target.value)}
-          options={dropdownOptions}
+          options={religionOptions}
           className="w-full"
         />
         <div className="mt-4">
@@ -130,61 +188,63 @@ function ReligionInfo() {
             Caste
           </label>
           <div className="flex flex-wrap gap-4 mt-3">
-            <RadioField name="caste" label="Brahmin" />
-
-            <RadioField name="caste" label="Kshatriya" />
-
-            <RadioField name="caste" label="Vaishya" />
-
-            <RadioField name="caste" label="Shudra" />
+            {["Brahmin", "Kshatriya", "Vaishya", "Shudra"].map((option) => (
+              <RadioField
+                key={option}
+                name="horoscopeDetails.caste"
+                label={option}
+                value={option}
+                checked={values.horoscopeDetails.caste === option}
+                onChange={(val) => setFieldValue("horoscopeDetails.caste", val)}
+              />
+            ))}
           </div>
         </div>
-        <SelectField
+        <Field
+          as={SelectField}
           label={"Mother Tongue"}
-          name={"mother_tongue"}
-          // value={formData[item.name]}
-          // onChange={(e) => handleChange(item.name, e.target.value)}
-          options={dropdownOptions}
+          name={"horoscopeDetails.motherTongue"}
+          value={values?.horoscopeDetails.motherTongue}
+          options={motherTongueOptions}
           className="w-full"
         />
-        <SelectField
+        <Field
+          as={SelectField}
           label={"Manglik"}
-          name={"manglik"}
-          // value={formData[item.name]}
-          // onChange={(e) => handleChange(item.name, e.target.value)}
-          options={dropdownOptions}
+          name={"horoscopeDetails.manglik"}
+          value={values?.horoscopeDetails?.manglik}
+          options={manglikOptions}
           className="w-full"
         />
-        <SelectField
+        <Field
+          as={SelectField}
           label={"Star"}
-          name={"star"}
-          // value={formData[item.name]}
-          // onChange={(e) => handleChange(item.name, e.target.value)}
-          options={dropdownOptions}
+          name={"horoscopeDetails.star"}
+          value={values?.horoscopeDetails.star}
+          options={starOptions}
           className="w-full"
         />
-        <SelectField
+        <Field
+          as={SelectField}
           label={"Dosh"}
-          name={"dosh"}
-          // value={formData[item.name]}
-          // onChange={(e) => handleChange(item.name, e.target.value)}
-          options={dropdownOptions}
+          name={"horoscopeDetails.dosh"}
+          value={values?.horoscopeDetails.dosh}
+          options={doshOptions}
           className="w-full"
         />
-        <SelectField
+        <Field
+          as={SelectField}
           label={"Birth Place"}
-          name={"birth_place"}
-          // value={formData[item.name]}
-          // onChange={(e) => handleChange(item.name, e.target.value)}
-          options={dropdownOptions}
+          name={"horoscopeDetails.birthPlace"}
+          value={values?.horoscopeDetails.birthPlace}
+          options={cityOptions}
           className="w-full"
         />
-        <SelectField
+        <Field
+          as={DatePicker}
           label={"Birth Time"}
-          name={"Birth Time"}
-          // value={formData[item.name]}
-          // onChange={(e) => handleChange(item.name, e.target.value)}
-          options={dropdownOptions}
+          name={"horoscopeDetails.birthTime"}
+          value={values?.horoscopeDetails.birthTime}
           className="w-full"
         />
       </div>
@@ -192,26 +252,118 @@ function ReligionInfo() {
   );
 }
 
-function LifestyleHabits() {
+function LocationInfo({ values, handleChange, errors, touched }: SubTabProps) {
+  const { setFieldValue } = useFormikContext();
   return (
     <div>
-      <h3 className="text-lg font-semibold">Lifestyle & Habits</h3>
+      <h3 className="text-lg font-semibold mb-4">Location Info</h3>
+      <div className="grid grid-cols-2 gap-4">
+        {/* <Field
+          as={SelectField}
+          label={"Country"}
+          name={"FamilyDetails.country"}
+          value={values?.FamilyDetails.country}
+          // onChange={(e) => handleChange(item.name, e.target.value)}
+          options={dropdownOptions}
+          className="w-full"
+        /> */}
+        <Field
+          as={SelectField}
+          label={"State"}
+          name={"FamilyDetails.state"}
+          value={values?.FamilyDetails.state}
+          // onChange={(e) => handleChange(item.name, e.target.value)}
+          options={stateOptions}
+          className="w-full"
+        />
+        <div className="mt-4">
+          <label className="mb-2 text-sm text-darkBlue font-semibold leading-5">
+            City
+          </label>
+          <div className="flex flex-wrap gap-4 mt-3">
+            {["Mumbai", "Banglore", "Delhi", "Hyderabad"].map((option) => (
+              <RadioField
+                key={option}
+                name="FamilyDetails.city"
+                label={option}
+                value={option}
+                checked={values.horoscopeDetails.caste === option}
+                onChange={(val) => setFieldValue("FamilyDetails.city", val)}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
 
-function LocationReligion() {
+function EducationInfo({ values, handleChange, errors, touched }: SubTabProps) {
+  const { setFieldValue } = useFormikContext();
+
   return (
     <div>
-      <h3 className="text-lg font-semibold">Location & Religion</h3>
+      <h3 className="text-lg font-semibold mb-4">Education Info</h3>
+      <div className="grid grid-cols-2 gap-4">
+        {/* Education Radio Buttons */}
+        <div className="mt-4">
+          <label className="mb-2 text-sm text-darkBlue font-semibold leading-5">
+            Education
+          </label>
+          <div className="flex flex-wrap gap-4 mt-3">
+            {["M.Phil", "BSc IT", "B Tech", "BA"].map((option) => (
+              <RadioField
+                key={option}
+                name="Education.education"
+                label={option}
+                value={option}
+                checked={values.Education.education === option} // Ensure checked state
+                onChange={(val) => setFieldValue("Education.education", val)} // Update Formik state
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Occupation Dropdown */}
+        <Field
+          as={SelectField}
+          label="Occupation"
+          name="Education.occupation"
+          value={values?.Education.occupation}
+          options={occupationOptions}
+          className="w-full"
+        />
+
+        {/* Annual Income Dropdown */}
+        <Field
+          as={SelectField}
+          label="Annual Income"
+          name="Education.income"
+          value={values?.Education.income}
+          options={incomeRangeOptions}
+          className="w-full"
+        />
+      </div>
     </div>
   );
 }
 
-function FamilyDetails() {
+function CriteriaInfo({ values, handleChange, errors, touched }: SubTabProps) {
   return (
     <div>
-      <h3 className="text-lg font-semibold">Family Details</h3>
+      <h3 className="text-lg font-semibold mb-4">Criteria Info</h3>
+      <div className="w-full">
+        <Field
+          as={InputField}
+          label={"Partner Expectation"}
+          name={"partnerExpectation"}
+          type="textarea"
+          value={values.partnerExpectation}
+          className="w-full"
+          error={errors.fullName}
+          touched={touched.fullName}
+        />
+      </div>
     </div>
   );
 }

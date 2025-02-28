@@ -1,33 +1,43 @@
 "use client";
 
 import React from "react";
-import { Formik, Form } from "formik";
+import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import InputField from "@/app/components/common/inputFields/InputField";
 import Button from "@/app/components/common/buttons/Button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { forgotPassword } from "@/app/lib/api/authRoutes";
+import { showToast } from "@/app/components/ui/CustomToast";
 
 const ResetPassword: React.FC = () => {
-  const router = useRouter()
+  const router = useRouter();
   return (
     <Formik
-      initialValues={{ email: "", password: "" }}
+      initialValues={{ email: "" }}
       validationSchema={Yup.object({
         email: Yup.string().email("Invalid email address").required("Required"),
-        password: Yup.string()
-          .min(6, "Password must be at least 6 characters")
-          .required("Required"),
       })}
-      onSubmit={(values, { setSubmitting }) => {
-        console.log(values);
-        setSubmitting(false);
+      onSubmit={async (values, { setSubmitting }) => {
+        try {
+          const response = await forgotPassword(values);
+          if (response?.status === 200) {
+            showToast("Reset Email sent successfully", "success");
+            router.push("/auth/reset-mail-sent");
+          } else {
+            showToast("Something went wrong. Please try again.", "error");
+          }
+        } catch (err: any) {
+        } finally {
+          setSubmitting(false);
+        }
       }}
     >
       {({ isSubmitting }) => (
         <Form>
           <h2 className="text-3xl font-bold mb-7">Reset your password</h2>
-          <InputField
+          <Field
+            as={InputField}
             label="Email Address"
             name="email"
             type="email"
@@ -37,9 +47,8 @@ const ResetPassword: React.FC = () => {
           <Button
             type="submit"
             disabled={isSubmitting}
-            label="Reset"
+            label={isSubmitting ? "Resetting..." : "Reset"}
             className="mt-4 w-full"
-            onClick={() => router.push("/auth/reset-mail-sent")}
           />
           <div className="mt-4 font-regular">
             <span>Have Your Password?</span>{" "}

@@ -1,8 +1,10 @@
 import Button from "@/app/components/common/buttons/Button";
+import DatePicker from "@/app/components/common/inputFields/DatePicker";
+import InputField from "@/app/components/common/inputFields/InputField";
 import SelectField from "@/app/components/common/inputFields/SelectField";
-import { dropdownOptions } from "@/constants/dummyConstants";
 import { basicInfoFormFields } from "@/constants/formConstants";
 import { FormData } from "@/types/formTypes";
+import { Field } from "formik";
 
 interface BasicPanelProps {
   formData: FormData;
@@ -13,6 +15,27 @@ interface BasicPanelProps {
 const BasicInfoPanel = ({ formData, handleChange }: BasicPanelProps) => (
   <div>
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      
+    <Field
+        as={InputField}
+        label="Full Name"
+        name="fullName"
+        // value={values.fullName}
+        placeholder="Full Name"
+        className="w-full sm:w-[47%]"
+        // error={errors.fullName}
+        // touched={touched.fullName}
+      />
+      <Field
+        as={DatePicker}
+        // onChange={handleChange}
+        // value={values.dob}
+        name="dateOfBirth"
+        label="Date Of Birth"
+        className="w-full sm:w-[47%]"
+        // error={errors.dateOfBirth}
+        // touched={touched.dateOfBirth}
+      />
       {basicInfoFormFields.map((item, i) => (
         <div key={i}>
           <SelectField
@@ -20,7 +43,7 @@ const BasicInfoPanel = ({ formData, handleChange }: BasicPanelProps) => (
             name={item.name}
             value={formData[item.name]}
             onChange={(e) => handleChange(item.name, e.target.value)}
-            options={dropdownOptions}
+            options={item.options}
             className="w-full"
           />
         </div>

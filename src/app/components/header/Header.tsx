@@ -2,12 +2,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import Cookies from "js-cookie";
 import {
   CloseIcon,
   DummyProfile,
+  FemalePlaceholder,
   Hamburger,
   LockIcon,
   LogoDark,
+  MalePlaceholder,
   NotificationsIcon,
   TablerMsgIcon,
 } from "../common/allImages/AllImages";
@@ -18,6 +21,10 @@ import ProfileImage from "../common/profileImage/ProfileImage";
 import ProfileMenu from "./components/ProfileMenu";
 
 const Header: React.FC = () => {
+  // const user = localStorage.getItem("user");
+  // const userObj = user ? JSON.parse(user) : null;
+  
+  const [userObj, setUserObj] = useState<any>({});
   const router = useRouter();
   const pathname = usePathname();
   const notificationsRef = useRef<HTMLDivElement>(null);
@@ -27,7 +34,15 @@ const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
+  const token = Cookies.get("token");
 
+  useEffect(() => {
+    // Check if window is defined (i.e., we're in the browser)
+    if (typeof window !== "undefined") {
+      const user = localStorage.getItem("user");
+      setUserObj(user ? JSON.parse(user) : null);
+    }
+  }, []);
   // useEffect(() => {
   //   const handleClickOutside = (event: MouseEvent) => {
   //     if (
@@ -137,7 +152,7 @@ const Header: React.FC = () => {
             ))}
           </nav>
 
-          {pathname.includes("auth") ? (
+          {!token ? (
             <div className="flex items-centers gap-1">
               <Button
                 label="Login"
@@ -178,16 +193,20 @@ const Header: React.FC = () => {
                     onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
                     className="cursor-pointer"
                   >
-                    <ProfileImage src={DummyProfile} alt="profile image" />
+                    <ProfileImage
+                      src={
+                        userObj?.userImages[0]
+                          ? userObj?.userImages[0]
+                          : userObj?.gender === "male"
+                          ? MalePlaceholder
+                          : FemalePlaceholder
+                      }
+                      alt="profile image"
+                    />
                   </div>
                   <ProfileMenu
                     isOpen={isProfileMenuOpen}
                     onClose={() => setIsProfileMenuOpen(false)}
-                    user={{
-                      name: "Sarah Bajk",
-                      id: "1234432",
-                      avatarUrl: DummyProfile,
-                    }}
                   />
                 </div>
               </div>

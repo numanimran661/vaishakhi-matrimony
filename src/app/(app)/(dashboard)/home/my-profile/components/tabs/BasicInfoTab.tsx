@@ -5,6 +5,7 @@ import SubTabs from "../SubTabs";
 import BasicInfoPanel from "../panels/BasicInfoPanel";
 import { basicInfoTabs } from "@/constants/formConstants";
 import PersonalPanel from "../panels/PersonalPanel";
+import { ArrowLeft } from "@/app/components/common/allImages/AllImages";
 
 interface PreferencesTabProps {
   selectedSubTab: number;
@@ -21,9 +22,11 @@ const BasicInfoTab = ({
 }: PreferencesTabProps) => {
   return (
     <TabGroup selectedIndex={selectedSubTab} onChange={setSelectedSubTab}>
-      <SubTabs
-        tabsList={basicInfoTabs}
-      />
+      <div className="md:hidden flex items-center space-x-2 p-4 border-b">
+        <ArrowLeft onClick={() => setSelectedSubTab(0)} />
+        <h2 className="text-lg font-semibold">Basic Info</h2>
+      </div>
+      <SubTabs tabsList={basicInfoTabs} />
       <TabPanels className="mt-4">
         {selectedSubTab === 0 && (
           <BasicInfoPanel formData={formData} handleChange={handleChange} />

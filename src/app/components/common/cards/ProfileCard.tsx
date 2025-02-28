@@ -11,9 +11,11 @@ import {
   VerifiedIcon,
 } from "../allImages/AllImages";
 import { useRouter } from "next/navigation";
+import { sendInterest } from "@/app/lib/api/homeRoutes";
+import { showToast } from "../../ui/CustomToast";
 
 type ProfileCardProps = {
-  id: number;
+  id: string;
   image?: StaticImageData | string;
   isNew: boolean;
   verified: boolean;
@@ -38,18 +40,29 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
   gender,
 }) => {
   const router = useRouter();
+
+  const handleInterestSend = async () => {
+    const {status} = await sendInterest({receiverId: id})
+    if(status === 200){
+      showToast("Interest Sent Successfully", 'success')
+    } else {
+      showToast("Error occured while sending Interest", 'error')
+    }
+  }
   return (
     <div
       className="bg-white shadow rounded-xl relative"
       onClick={() => router.push(`/home/profile-details/${id}`)}
     >
-      <Image
+      <img
         src={
           image
-            ? image
+            ? typeof image === "string"
+              ? image // Use the string directly
+              : image.src
             : gender === "male"
-            ? MalePlaceholder
-            : FemalePlaceholder
+            ? MalePlaceholder.src
+            : FemalePlaceholder.src
         }
         alt="Profile Picture"
         className="w-full h-40 object-cover rounded-t-lg"
@@ -71,10 +84,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
                 image ? "blur-bg" : "bg-gray"
               }`}
             >
-              <VerifiedIcon
-                width={16}
-                height={16}
-              />
+              <VerifiedIcon width={16} height={16} />
             </span>
           )}
         </div>
@@ -89,15 +99,12 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
           </p>
           <div className="flex justify-between items-center">
             <p className="text-sm text-normal flex items-center gap-1">
-              <LocationMarker />
+              <LocationMarker width="20px" />
               {location}
             </p>
             <div className="flex gap-1 items-center">
-              <span className="rounded-full bg-lightGray p-2 cursor-pointer">
-                <ReqSendIcon
-                  width={14}
-                  height={14}
-                />
+              <span className="rounded-full bg-lightGray p-2 cursor-pointer" onClick={handleInterestSend}>
+                <ReqSendIcon width={14} height={14} />
               </span>
               <span
                 className="rounded-full bg-orange-50 p-2 cursor-pointer"
@@ -106,10 +113,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
                   router.push("/home/messages");
                 }}
               >
-                <MessageIcon
-                  width={14}
-                  height={14}
-                />
+                <MessageIcon width={14} height={14} />
               </span>
             </div>
           </div>

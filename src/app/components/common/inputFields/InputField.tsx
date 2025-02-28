@@ -11,8 +11,8 @@ type InputFieldProps = {
   classNameLabel?: string;
   icon?: ElementType;
   disabled?: boolean;
-  error?: string; // Add error prop
-  touched?: boolean; // Add touched prop
+  error?: string;
+  touched?: boolean;
 };
 
 const InputField: React.FC<InputFieldProps> = ({
@@ -26,8 +26,8 @@ const InputField: React.FC<InputFieldProps> = ({
   classNameLabel = "",
   icon: Icon,
   disabled = false,
-  error, // Destructure error
-  touched, // Destructure touched
+  error,
+  touched,
 }) => {
   return (
     <div className={`flex flex-col ${className}`}>

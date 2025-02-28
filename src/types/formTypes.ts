@@ -1,15 +1,59 @@
-export type initialValuesProps = {
-  fullName: string;
-  age: string;
+export type InitialValuesProps = {
   gender: string;
-  height: string;
-  dob: string;
+  dateOfBirth: string;
+  occupation: string;
+  employedIn: string;
+  annualIncome: string;
+  workLocation: string;
+  age: string;
+  fullName: string;
   maritalStatus: string;
   religion: string;
+  height: string;
   motherTongue: string;
-  cast: string;
+  sect: string;
   city: string;
+  highestDegree: string;
+  ageFrom: string;
+  ageTo: string;
+  heightFrom: string;
+  heightTo: string;
+  lookingFor: string;
+  physicalStatus: string;
+  food: string;
+  smoking: string;
+  drinking: string;
+  familyType: string;
+  familyStatus: string;
+  familyValue: string;
+  fathersOccupation: string;
+  horoscopeDetails: {
+    dosh: string;
+    star: string;
+    birthTime: string;
+    birthPlace: string;
+    religion: string;
+    caste: string;
+    motherTongue: string;
+    manglik: string;
+  };
+  FamilyDetails: {
+    // numOfBrothers: string;
+    // numOfMarriedBrothers: string;
+    // numOfSisters: string;
+    // numOfMarriedSisters: string;
+    country: string;
+    state: string;
+    city: string;
+  };
+  Education: {
+    education: string;
+    occupation: string;
+    income: string;
+  };
+  partnerExpectation: string;
 };
+
 
 
 export type SelectOption = {
@@ -30,6 +74,8 @@ export type SelectFieldProps = {
   className?: string;
   onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   value?: string;
+  error?: string;
+  touched?: boolean;
 };
 
 export type InputFieldProps = {

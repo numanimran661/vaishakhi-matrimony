@@ -1,3 +1,5 @@
+"use client";
+import Cookies from "js-cookie";
 import FAQSection from "@/app/components/landingPageSections/faq/FAQ";
 import StartNow from "@/app/components/landingPageSections/startNow/StartNow";
 import React from "react";
@@ -7,6 +9,7 @@ import CoreValues from "./components/CoreValues";
 import FounderSection from "./components/FounderSection";
 
 const page = () => {
+  const token = Cookies.get("token");
   return (
     <>
       <AboutBanner />
@@ -14,7 +17,7 @@ const page = () => {
       <CoreValues />
       <FounderSection />
       <FAQSection />
-      <StartNow />
+      {!token && <StartNow />}
     </>
   );
 };

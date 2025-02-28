@@ -1,8 +1,9 @@
 import Button from "@/app/components/common/buttons/Button";
+import DatePicker from "@/app/components/common/inputFields/DatePicker";
 import SelectField from "@/app/components/common/inputFields/SelectField";
-import { dropdownOptions } from "@/constants/dummyConstants";
 import { religionFormFields } from "@/constants/formConstants";
 import { FormData } from "@/types/formTypes";
+import { Field } from "formik";
 
 interface PreferencesPanelProps {
   formData: FormData;
@@ -23,11 +24,21 @@ const ReligionPanel = ({
             name={item.name}
             value={formData[item.name]}
             onChange={(e) => handleChange(item.name, e.target.value)}
-            options={dropdownOptions}
+            options={item.options}
             className="w-full"
           />
         </div>
       ))}
+      <Field
+        as={DatePicker}
+        // onChange={handleChange}
+        // value={values.dob}
+        name="birthTime"
+        label="Birth Time"
+        className="w-full sm:w-[47%]"
+        // error={errors.dateOfBirth}
+        // touched={touched.dateOfBirth}
+      />
     </div>
     <Button label="Save Changes" className="mt-5" />
   </div>

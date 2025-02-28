@@ -4,6 +4,9 @@ import Footer from "./components/footer/Footer";
 import Header from "./components/header/Header";
 import "./styles/global.css";
 import { usePathname } from "next/navigation";
+import { Toaster } from "react-hot-toast";
+import { AuthProvider } from "@/context/AuthContext";
+import NotificationHandler from "./components/notificationHandler/NotificationHandler";
 
 export default function RootLayout({
   children,
@@ -15,13 +18,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {/* <SessionProvider> */}
-          {!isAuthRoute && <Header />}
-          <div>{children}</div>
-          {!isAuthRoute && <Footer />}
+        <AuthProvider>
+          <SessionProvider>
+            <NotificationHandler />
+            {!isAuthRoute && <Header />}
+            <div>{children}</div>
+            {!isAuthRoute && <Footer />}
 
-          <div id="modal-root"></div>
-        {/* </SessionProvider> */}
+            <div id="modal-root"></div>
+            <Toaster position="top-right" reverseOrder={false} />
+          </SessionProvider>
+        </AuthProvider>
       </body>
     </html>
   );

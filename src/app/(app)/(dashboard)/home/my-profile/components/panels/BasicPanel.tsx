@@ -25,7 +25,7 @@ const BasicPanel = ({ formData, handleChange }: BasicPanelProps) => (
             name={item.name}
             value={formData[item.name]}
             onChange={(e) => handleChange(item.name, e.target.value)}
-            options={dropdownOptions}
+            options={item.options}
             className="w-full"
           />
           {item.isRange && (
@@ -40,7 +40,7 @@ const BasicPanel = ({ formData, handleChange }: BasicPanelProps) => (
                 name={`${item.name}To`}
                 value={formData[`${item.name}To`]}
                 onChange={(e) => handleChange(`${item.name}To`, e.target.value)}
-                options={dropdownOptions}
+                options={item.options}
                 className="w-full"
               />
             </div>
