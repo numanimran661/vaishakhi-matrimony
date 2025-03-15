@@ -39,10 +39,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const logoutInternal = () => {
     Cookies.remove("token");
     localStorage.removeItem("user");
-    signOut({redirect: false})
+    signOut({redirect: false});
     setToken(null);
     setUser(null);
-    router.push("/login");
+    router.push("/auth/login");
   };
 
   return (

@@ -8,6 +8,7 @@ type ButtonProps = {
   variant?: "primary" | "secondary" | "transparent" | "light" | "transparentOrange" | "dark";
   disabled?: boolean;
   className?: string;
+  iconColor?: string;
   size?: "sm" | "md" | "lg"
 };
 
@@ -19,6 +20,7 @@ const Button: React.FC<ButtonProps> = ({
   disabled = false,
   className = "",
   icon: Icon,
+  iconColor = "",
   size = "lg"
 }) => {
   const baseStyle = "flex justify-center items-center gap-1 font-semibold rounded-full";
@@ -52,8 +54,9 @@ const Button: React.FC<ButtonProps> = ({
       }`}
     >
       {Icon && (
-        <span>
-          <Icon />
+        <span className="mr-2">
+          <Icon fill={iconColor} stroke={iconColor} />
+          {/* <Icon className={iconColor ? `text-${iconColor}` : ""} /> */}
         </span>
       )}
       <span className="text-nowrap">{label}</span>

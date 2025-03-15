@@ -9,11 +9,15 @@ import EducationPanel from "../panels/EducationPanel";
 import CriteriaPanel from "../panels/Criteria";
 import { subTabs } from "@/constants/formConstants";
 
+interface ProfileFormData {
+  [key: string]: string;
+}
 interface PreferencesTabProps {
   selectedSubTab: number;
   setSelectedSubTab: (index: number) => void;
   formData: FormData;
   handleChange: (name: string, value: string) => void;
+  handleFormSubmit: (values: ProfileFormData) => void;
 }
 
 const PreferencesTab = ({
@@ -21,6 +25,7 @@ const PreferencesTab = ({
   setSelectedSubTab,
   formData,
   handleChange,
+  handleFormSubmit
 }: PreferencesTabProps) => {
   return (
     <TabGroup selectedIndex={selectedSubTab} onChange={setSelectedSubTab}>
@@ -29,19 +34,19 @@ const PreferencesTab = ({
       />
       <TabPanels className="mt-4">
         {selectedSubTab === 0 && (
-          <BasicPanel formData={formData} handleChange={handleChange} />
+          <BasicPanel formData={formData} handleFormSubmit={handleFormSubmit} />
         )}
         {selectedSubTab === 1 && (
-          <ReligionPanel formData={formData} handleChange={handleChange} />
+          <ReligionPanel formData={formData} handleFormSubmit={handleFormSubmit} />
         )}
         {selectedSubTab === 2 && (
-          <LocationPanel formData={formData} handleChange={handleChange} />
+          <LocationPanel formData={formData} handleFormSubmit={handleFormSubmit} />
         )}
         {selectedSubTab === 3 && (
-          <EducationPanel formData={formData} handleChange={handleChange} />
+          <EducationPanel formData={formData} handleFormSubmit={handleFormSubmit} />
         )}
         {selectedSubTab === 4 && (
-          <CriteriaPanel formData={formData} handleChange={handleChange} />
+          <CriteriaPanel formData={formData} handleFormSubmit={handleFormSubmit} />
         )}
       </TabPanels>
     </TabGroup>

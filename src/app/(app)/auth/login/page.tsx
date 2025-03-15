@@ -19,24 +19,37 @@ interface LoginValues {
 }
 
 const LoginPage: React.FC = () => {
+  // const token = localStorage.getItem("fcm_token");
+  // const fcmToken = token ? token : null;
   const router = useRouter();
-  const { loginInternal } = useAuth();
+  const { loginInternal, logoutInternal } = useAuth();
   const { data: session } = useSession();
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [fcmToken, setFcmToken] = useState<string | null>(null);
   const [googleAuthCompleted, setGoogleAuthCompleted] =
     useState<boolean>(false);
 
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("fcm_token");
+      setFcmToken(token ? token : null);
+    }
+  }, []);
   useEffect(() => {
     if (session?.user?.email && !googleAuthCompleted) {
       setGoogleAuthCompleted(true);
       saveUserToBackend(session?.user?.email);
+    } else {
+      logoutInternal();
     }
   }, [session?.user?.email]);
   const saveUserToBackend = async (email: string) => {
     try {
       const obj = {
         email,
+        fcmToken,
       };
       const response = await socialLogin(obj);
 
@@ -80,7 +93,7 @@ const LoginPage: React.FC = () => {
       onSubmit={async (values, { setSubmitting }) => {
         setError(null);
         try {
-          const response = await login(values);
+          const response = await login({ ...values, fcmToken: fcmToken });
           if (response?.status === 200) {
             loginInternal(response?.data?.token, response?.data?.user);
 

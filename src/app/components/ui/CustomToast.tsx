@@ -14,7 +14,7 @@ const CustomToast = ({
 }) => {
   return (
     <div
-      className={`flex items-start p-4 rounded-lg shadow-lg border ${
+      className={`flex w-[350px] items-start p-4 rounded-lg shadow-lg border ${
         type === "success"
           ? "bg-orange-50 border-orange-300"
           : "bg-red-50 border-red-300"

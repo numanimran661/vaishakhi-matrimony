@@ -7,11 +7,15 @@ import { basicInfoTabs } from "@/constants/formConstants";
 import PersonalPanel from "../panels/PersonalPanel";
 import { ArrowLeft } from "@/app/components/common/allImages/AllImages";
 
+interface ProfileFormData {
+  [key: string]: string;
+}
 interface PreferencesTabProps {
   selectedSubTab: number;
   setSelectedSubTab: (index: number) => void;
   formData: FormData;
   handleChange: (name: string, value: string) => void;
+  handleFormSubmit: (values: ProfileFormData) => void;
 }
 
 const BasicInfoTab = ({
@@ -19,6 +23,7 @@ const BasicInfoTab = ({
   setSelectedSubTab,
   formData,
   handleChange,
+  handleFormSubmit
 }: PreferencesTabProps) => {
   return (
     <TabGroup selectedIndex={selectedSubTab} onChange={setSelectedSubTab}>
@@ -29,10 +34,10 @@ const BasicInfoTab = ({
       <SubTabs tabsList={basicInfoTabs} />
       <TabPanels className="mt-4">
         {selectedSubTab === 0 && (
-          <BasicInfoPanel formData={formData} handleChange={handleChange} />
+          <BasicInfoPanel formData={formData} handleFormSubmit={handleFormSubmit} />
         )}
         {selectedSubTab === 1 && (
-          <PersonalPanel formData={formData} handleChange={handleChange} />
+          <PersonalPanel formData={formData} handleFormSubmit={handleFormSubmit} />
         )}
       </TabPanels>
     </TabGroup>

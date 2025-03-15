@@ -60,11 +60,12 @@ const NotificationHandler = () => {
                 vapidKey: process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY,
               });
               console.log("FCM Token:", token);
+              localStorage.setItem('fcm_token', token)
               // Send token to your backend
-              await fetch("/api/save-token", {
-                method: "POST",
-                body: JSON.stringify({ token }),
-              });
+              // await fetch("/api/save-token", {
+              //   method: "POST",
+              //   body: JSON.stringify({ token }),
+              // });
             }
           } else {
             console.error("Service Worker is not supported in this browser.");

@@ -43,7 +43,7 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ isOpen, onClose }) => {
       <div className="">
         <div className="p-4 flex items-center justify-between md:flex-col md:items-start mb-2 border-b border-gray mt-3">
           <div className="flex items-center md:gap-3 gap-1">
-            <ProfileImage src={userObj?.userImages[0]} alt="Profile" size="lg" />
+            <ProfileImage src={Array.isArray(userObj?.userImages) && userObj?.userImages.length > 0 && userObj?.userImages[0]} alt="Profile" size="lg" />
             <div>
               <h3 className="font-medium text-sm md:text-base">{userObj?.name}</h3>
               <div className="flex items-center gap-1 bg-gray50 rounded-2xl my-1 px-2">

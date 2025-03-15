@@ -33,7 +33,7 @@ const ResetPassword: React.FC = () => {
         }
       }}
     >
-      {({ isSubmitting }) => (
+      {({ isSubmitting, errors, touched }) => (
         <Form>
           <h2 className="text-3xl font-bold mb-7">Reset your password</h2>
           <Field
@@ -43,6 +43,8 @@ const ResetPassword: React.FC = () => {
             type="email"
             placeholder="Email Address"
             className="mt-4"
+            error={errors.email}
+            touched={touched.email}
           />
           <Button
             type="submit"

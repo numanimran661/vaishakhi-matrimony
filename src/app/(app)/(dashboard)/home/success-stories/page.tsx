@@ -5,11 +5,13 @@ import {
   SuccessStory,
 } from "@/app/components/common/allImages/AllImages";
 import Button from "@/app/components/common/buttons/Button";
+import CustomLoader from "@/app/components/common/loader/CustomLoader";
 import Pagination from "@/app/components/common/pagination/Pagination";
+import { getSuccessStoriesList } from "@/app/lib/api/successStoryRoutes";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 
 const testimonials = [
   {
@@ -30,6 +32,30 @@ const testimonials = [
 
 const SuccessStoriesPage = () => {
   const router = useRouter();
+  const [successStoriesList, setSuccessStoriesList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const getSuccessStories = async () => {
+    try {
+      setIsLoading(true);
+      const { data } = await getSuccessStoriesList();
+      setSuccessStoriesList(data);
+    } catch (error) {} finally{
+      setIsLoading(false)
+    }
+  };
+  useEffect(() => {
+    getSuccessStories();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="w-full h-full flex justify-center">
+        <CustomLoader />
+      </div>
+    );
+  }
+
   return (
     <section className="">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -54,9 +80,7 @@ const SuccessStoriesPage = () => {
                   <div className="bg-primary custom-rounded text-left flex justify-between">
                     <div className="lg:py-20 py-8 px-4 lg:px-12 relative">
                       <div>
-                        <ReviewIcon
-                          className="absolute top-14 right-20 opacity-35"
-                        />
+                        <ReviewIcon className="absolute top-14 right-20 opacity-35" />
                       </div>
                       <div className="flex">
                         {Array(5)

@@ -1,10 +1,9 @@
 import axios from "axios";
 import axiosInstance from "../axiosInstance";
 
-export const getUserProfile = async () => {
+export const createChat = async (data: any) => {
   try {
-    const response = await axiosInstance.get("/user/profile");
-
+    const response = await axiosInstance.post("/user/createConversation", data);
     return response; // Return full response
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
@@ -13,10 +12,9 @@ export const getUserProfile = async () => {
     throw error;
   }
 };
-export const getUserDetails = async (id: string) => {
+export const getAllChats = async () => {
   try {
-    const response = await axiosInstance.get(`/user/userDetails/${id}`);
-
+    const response = await axiosInstance.get("/user/getAllConversation");
     return response; // Return full response
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
@@ -25,10 +23,11 @@ export const getUserDetails = async (id: string) => {
     throw error;
   }
 };
-export const updateUserProfile = async (formData: any) => {
+export const getMessages = async (roomId: any) => {
   try {
-    const response = await axiosInstance.put(`/user/updateProfile`, formData);
-
+    const response = await axiosInstance.get(
+      `/user/getMessages?roomId=${roomId}`
+    );
     return response; // Return full response
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
@@ -37,10 +36,9 @@ export const updateUserProfile = async (formData: any) => {
     throw error;
   }
 };
-export const deleteUserProfile = async (formData: any) => {
+export const sendInterest = async (formData: any) => {
   try {
-    const response = await axiosInstance.post(`/user/deleteAccount`, formData);
-
+    const response = await axiosInstance.post("/user/sendInterest", formData);
     return response; // Return full response
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {

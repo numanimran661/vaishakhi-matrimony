@@ -12,9 +12,9 @@ export const getNewUsers = async () => {
     throw error;
   }
 };
-export const getMatchUsers = async () => {
+export const getMatchUsers = async (matchType: string) => {
   try {
-    const response = await axiosInstance.get("/user/userMatch");
+    const response = await axiosInstance.get(`/user/userMatch?matchType=${matchType}`);
     return response; // Return full response
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
@@ -26,6 +26,17 @@ export const getMatchUsers = async () => {
 export const sendInterest = async (formData: any) => {
   try {
     const response = await axiosInstance.post("/user/sendInterest", formData);
+    return response; // Return full response
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      return error.response;
+    }
+    throw error;
+  }
+};
+export const getNotificationsList = async () => {
+  try {
+    const response = await axiosInstance.get("/user/getNotifications");
     return response; // Return full response
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {

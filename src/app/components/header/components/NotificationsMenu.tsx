@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ArrowLeft } from "../../common/allImages/AllImages";
 import Image from "next/image";
+import { getNotificationsList } from "@/app/lib/api/homeRoutes";
 
 interface Notification {
   id: number;
@@ -55,6 +56,17 @@ const NotificationsMenu = ({
       isRead: false,
     },
   ];
+
+  const getNotification = async () => {
+    try{
+      const {data} = await getNotificationsList()
+    } catch(error){}
+  }
+  useEffect(() => {
+    if(isOpen){
+      getNotification()
+    }
+  }, [isOpen])
 
   return (
     <div

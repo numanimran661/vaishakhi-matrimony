@@ -21,37 +21,49 @@ interface SignUpValues {
 }
 
 const SignupForm: React.FC = () => {
+  // const token = localStorage.getItem("fcm_token");
+  // const fcmToken = token ? token : null;
   const router = useRouter();
   const { loginInternal } = useAuth();
   const { data: session } = useSession();
   const [loading, setLoading] = useState<boolean>(false);
-  const [googleAuthCompleted, setGoogleAuthCompleted] = useState<boolean>(false);
+  const [fcmToken, setFcmToken] = useState<string | null>(null);
+  const [googleAuthCompleted, setGoogleAuthCompleted] =
+    useState<boolean>(false);
 
-  useEffect(() => {
-    if (session?.user?.email && !googleAuthCompleted) {
-      setGoogleAuthCompleted(true);
-      saveUserToBackend(session?.user?.email);
-    }
-  }, [session?.user?.email]);
-  const saveUserToBackend = async (email: string) => {
-    try {
-      const obj = {
-        email,
-      };
-      const response = await socialLogin(obj);
 
-      if (response?.status === 200 || response?.status === 201) {
-        showToast("Logged In successfully", "success");
-        loginInternal(response?.data?.token, response?.data?.user);
-        router.push("/home");
-      } else {
-        showToast("Something went wrong. Please try again.", "error");
-      }
-    } catch (error) {
-    } finally {
-      setLoading(false);
-    }
-  };
+useEffect(() => {
+  if (typeof window !== "undefined") {
+    const token = localStorage.getItem("fcm_token");
+    setFcmToken(token ? token : null);
+  }
+}, []);
+  // useEffect(() => {
+  //   if (session?.user?.email && !googleAuthCompleted) {
+  //     setGoogleAuthCompleted(true);
+  //     saveUserToBackend(session?.user?.email);
+  //   }
+  // }, [session?.user?.email]);
+  // const saveUserToBackend = async (email: string) => {
+  //   try {
+  //     const obj = {
+  //       email,
+  //       fcmToken,
+  //     };
+  //     const response = await socialLogin(obj);
+
+  //     if (response?.status === 200 || response?.status === 201) {
+  //       showToast("Logged In successfully", "success");
+  //       loginInternal(response?.data?.token, response?.data?.user);
+  //       router.push("/home");
+  //     } else {
+  //       showToast("Something went wrong. Please try again.", "error");
+  //     }
+  //   } catch (error) {
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
   const initialValues: SignUpValues = {
     name: "",
     email: "",
@@ -72,22 +84,22 @@ const SignupForm: React.FC = () => {
       .min(6, "Password must be at least 6 characters")
       .required("Password is required"),
   });
-  const handleGoogleLogin = async () => {
-    try {
-      setLoading(true);
-      await signIn("google", { redirect: false });
-    } catch (error) {
-    } finally {
-      setLoading(false);
-    }
-  };
+  // const handleGoogleLogin = async () => {
+  //   try {
+  //     setLoading(true);
+  //     await signIn("google", { redirect: false });
+  //   } catch (error) {
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={async (values, { setSubmitting }) => {
         try {
-          const response = await register(values);
+          const response = await register({ ...values, fcmToken });
           if (response?.status === 200 || response?.status === 201) {
             loginInternal(response?.data?.token, response?.data?.user);
             showToast("Signed up successfully", "success");
@@ -150,14 +162,14 @@ const SignupForm: React.FC = () => {
             label={isSubmitting ? "Signing Up..." : "Sign Up"}
             className="mt-4 w-full"
           />
-          <Button
+          {/* <Button
             type="button"
             label={loading ? "Signing Up..." : "Sign Up with google"}
             icon={GoogleLogo}
             className="mt-4 w-full bg-lightBlue"
             variant="light"
             onClick={handleGoogleLogin}
-          />
+          /> */}
           <div className="mt-4 font-regular">
             <span>Already have an account?</span>{" "}
             <Link href={"/auth/login"} className="text-primary">

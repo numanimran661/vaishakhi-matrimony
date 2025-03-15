@@ -53,7 +53,7 @@ export const completeProfileValidation = Yup.object({
     // numOfMarriedBrothers: Yup.number().required("Number of married brothers is required"),
     // numOfSisters: Yup.number().required("Number of sisters is required"),
     // numOfMarriedSisters: Yup.number().required("Number of married sisters is required"),
-    country: Yup.string().required("Country is required"),
+    // country: Yup.string().required("Country is required"),
     state: Yup.string().required("State is required"),
     city: Yup.string().required("City is required"),
   }),

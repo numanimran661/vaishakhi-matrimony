@@ -42,7 +42,7 @@ export type InitialValuesProps = {
     // numOfMarriedBrothers: string;
     // numOfSisters: string;
     // numOfMarriedSisters: string;
-    country: string;
+    // country: string;
     state: string;
     city: string;
   };

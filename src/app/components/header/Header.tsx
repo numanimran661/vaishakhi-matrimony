@@ -195,11 +195,11 @@ const Header: React.FC = () => {
                   >
                     <ProfileImage
                       src={
-                        userObj?.userImages[0]
+                        Array.isArray(userObj?.userImages) && userObj?.userImages[0]
                           ? userObj?.userImages[0]
                           : userObj?.gender === "male"
-                          ? MalePlaceholder
-                          : FemalePlaceholder
+                          ? MalePlaceholder.src
+                          : FemalePlaceholder.src
                       }
                       alt="profile image"
                     />

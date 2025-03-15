@@ -5,6 +5,7 @@ import axiosInstance from "../axiosInstance";
 export const login = async (credentials: {
   email: string;
   password: string;
+  fcmToken?: string | null;
 }) => {
   try {
     const response = await axiosInstance.post("/user/login", credentials);
@@ -32,6 +33,7 @@ export const register = async (credentials: {
   email: string;
   phone: string;
   password: string;
+  fcmToken?: string | null;
 }) => {
   try {
     const response = await axiosInstance.post("/user/register", credentials);
@@ -72,6 +74,30 @@ export const forgotPassword = async (user: any) => {
 export const completeProfile = async (formData: any) => {
   try {
     const response = await axiosInstance.put("/user/completeProfile", formData);
+
+    return response;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      return error.response;
+    }
+    throw error;
+  }
+};
+export const verifyEmail = async (formData: any) => {
+  try {
+    const response = await axiosInstance.post("/user/verifyEmail", formData);
+
+    return response;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      return error.response;
+    }
+    throw error;
+  }
+};
+export const confirmEmail = async (formData: any) => {
+  try {
+    const response = await axiosInstance.post("/user/confirmEmail", formData);
 
     return response;
   } catch (error) {

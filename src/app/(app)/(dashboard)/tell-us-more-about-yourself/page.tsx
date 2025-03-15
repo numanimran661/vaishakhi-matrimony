@@ -60,7 +60,7 @@ const initialValues: InitialValuesProps = {
     // numOfMarriedBrothers: "",
     // numOfSisters: "",
     // numOfMarriedSisters: "",
-    country: "",
+    // country: "",
     state: "",
     city: "",
   },
@@ -184,7 +184,7 @@ const TellUsMoreAboutYourself: React.FC = () => {
                       "Congratulation! Your profile is completed successfully.",
                       "success"
                     );
-                    localStorage.setItem("user", JSON.stringify(response?.data));
+                    localStorage.setItem("user", JSON.stringify(response?.data?.user));
                     router.push("/home");
                   } else {
                     showToast(

@@ -1,36 +1,72 @@
+"use client";
+
+import React from "react";
+import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
 import Button from "@/app/components/common/buttons/Button";
 import SelectField from "@/app/components/common/inputFields/SelectField";
 import { dropdownOptions } from "@/constants/dummyConstants";
 import { educationFields } from "@/constants/formConstants";
-import { FormData } from "@/types/formTypes";
 
-interface PreferencesPanelProps {
-  formData: FormData;
-  handleChange: (name: string, value: string) => void;
+interface ProfileFormData {
+  [key: string]: any; // Allow dynamic keys
+}
+interface EducationPanelProps {
+  formData: Record<string, string>; // Prevents TypeScript index errors
+  handleFormSubmit: (values: Record<string, string>) => void;
 }
 
-// Preferences Panel Component
-const EducationPanel = ({
+const EducationPanel: React.FC<EducationPanelProps> = ({
   formData,
-  handleChange,
-}: PreferencesPanelProps) => (
-  <div>
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-      {educationFields.map((item, i) => (
-        <div key={i}>
-          <SelectField
-            label={item.label}
-            name={item.name}
-            value={formData[item.name]}
-            onChange={(e) => handleChange(item.name, e.target.value)}
-            options={dropdownOptions}
-            className="w-full"
+  handleFormSubmit,
+}) => {
+  // Generate validation schema dynamically
+  const validationSchema = Yup.object().shape(
+    educationFields.reduce((schema, field) => {
+      schema[field.name] = Yup.string().required(`${field.label} is required`);
+      return schema;
+    }, {} as Record<string, Yup.StringSchema>)
+  );
+
+  return (
+    <Formik
+      initialValues={{
+        ...educationFields.reduce((acc, item) => {
+          acc[item.name] = formData?.[item.name] || "";
+          return acc;
+        }, {} as ProfileFormData),
+      }}
+      validationSchema={validationSchema}
+      onSubmit={handleFormSubmit}
+    >
+      {({ values, errors, isSubmitting, touched, handleChange }) => (
+        <Form>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {educationFields.map((item, i) => (
+              <div key={i}>
+                <Field
+                  as={SelectField}
+                  label={item.label}
+                  name={item.name}
+                  value={values[item.name]}
+                  onChange={handleChange}
+                  options={item.options}
+                  error={errors[item.name]}
+                  touched={touched[item.name]}
+                  className="w-full"
+                />
+              </div>
+            ))}
+          </div>
+          <Button
+            type="submit"
+            label={isSubmitting ? "Saving..." : "Save Changes"}
+            className="mt-5"
           />
-        </div>
-      ))}
-    </div>
-    <Button label="Save Changes" className="mt-5" />
-  </div>
-);
+        </Form>
+      )}
+    </Formik>
+  );
+};
 
 export default EducationPanel;

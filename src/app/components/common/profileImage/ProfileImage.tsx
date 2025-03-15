@@ -4,7 +4,7 @@ import { StaticImageData } from 'next/image';
 import { FemalePlaceholder, MalePlaceholder } from '../allImages/AllImages';
 
 interface ProfileImageProps {
-  src: StaticImageData;
+  src: string;
   alt: string;
   active?: boolean;
   size?: 'sm' | 'md' | 'lg';
@@ -26,11 +26,10 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
 
   return (
     <div className={`relative flex-shrink-0 ${sizeClasses[size]}`}>
-      <Image
-        src={src? src : userObj?.gender === "male" ? MalePlaceholder : FemalePlaceholder}
+      <img
+        src={src? src : userObj?.gender === "male" ? MalePlaceholder.src : FemalePlaceholder.src}
         alt={alt}
-        className="rounded-full object-cover"
-        fill
+        className="rounded-full object-cover w-full h-full"
       />
       {active && (
         <div

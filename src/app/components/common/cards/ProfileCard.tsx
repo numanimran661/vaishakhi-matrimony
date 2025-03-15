@@ -1,8 +1,9 @@
 "use client";
-import Image, { StaticImageData } from "next/image";
+import { StaticImageData } from "next/image";
 import React from "react";
 import {
   BriefcaseIcon,
+  ClockIcon,
   FemalePlaceholder,
   LocationMarker,
   MalePlaceholder,
@@ -11,8 +12,7 @@ import {
   VerifiedIcon,
 } from "../allImages/AllImages";
 import { useRouter } from "next/navigation";
-import { sendInterest } from "@/app/lib/api/homeRoutes";
-import { showToast } from "../../ui/CustomToast";
+import { useAuth } from "@/context/AuthContext";
 
 type ProfileCardProps = {
   id: string;
@@ -23,8 +23,10 @@ type ProfileCardProps = {
   age: string;
   height: string;
   occupation: string;
+  sentInterests: string[];
   location?: string;
   gender?: string;
+  handleInterestSend: (id: string) => void;
 };
 
 const ProfileCard: React.FC<ProfileCardProps> = ({
@@ -36,19 +38,14 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
   age,
   height,
   occupation,
+  sentInterests,
+  handleInterestSend,
   location,
   gender,
 }) => {
   const router = useRouter();
+  const { user } = useAuth();
 
-  const handleInterestSend = async () => {
-    const {status} = await sendInterest({receiverId: id})
-    if(status === 200){
-      showToast("Interest Sent Successfully", 'success')
-    } else {
-      showToast("Error occured while sending Interest", 'error')
-    }
-  }
   return (
     <div
       className="bg-white shadow rounded-xl relative"
@@ -103,14 +100,26 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
               {location}
             </p>
             <div className="flex gap-1 items-center">
-              <span className="rounded-full bg-lightGray p-2 cursor-pointer" onClick={handleInterestSend}>
-                <ReqSendIcon width={14} height={14} />
-              </span>
+              {sentInterests.includes(user?._id) ? (
+                <span className="rounded-full bg-lightGray p-2 cursor-pointer">
+                  <ClockIcon width={14} height={14} />
+                </span>
+              ) : (
+                <span
+                  className="rounded-full bg-lightGray p-2 cursor-pointer"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleInterestSend(id);
+                  }}
+                >
+                  <ReqSendIcon width={14} height={14} />
+                </span>
+              )}
               <span
                 className="rounded-full bg-orange-50 p-2 cursor-pointer"
                 onClick={(e) => {
                   e.stopPropagation();
-                  router.push("/home/messages");
+                  router.push(`/home/messages?receiverId=${id}`);
                 }}
               >
                 <MessageIcon width={14} height={14} />
