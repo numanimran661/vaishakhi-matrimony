@@ -48,6 +48,10 @@ const useChat = (roomId: string | null, userId: string) => {
         authorName: user?.name,
         receiverId,
         text: messageText,
+        user: {
+          _id: userId,
+          name: user?.name
+        },
         createdAt: new Date(),
       };
 

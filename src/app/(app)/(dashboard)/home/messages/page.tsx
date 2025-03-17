@@ -89,7 +89,7 @@ const MessagePage: React.FC = () => {
                 : chat?.chattedUser?.gender === "male"
                 ? MalePlaceholder.src
                 : FemalePlaceholder.src,
-            roomId: chat?._doc?.roomId,
+            roomId: chat?.roomId,
             gender: chat?.chattedUser?.gender,
             // roomId: chat?._doc?.roomId ? chat?._doc?.roomId : chat?._doc?._id,
           }))
@@ -132,7 +132,9 @@ const MessagePage: React.FC = () => {
     }
   }, [selectedChat]);
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
+    }
   }, [messages]);
 
   const handleSendMessage = async () => {
@@ -170,32 +172,32 @@ const MessagePage: React.FC = () => {
     setInputMessage((prev) => prev + emojiObject.emoji);
   };
 
-  const handleCreateConvo = async (id: string) => {
-    try {
-      const response = await createChat({
-        senderId: user?._id,
-        receiverId: receiver_id,
-        roomId: generateRoomId(id, user?._id),
-      });
-      console.log(response);
-      if (response?.status === 200 && response?.data?.conversation) {
-        const convo = response?.data?.conversation;
-        setSelectedChat({
-          _id: convo?._doc?._id,
-          name: convo?.chattedUser?.name,
-          message: "",
-          time: getformattedTime(convo?._doc?.updatedAt),
-          image: convo?.chattedUser?.userImages[0],
-          roomId: convo?.roomId,
-          gender: convo?.chattedUser?.gender,
-        });
-      }
-    } catch (error) {}
-  };
+  // const handleCreateConvo = async (id: string) => {
+  //   try {
+  //     const response = await createChat({
+  //       senderId: user?._id,
+  //       receiverId: receiver_id,
+  //       roomId: generateRoomId(id, user?._id),
+  //     });
+  //     console.log(response);
+  //     if (response?.status === 200 && response?.data?.conversation) {
+  //       const convo = response?.data?.conversation;
+  //       setSelectedChat({
+  //         _id: convo?._doc?._id,
+  //         name: convo?.chattedUser?.name,
+  //         message: "",
+  //         time: getformattedTime(convo?._doc?.updatedAt),
+  //         image: convo?.chattedUser?.userImages[0],
+  //         roomId: convo?.roomId,
+  //         gender: convo?.chattedUser?.gender,
+  //       });
+  //     }
+  //   } catch (error) {}
+  // };
 
-  useEffect(() => {
-    if (receiver_id) handleCreateConvo(receiver_id);
-  }, [receiver_id]);
+  // useEffect(() => {
+  //   if (receiver_id) handleCreateConvo(receiver_id);
+  // }, [receiver_id]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -326,7 +328,7 @@ const MessagePage: React.FC = () => {
               <button className="text-sm text-primary">Block</button>
             </div>
 
-            <div className="flex-1 p-6 overflow-y-auto space-y-4">
+            <div className="flex-1 p-6 overflow-y-auto space-y-4" ref={messagesEndRef}>
               {messagesLoading ? (
                 <div className="w-full h-full flex justify-center items-end">
                   <CustomLoader />
@@ -368,7 +370,7 @@ const MessagePage: React.FC = () => {
                 ))
               )}
 
-              <div ref={messagesEndRef} />
+              <div  />
             </div>
 
             <div className="p-4 border-t border-gray">

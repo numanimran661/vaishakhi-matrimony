@@ -545,9 +545,11 @@ import Link from "next/link";
 import { getUserDetails } from "@/app/lib/api/profileRoutes";
 import { showToast } from "@/app/components/ui/CustomToast";
 import { sendInterest } from "@/app/lib/api/homeRoutes";
+import { useRouter } from "next/navigation";
 
 const ProfileDetail = ({ params }: any) => {
   const id = params.profile_id;
+  const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [userDetails, setUserDetails] = useState<any>(null);
@@ -572,20 +574,21 @@ const ProfileDetail = ({ params }: any) => {
     ),
   };
   const [loading, setLoading] = useState<boolean>(true);
-  
-    const handleInterestSend = async () => {
-      try{
-        setLoading(true)
-        const { status } = await sendInterest({ receiverId: id });
-        if (status === 200) {
-          showToast("Interest Sent Successfully", "success");
-        } else {
-          showToast("Error occured while sending Interest", "error");
-        }
-      } catch(error){} finally{
-        setLoading(false)
+
+  const handleInterestSend = async () => {
+    try {
+      setLoading(true);
+      const { status } = await sendInterest({ receiverId: id });
+      if (status === 200) {
+        showToast("Interest Sent Successfully", "success");
+      } else {
+        showToast("Error occured while sending Interest", "error");
       }
-    };
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     const getUsersProfile = async () => {
@@ -743,7 +746,14 @@ const ProfileDetail = ({ params }: any) => {
               />
             </div>
             <div>
-              <Button icon={MessageIcon} iconColor="white" label="Chat Now" />
+              <Button
+                icon={MessageIcon}
+                iconColor="white"
+                label="Chat Now"
+                onClick={() => {
+                  router.push(`/home/messages?receiverId=${id}`);
+                }}
+              />
             </div>
           </div>
         </div>

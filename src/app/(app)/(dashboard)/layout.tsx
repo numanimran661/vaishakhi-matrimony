@@ -9,11 +9,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { showToast } from "@/app/components/ui/CustomToast";
 
 const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
+  const pathname = usePathname();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -30,7 +31,7 @@ const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
         setIsLoading(false);
       }
     }
-  }, []);
+  }, [pathname]);
 
   //   if (isLoading) {
   //     return (
