@@ -31,6 +31,8 @@ const useChat = (roomId: string | null, userId: string) => {
     }
 
     newSocket.on("receive_message", (message: Message) => {
+      console.log(message);
+      
       if (user?._id === message?.receiverId)
         setMessages((prevMessages) => [...prevMessages, message]);
     });

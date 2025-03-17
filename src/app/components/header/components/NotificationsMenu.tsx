@@ -1,7 +1,14 @@
-import React, { useEffect } from "react";
-import { ArrowLeft } from "../../common/allImages/AllImages";
+"use client";
+import React, { useEffect, useState } from "react";
+import {
+  ArrowLeft,
+  FemalePlaceholder,
+  MalePlaceholder,
+} from "../../common/allImages/AllImages";
 import Image from "next/image";
 import { getNotificationsList } from "@/app/lib/api/homeRoutes";
+import ProfileImage from "../../common/profileImage/ProfileImage";
+import { getformattedTime } from "@/util/util";
 
 interface Notification {
   id: number;
@@ -19,6 +26,7 @@ const NotificationsMenu = ({
   isOpen: boolean;
   onClose: () => void;
 }) => {
+  const [notification, setNotifications] = useState<any[]>([]);
   const notifications: Notification[] = [
     {
       id: 1,
@@ -58,15 +66,18 @@ const NotificationsMenu = ({
   ];
 
   const getNotification = async () => {
-    try{
-      const {data} = await getNotificationsList()
-    } catch(error){}
-  }
+    try {
+      const { data } = await getNotificationsList();
+      if (data) {
+        setNotifications(data?.notifications);
+      }
+    } catch (error) {}
+  };
   useEffect(() => {
-    if(isOpen){
-      getNotification()
+    if (isOpen) {
+      getNotification();
     }
-  }, [isOpen])
+  }, [isOpen]);
 
   return (
     <div
@@ -87,16 +98,53 @@ const NotificationsMenu = ({
           <button className="text-primary border-b-2 border-primary pb-2 px-3 transition-colors">
             All
           </button>
-          <button className="text-gray-500 hover:text-primary pb-2 px-3 transition-colors">
+          {/* <button className="text-gray-500 hover:text-primary pb-2 px-3 transition-colors">
             Unread
-          </button>
+          </button> */}
         </div>
       </div>
 
       <div className="sm:max-h-[400px] overflow-y-auto">
         <div className="p-2">
           <div className="text-sm text-gray-500 px-2 py-1">Today</div>
-          {notifications.map((notification, index) => (
+          {notification &&
+            Array.isArray(notification) &&
+            notification.length < 0 ?
+            notification.map((noti, index) => (
+              <div
+                key={noti._id}
+                className="flex items-start p-3 hover:bg-gray-50 cursor-pointer rounded-lg transition-all duration-200 ease-in-out transform hover:scale-[1.02]"
+                style={{
+                  animationDelay: `${index * 100}ms`,
+                }}
+              >
+                <div className="flex-shrink-0 mr-3">
+                  <ProfileImage
+                    src={
+                      Array.isArray(noti?.senderId?.userImages) &&
+                      noti?.senderId?.userImages[0]
+                        ? noti?.senderId?.userImages[0]
+                        : noti?.senderId?.gender === "male"
+                        ? MalePlaceholder.src
+                        : FemalePlaceholder.src
+                    }
+                    alt="userImage"
+                  />
+                </div>
+                <div className="flex-1">
+                  <div className="flex justify-between">
+                    <p className="font-semibold text-sm">{noti?.senderId?.name}</p>
+                    <span className="text-xs text-gray-500">{getformattedTime(noti?.updatedAt)}</span>
+                  </div>
+                  <p className="text-sm text-gray-600 mt-1">{noti?.message}</p>
+                </div>
+              </div>
+            )).reverse() : (
+              <div className="flex justify-center my-32">
+                <h6>No Notifications</h6>
+              </div>
+            )}
+          {/* {notifications.map((notification, index) => (
             <div
               key={notification.id}
               className="flex items-start p-3 hover:bg-gray-50 cursor-pointer rounded-lg transition-all duration-200 ease-in-out transform hover:scale-[1.02]"
@@ -115,7 +163,6 @@ const NotificationsMenu = ({
                 )}
                 {notification.isRead && (
                   <div className="relative">
-                    {/* <div className="w-2 h-2 bg-red-500 rounded-full absolute -top-1 -left-1"></div> */}
                     <div className="bg-green-100 rounded-full text-green-500 w-9 h-9 flex items-center justify-center mt-3">
                       ✓
                     </div>
@@ -134,7 +181,7 @@ const NotificationsMenu = ({
                 </p>
               </div>
             </div>
-          ))}
+          ))} */}
         </div>
       </div>
 
