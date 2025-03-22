@@ -74,6 +74,7 @@ import AboutBannerImg from "../../../../../public/images/png/about-banner-bg.png
 import MissionVisionImg from "../../../../../public/images/png/mission-vision-img.png";
 import RocketImg from "../../../../../public/images/png/rocket-img.png";
 import CloudUploadIcon from "../../../../../public/images/png/cloud-upload.png";
+import CashfreeLogo from "../../../../../public/images/png/Cashfree.png";
 
 export {
   AppLogo,
@@ -149,6 +150,7 @@ export {
   RocketImg,
   CloudUploadIcon,
   ToastCheck,
-  ToastCross
+  ToastCross,
+  CashfreeLogo
 };
 

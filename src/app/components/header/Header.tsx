@@ -158,6 +158,7 @@ const Header: React.FC = () => {
                 label="Login"
                 variant="transparent"
                 icon={LockIcon}
+                iconColor="white"
                 className="sm:flex hidden"
                 onClick={handleLoginClick}
               />

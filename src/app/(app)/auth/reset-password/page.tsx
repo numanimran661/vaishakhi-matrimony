@@ -14,9 +14,12 @@ const ResetPassword: React.FC = () => {
   const router = useRouter();
   return (
     <Formik
-      initialValues={{ email: "" }}
+      initialValues={{ email: "", password: "" }}
       validationSchema={Yup.object({
         email: Yup.string().email("Invalid email address").required("Required"),
+        password: Yup.string()
+          .min(6, "Password must be at least 6 characters")
+          .required("Required"),
       })}
       onSubmit={async (values, { setSubmitting }) => {
         try {
@@ -45,6 +48,16 @@ const ResetPassword: React.FC = () => {
             className="mt-4"
             error={errors.email}
             touched={touched.email}
+          />
+          <Field
+            as={InputField}
+            label="New Password"
+            name="password"
+            type="password"
+            placeholder="New Password"
+            className="mt-4"
+            error={errors.password}
+            touched={touched.password}
           />
           <Button
             type="submit"

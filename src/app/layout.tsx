@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "@/context/AuthContext";
 import NotificationHandler from "./components/notificationHandler/NotificationHandler";
+import Head from "next/head";
 
 export default function RootLayout({
   children,
@@ -17,6 +18,9 @@ export default function RootLayout({
   const isAuthRoute = pathname?.startsWith("/auth");
   return (
     <html lang="en">
+      <Head>
+        <script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
+      </Head>
       <body>
         <AuthProvider>
           <SessionProvider>

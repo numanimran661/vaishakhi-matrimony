@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  CashfreeLogo,
   Radio,
   RazorpayLogo,
   RightArrowWithoutBg,
@@ -8,9 +9,10 @@ import {
 } from "@/app/components/common/allImages/AllImages";
 import Button from "@/app/components/common/buttons/Button";
 import { createPaymentCheckout } from "@/app/lib/api/membershipRoutes";
+import {load} from "@cashfreepayments/cashfree-js";
 import axios from "axios";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const BreadcrumbMain = () => {
   return (
@@ -36,43 +38,53 @@ const BreadcrumbMain = () => {
 const SelectedPlans = () => {
   const selectedPlan = localStorage.getItem("selected_plan");
   const parsedObj = selectedPlan ? JSON.parse(selectedPlan) : null;
+  const [cashfree, setCashfree] = useState<any>(null);
+
+  // Initialize Cashfree SDK
+  useEffect(() => {
+    const initializeSDK = async () => {
+      const cashfreeInstance = await load({
+        mode: "sandbox", // Use "sandbox" for testing
+      });
+      setCashfree(cashfreeInstance);
+    };
+    initializeSDK();
+  }, []);
 
   const handlePayment = async () => {
     try {
       const response = await createPaymentCheckout({
-        amount: parsedObj?.price, // Ensure amount is in INR
+        amount: parsedObj?.price,
       });
-  
+
       if (response.status === 200) {
-        console.log("Order created:", response.data);
-  
-        // 1️⃣ Create a form element
-        const form = document.createElement("form");
-        form.method = "POST";
-        form.action = "https://api.razorpay.com/v1/checkout/embedded";
-  
-        // 2️⃣ Add required fields
-        const fields = {
-          key_id: process.env.NEXT_PUBLIC_RAZORPAY_KEY, // Use NEXT_PUBLIC for frontend
-          name: "Vaishakhi Matrimony",
-          order_id: response.data.id,
-          amount: response.data.amount,
-          currency: response.data.currency,
-          callback_url: "http://localhost:3000/membership-plans/selected-plan",
-        };
-  
-        // 3️⃣ Append fields to form
-        Object.entries(fields).forEach(([key, value]) => {
-          const input = document.createElement("input");
-          input.type = "hidden";
-          input.name = key;
-          input.value = value;
-          form.appendChild(input);
-        });
-  
-        // 4️⃣ Append form to body and submit
-        document.body.appendChild(form);
-        form.submit();
+        
+        // Extract payment session ID from the response
+        const paymentSessionId = response.data.payment_session_id;
+        console.log("Order created:", paymentSessionId);
+
+        // Open Cashfree payment modal
+        if (cashfree) {
+          const checkoutOptions = {
+            paymentSessionId: paymentSessionId,
+            redirectTarget: "_modal", // Open in a modal
+          };
+
+          cashfree.checkout(checkoutOptions).then((result: any) => {
+            if (result.error) {
+              // Handle payment errors
+              console.log("Payment error:", result.error);
+            }
+            if (result.redirect) {
+              // Handle redirection (if needed)
+              console.log("Payment will be redirected");
+            }
+            if (result.paymentDetails) {
+              // Handle payment completion
+              console.log("Payment completed:", result.paymentDetails);
+            }
+          });
+        }
       }
     } catch (error) {
       console.error("Payment initiation failed", error);
@@ -124,10 +136,10 @@ const SelectedPlans = () => {
             <div className="flex gap-2 items-center">
               <Radio />
               <p className="text-[#434343] font-semibold text-[18px]">
-                Razorpay
+                Cashfree
               </p>
             </div>
-            <RazorpayLogo />
+            <img src={CashfreeLogo.src} alt="Cashfree logo" className="w-12" />
           </div>
         </div>
 
