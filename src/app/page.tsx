@@ -17,7 +17,7 @@ const MainPage = () => {
       <Banner />
       <AboutSection />
       <ProcessSection />
-      <SuccessStories />
+      {token && <SuccessStories />}
       <OurFeatures />
       <PricingPlans />
       <FAQSection />

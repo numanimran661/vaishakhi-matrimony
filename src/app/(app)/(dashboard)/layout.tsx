@@ -11,16 +11,18 @@
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { showToast } from "@/app/components/ui/CustomToast";
+import { useAuth } from "@/context/AuthContext";
 
 const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   const pathname = usePathname();
+  const {token} = useAuth()
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
 
-    if (storedUser) {
+    if (storedUser && token) {
       const user = JSON.parse(storedUser);
 
       if (user.profileCompleted) {
@@ -30,6 +32,8 @@ const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
         router.push("/tell-us-more-about-yourself");
         setIsLoading(false);
       }
+    } else {
+      setIsLoading(false)
     }
   }, [pathname]);
 

@@ -1,5 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
+import { showToast } from "../components/ui/CustomToast";
 
 const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
@@ -22,10 +23,11 @@ axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-    //   if (typeof window !== "undefined") {
-    //     localStorage.removeItem("token");
-    //     window.location.href = "/login";
-    //   }
+      if (typeof window !== "undefined") {
+        localStorage.clear();
+        showToast("Unauthorized! Please login again", "error")
+        window.location.href = "/auth/login";
+      }
     }
     return Promise.reject(error);
   }

@@ -9,7 +9,7 @@ const BreadcrumbMain = () => {
     <nav className="hidden sm:block mb-4">
       <ul className="flex items-center space-x-2">
         <li>
-          <Link href="/" className="text-darkBlue leading-4 text-[14px]">
+          <Link href="/home" className="text-darkBlue leading-4 text-[14px]">
             Home
           </Link>
         </li>
