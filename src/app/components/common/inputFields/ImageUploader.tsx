@@ -8,7 +8,7 @@ interface ImageUploaderProps {
   className?: string;
 }
 
-const ImageUploader = ({ onUpload, maxImages = 8, className }: ImageUploaderProps) => {
+const ImageUploader = ({ onUpload, maxImages = 1, className }: ImageUploaderProps) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [isDragging, setIsDragging] = useState(false);
 
@@ -59,7 +59,7 @@ const ImageUploader = ({ onUpload, maxImages = 8, className }: ImageUploaderProp
       <p className="text-sm text-gray-500">
         Drag & drop files or <span className="text-orange-500">Browse</span>
       </p>
-      <p className="text-xs text-gray-400">Max {maxImages} images</p>
+      {/* <p className="text-xs text-gray-400">Max {maxImages} images</p> */}
     </div>
   );
 };

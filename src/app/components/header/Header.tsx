@@ -19,12 +19,14 @@ import { usePathname, useRouter } from "next/navigation";
 import NotificationsMenu from "./components/NotificationsMenu";
 import ProfileImage from "../common/profileImage/ProfileImage";
 import ProfileMenu from "./components/ProfileMenu";
+import { useAuth } from "@/context/AuthContext";
 
 const Header: React.FC = () => {
   // const user = localStorage.getItem("user");
   // const userObj = user ? JSON.parse(user) : null;
-  
+
   const [userObj, setUserObj] = useState<any>({});
+  const {user} = useAuth()
   const router = useRouter();
   const pathname = usePathname();
   const notificationsRef = useRef<HTMLDivElement>(null);
@@ -196,9 +198,10 @@ const Header: React.FC = () => {
                   >
                     <ProfileImage
                       src={
-                        Array.isArray(userObj?.userImages) && userObj?.userImages[0]
-                          ? userObj?.userImages[0]
-                          : userObj?.gender === "male"
+                        Array.isArray(user?.userImages) &&
+                        user?.userImages[0]
+                          ? user?.userImages[0]
+                          : user?.gender === "male"
                           ? MalePlaceholder.src
                           : FemalePlaceholder.src
                       }

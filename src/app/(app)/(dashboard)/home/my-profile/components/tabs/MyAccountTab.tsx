@@ -18,10 +18,10 @@ interface ProfileFormData {
 
 interface ProfilePanelProps {
   formData: ProfileFormData;
-  images: string[];
+  images: string | null;
   // handleChange: (name: string, value: string) => void;
   handleImageUpload: (images: FileList | null) => void;
-  handleDeleteImage: (index: number) => void;
+  handleDeleteImage: () => void;
   handleFormSubmit: (values: ProfileFormData) => void;
 }
 
@@ -82,27 +82,29 @@ const MyAccountTab: React.FC<ProfilePanelProps> = ({
           return (
             <Form onSubmit={handleSubmit}>
               <h3 className="text-lg font-semibold mb-2">Profile Images</h3>
-              <ImageUploader
-                onUpload={handleImageUpload}
-                maxImages={8}
-                className="w-72"
-              />
+              {!images && (
+                <ImageUploader
+                  onUpload={handleImageUpload}
+                  maxImages={1}
+                  className="w-72"
+                />
+              )}
               <div className="flex gap-2 mt-4 mb-12">
-                {images.map((image, index) => (
-                  <div key={index} className="relative">
+                {images && (
+                  <div className="relative">
                     <img
-                      src={image}
-                      alt={`Profile ${index}`}
-                      className="w-24 h-16 object-contain rounded-md"
+                      src={images}
+                      alt={`Profile`}
+                      className="w-36 h-32 object-contain rounded-md"
                     />
                     <div
                       className="absolute top-0 right-0 bg-primary flex items-center justify-center text-white text-xs w-3 h-3 rounded-sm cursor-pointer"
-                      onClick={() => handleDeleteImage(index)}
+                      onClick={() => handleDeleteImage()}
                     >
                       ×
                     </div>
                   </div>
-                ))}
+                )}
               </div>
 
               <h3 className="text-lg font-semibold mb-6">Account Info</h3>

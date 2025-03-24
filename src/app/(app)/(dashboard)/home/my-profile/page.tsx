@@ -9,7 +9,7 @@ import PreferencesTab from "./components/tabs/PreferencesTab";
 import BasicInfoTab from "./components/tabs/BasicInfoTab";
 import MyAccountTab from "./components/tabs/MyAccountTab";
 import { mainTabs } from "@/constants/formConstants";
-import { getUserProfile, updateUserProfile } from "@/app/lib/api/profileRoutes";
+import { getUserProfile, updateUserProfile, uploadFile } from "@/app/lib/api/profileRoutes";
 import { showToast } from "@/app/components/ui/CustomToast";
 
 // Main Profile Module Component
@@ -17,40 +17,42 @@ const ProfilePage = () => {
   const [selectedMainTab, setSelectedMainTab] = useState<number>(0);
   const [selectedSubTab, setSelectedSubTab] = useState<number>(0);
   const [formData, setFormData] = useState<FormData>({});
-  const [uploadedImages, setUploadedImages] = useState<string[]>([]);
-  const [images, setImages] = useState<File[]>([]);
+  const [uploadedImages, setUploadedImages] = useState<string |null>(null);
+  const [images, setImages] = useState<File | null>(null);
 
   const handleChange = (name: string, value: string) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
-  const handleImagesChange = (value: string[]) => {
-    setUploadedImages(value);
-  };
   const handleImageUpload = (files: FileList | null) => {
     if (!files) return;
 
-    const newImages = Array.from(files).map((file) =>
-      URL.createObjectURL(file)
-    );
+    const file = files[0]; // Take the first file only
+    const imageUrl = URL.createObjectURL(file);
 
-    setUploadedImages((prevImages) => [...prevImages, ...newImages]);
-    handleImagesChange([...uploadedImages, ...newImages]);
-    setImages(Array.from(files));
+    setUploadedImages(imageUrl); // Set single image
+    setImages(file);
+    // setUploadedImages((prevImages) => [...prevImages, ...newImages]);
+    // handleImagesChange([...uploadedImages, ...newImages]);
+    // setImages(Array.from(files));
   };
 
-  const handleDeleteImage = (index: number) => {
-    setUploadedImages((prevImages) => {
-      const updatedImages = prevImages.filter((_, i) => i !== index);
-      handleImagesChange(updatedImages);
-      return updatedImages;
-    });
+  const handleDeleteImage = () => {
+    setUploadedImages(null);
   };
 
   const handleSubmit = async (formData: any) => {
     try {
+      let fileUrl;
+      if(images) {
+        const form = new FormData()
+        form.append("file", images)
+        const {data, status} = await uploadFile(form)
+        if(status === 200 && data?.fileUrl)
+        fileUrl = data?.fileUrl;
+      }
       const formDataToSend = {
         ...formData,
-        // userImages: images
+        ...(fileUrl && {userImages: [fileUrl]})
       };
       const { data, status } = await updateUserProfile(formDataToSend);
       if (status === 200) {
@@ -67,6 +69,8 @@ const ProfilePage = () => {
       const response = await getUserProfile();
       if (response?.data?.user) {
         const { horoscopeDetails, FamilyDetails, Education, ...restUser } = response?.data?.user || {};
+        
+        localStorage.setItem("user", JSON.stringify(response?.data?.user));
 
         setFormData({
           ...horoscopeDetails,
@@ -74,6 +78,10 @@ const ProfilePage = () => {
           ...Education,
           ...restUser,
         });
+        if(restUser?.userImages){
+          setImages(restUser?.userImages[0])
+          setUploadedImages(restUser?.userImages[0])
+        }
       }
     } catch (error) {}
   };

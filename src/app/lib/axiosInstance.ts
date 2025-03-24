@@ -9,8 +9,7 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token =
-      typeof window !== "undefined" ? Cookies.get("token") : null;
+    const token = typeof window !== "undefined" ? Cookies.get("token") : null;
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -24,9 +23,13 @@ axiosInstance.interceptors.response.use(
   (error) => {
     if (error.response?.status === 401) {
       if (typeof window !== "undefined") {
-        localStorage.clear();
-        showToast("Unauthorized! Please login again", "error")
-        window.location.href = "/auth/login";
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        Cookies.remove("token");
+        Cookies.remove("refreshToken");
+        showToast("Unauthorized! Please login again", "error");
+        if (!window.location.pathname.includes("auth"))
+          window.location.replace("/auth/login");
       }
     }
     return Promise.reject(error);

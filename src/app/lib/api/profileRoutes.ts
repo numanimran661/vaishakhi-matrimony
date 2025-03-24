@@ -49,3 +49,19 @@ export const deleteUserProfile = async (formData: any) => {
     throw error;
   }
 };
+export const uploadFile = async (formData: any) => {
+  try {
+    const response = await axiosInstance.post(`/user/uploadFile`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
+    });
+
+    return response; // Return full response
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      return error.response;
+    }
+    throw error;
+  }
+};

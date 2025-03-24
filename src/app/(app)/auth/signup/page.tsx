@@ -31,13 +31,12 @@ const SignupForm: React.FC = () => {
   const [googleAuthCompleted, setGoogleAuthCompleted] =
     useState<boolean>(false);
 
-
-useEffect(() => {
-  if (typeof window !== "undefined") {
-    const token = localStorage.getItem("fcm_token");
-    setFcmToken(token ? token : null);
-  }
-}, []);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("fcm_token");
+      setFcmToken(token ? token : null);
+    }
+  }, []);
   // useEffect(() => {
   //   if (session?.user?.email && !googleAuthCompleted) {
   //     setGoogleAuthCompleted(true);
@@ -104,6 +103,8 @@ useEffect(() => {
             loginInternal(response?.data?.token, response?.data?.user);
             showToast("Signed up successfully", "success");
             router.push("/home");
+          } else if (response?.data?.message) {
+            showToast(response?.data?.message, "error");
           } else {
             showToast("Something went wrong. Please try again.", "error");
           }

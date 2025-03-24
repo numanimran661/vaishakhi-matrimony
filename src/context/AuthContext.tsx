@@ -12,7 +12,9 @@ interface AuthContextProps {
   logoutInternal: () => void;
 }
 
-export const AuthContext = createContext<AuthContextProps | undefined>(undefined);
+export const AuthContext = createContext<AuthContextProps | undefined>(
+  undefined
+);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<any>(null);
@@ -39,14 +41,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const logoutInternal = () => {
     Cookies.remove("token");
     localStorage.removeItem("user");
-    signOut({redirect: false});
+    signOut({ redirect: false });
     setToken(null);
     setUser(null);
-    router.push("/auth/login");
+    if (!window.location.pathname.includes("auth")) router.push("/auth/login");
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, loginInternal, logoutInternal }}>
+    <AuthContext.Provider
+      value={{ user, token, loginInternal, logoutInternal }}
+    >
       {children}
     </AuthContext.Provider>
   );
