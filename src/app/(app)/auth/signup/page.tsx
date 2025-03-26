@@ -98,11 +98,14 @@ const SignupForm: React.FC = () => {
       validationSchema={validationSchema}
       onSubmit={async (values, { setSubmitting }) => {
         try {
-          const response = await register({ ...values, fcmToken });
+          const response = await register({
+            ...values,
+            ...(fcmToken && { fcmToken: fcmToken }),
+          });
           if (response?.status === 200 || response?.status === 201) {
             loginInternal(response?.data?.token, response?.data?.user);
             showToast("Signed up successfully", "success");
-            router.push("/home");
+            router.push("/tell-us-more-about-yourself");
           } else if (response?.data?.message) {
             showToast(response?.data?.message, "error");
           } else {

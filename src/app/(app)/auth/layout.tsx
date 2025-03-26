@@ -1,14 +1,18 @@
+'use client'
 import {
   AboutImg1,
   AboutImg2,
   AppLogo,
+  ArrowLeft,
   CheckCircle,
   PricingBg,
 } from "@/app/components/common/allImages/AllImages";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
+  const router = useRouter()
   return (
     <div className="flex min-h-screen mx-auto max-w-7xl">
       {/* Left Side */}
@@ -32,14 +36,13 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
           </h1>
           <ul className="space-y-2">
             <li className="flex items-center gap-2">
-              <CheckCircle /> All profiles are
-              verified.
+              <CheckCircle /> All profiles are verified.
             </li>
             <li className="flex items-center gap-2">
-            <CheckCircle /> Perfect Matching.
+              <CheckCircle /> Perfect Matching.
             </li>
             <li className="flex items-center gap-2">
-            <CheckCircle /> Use our mobile app.
+              <CheckCircle /> Use our mobile app.
             </li>
           </ul>
 
@@ -65,7 +68,13 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
       </div>
 
       {/* Right Side (Content Area) */}
-      <div className="md:w-1/2 w-full sm:p-8 p-5 flex flex-col justify-center">{children}</div>
+      <div className="md:w-1/2 w-full sm:p-8 p-5">
+        <div className="flex gap-1 items-center cursor-pointer" onClick={() => router.push('/')}>
+          <ArrowLeft />
+          <span>Back</span>
+        </div>
+        <div className="h-full flex flex-col mt-20 md:mt-32">{children}</div>
+      </div>
     </div>
   );
 };

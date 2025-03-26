@@ -27,7 +27,7 @@ axiosInstance.interceptors.response.use(
         localStorage.removeItem("user");
         Cookies.remove("token");
         Cookies.remove("refreshToken");
-        showToast("Unauthorized! Please login again", "error");
+        // showToast("Unauthorized! Please login again", "error");
         if (!window.location.pathname.includes("auth"))
           window.location.replace("/auth/login");
       }

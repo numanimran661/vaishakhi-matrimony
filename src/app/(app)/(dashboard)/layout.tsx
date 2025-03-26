@@ -16,7 +16,7 @@ import { useAuth } from "@/context/AuthContext";
 const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   const pathname = usePathname();
-  const {token} = useAuth()
+  const { token } = useAuth();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -28,12 +28,14 @@ const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
       if (user.profileCompleted) {
         setIsLoading(false);
       } else {
-        showToast("Please complete your profile first", 'error')
-        router.push("/tell-us-more-about-yourself");
+        if (!pathname.includes("tell-us-more-about-yourself")) {
+          showToast("Please complete your profile first", "error");
+          router.push("/tell-us-more-about-yourself");
+        }
         setIsLoading(false);
       }
     } else {
-      setIsLoading(false)
+      setIsLoading(false);
     }
   }, [pathname]);
 

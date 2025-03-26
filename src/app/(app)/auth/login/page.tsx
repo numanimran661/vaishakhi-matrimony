@@ -56,7 +56,8 @@ const LoginPage: React.FC = () => {
     try {
       const obj = {
         email,
-        fcmToken,
+        // fcmToken,
+        ...(fcmToken && { fcmToken: fcmToken }),
       };
       const response = await socialLogin(obj);
 
@@ -64,9 +65,11 @@ const LoginPage: React.FC = () => {
         loginInternal(response?.data?.token, response?.data?.user);
         showToast("Logged In successfully", "success");
         router.push("/home");
-      } else if(response?.status === 401) {
+      } else if (response?.status === 401) {
         showToast("Email not found, Please signup first!", "error");
         logoutInternal();
+      } else if (response?.data?.message) {
+        showToast(response?.data?.message, "error");
       } else {
         showToast("Something went wrong. Please try again.", "error");
         logoutInternal();
@@ -101,12 +104,18 @@ const LoginPage: React.FC = () => {
       onSubmit={async (values, { setSubmitting }) => {
         setError(null);
         try {
-          const response = await login({ ...values, fcmToken: fcmToken });
+          const response = await login({
+            ...values,
+            ...(fcmToken && { fcmToken: fcmToken }),
+          });
           if (response?.status === 200) {
             loginInternal(response?.data?.token, response?.data?.user);
 
             showToast("Logged In successfully", "success");
-            router.push("/home");
+            if (response?.data?.user?.profileCompleted) router.push("/home");
+            else router.push("/tell-us-more-about-yourself");
+          } else if (response?.data?.message) {
+            showToast(response?.data?.message, "error");
           } else {
             showToast("Something went wrong. Please try again.", "error");
           }

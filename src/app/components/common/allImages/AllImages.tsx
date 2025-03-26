@@ -52,6 +52,8 @@ import LogoutIcon from "@/assets/images/svg/logout-icon.svg";
 import ClipboardIcon from "@/assets/images/svg/clipboard-icon.svg";
 import ToastCheck from "@/assets/images/svg/toast-check.svg";
 import ToastCross from "@/assets/images/svg/toast-cross.svg";
+import EyeOpen from "@/assets/images/svg/eye-open.svg";
+import EyeClose from "@/assets/images/svg/eye-close.svg";
 
 import AppLogo from "../../../../../public/images/png/app-logo.png";
 import LogoDark from "../../../../../public/images/png/logo-dark.png";
@@ -151,6 +153,8 @@ export {
   CloudUploadIcon,
   ToastCheck,
   ToastCross,
-  CashfreeLogo
+  CashfreeLogo,
+  EyeOpen,
+  EyeClose
 };
 
