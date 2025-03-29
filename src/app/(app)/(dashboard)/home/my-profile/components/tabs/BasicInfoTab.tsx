@@ -27,10 +27,10 @@ const BasicInfoTab = ({
 }: PreferencesTabProps) => {
   return (
     <TabGroup selectedIndex={selectedSubTab} onChange={setSelectedSubTab}>
-      <div className="md:hidden flex items-center space-x-2 p-4 border-b">
+      {/* <div className="md:hidden flex items-center space-x-2 p-4 border-b">
         <ArrowLeft onClick={() => setSelectedSubTab(0)} />
         <h2 className="text-lg font-semibold">Basic Info</h2>
-      </div>
+      </div> */}
       <SubTabs tabsList={basicInfoTabs} />
       <TabPanels className="mt-4">
         {selectedSubTab === 0 && (

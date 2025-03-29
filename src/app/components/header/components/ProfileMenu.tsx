@@ -52,8 +52,8 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ isOpen, onClose }) => {
             />
             <div>
               <h3 className="font-medium text-sm md:text-base">{user?.name}</h3>
-              <div className="flex items-center gap-1 bg-gray50 rounded-2xl my-1 px-2">
-                <p className="text-sm text-darkGray">{user?._id}</p>
+              <div className="flex items-center gap-1 bg-gray50 rounded-2xl my-1 px-2 max-w-[60%]">
+                <p className="text-sm text-darkGray truncate w-full">{user?._id}</p>
                 <ClipboardIcon
                   width={14}
                   height={14}

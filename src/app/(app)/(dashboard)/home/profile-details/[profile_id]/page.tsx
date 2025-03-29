@@ -546,10 +546,12 @@ import { getUserDetails } from "@/app/lib/api/profileRoutes";
 import { showToast } from "@/app/components/ui/CustomToast";
 import { sendInterest } from "@/app/lib/api/homeRoutes";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
 
 const ProfileDetail = ({ params }: any) => {
   const id = params.profile_id;
   const router = useRouter();
+  const { user } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [userDetails, setUserDetails] = useState<any>(null);
@@ -685,12 +687,14 @@ const ProfileDetail = ({ params }: any) => {
             <h3 className="font-bold text-lg">Contact Details</h3>
             <ul className="text-sm text-gray-600 space-y-1 mt-2 grid grid-cols-2 gap-5">
               <li>
-                <span className="text-normal mb-1">Phone Number:</span> +91
-                ******{userDetails?.phone.slice(-4)}
+                <span className="text-normal mb-1">Phone Number:</span>
+                {user?.isPaid
+                  ? userDetails?.phone
+                  : "+91 ******" + userDetails?.phone.slice(-4)}
               </li>
               <li>
                 <span className="text-normal mb-1">Email:</span>{" "}
-                ******@gmail.com
+                {user?.isPaid ? userDetails?.email : "******@gmail.com"}
               </li>
             </ul>
           </div>
@@ -741,7 +745,13 @@ const ProfileDetail = ({ params }: any) => {
                 label="Send Request"
                 iconColor="white"
                 variant="dark"
-                onClick={handleInterestSend}
+                onClick={() => {
+                  if (user?.isPaid) {
+                    handleInterestSend();
+                  } else {
+                    setIsModalOpen(true);
+                  }
+                }}
                 // onClick={() => setIsModalOpen(true)}
               />
             </div>
@@ -751,7 +761,11 @@ const ProfileDetail = ({ params }: any) => {
                 iconColor="white"
                 label="Chat Now"
                 onClick={() => {
-                  router.push(`/home/messages?receiverId=${id}`);
+                  if (user?.isPaid) {
+                    router.push(`/home/messages?receiverId=${id}`);
+                  } else {
+                    setIsModalOpen(true);
+                  }
                 }}
               />
             </div>
@@ -773,7 +787,7 @@ const ProfileDetail = ({ params }: any) => {
             label="Cancel"
             variant="light"
           />
-          <Button label="Upgrade Now" />
+          <Button label="Upgrade Now" onClick={() => router.push('/membership-plans')} />
         </div>
       </GlobalModal>
     </div>

@@ -75,7 +75,7 @@ export const basicPanelFormFields = [
   // { label: "Complexion", name: "complexion" },
 ];
 export const basicInfoFormFields = [
-  { label: "dateOfBirth", name: "Date of Birth" },
+  { label: "Date Of Birth", name: "dateOfBirth" },
   { label: "Age", name: "age", options: ageOptions },
   { label: "Gender", name: "gender", options: genderOptions },
   { label: "Height", name: "height", options: heightOptions },

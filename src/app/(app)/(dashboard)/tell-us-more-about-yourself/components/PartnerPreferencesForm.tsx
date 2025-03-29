@@ -2,7 +2,7 @@ import DatePicker from "@/app/components/common/inputFields/DatePicker";
 import InputField from "@/app/components/common/inputFields/InputField";
 import RadioField from "@/app/components/common/inputFields/RadioInput";
 import SelectField from "@/app/components/common/inputFields/SelectField";
-import { cityOptions, doshOptions, dropdownOptions, incomeRangeOptions, manglikOptions, motherTongueOptions, occupationOptions, religionOptions, starOptions, stateOptions } from "@/constants/dummyConstants";
+import { cityOptions, degreeOptions, doshOptions, dropdownOptions, incomeRangeOptions, manglikOptions, motherTongueOptions, occupationOptions, religionOptions, starOptions, stateOptions } from "@/constants/dummyConstants";
 import { basicPanelFormFields } from "@/constants/formConstants";
 import { Field, useFormikContext } from "formik";
 import { useState } from "react";
@@ -276,7 +276,16 @@ function LocationInfo({ values, handleChange, errors, touched }: SubTabProps) {
           options={stateOptions}
           className="w-full"
         />
-        <div className="mt-4">
+        <Field
+          as={SelectField}
+          label={"City"}
+          name={"FamilyDetails.city"}
+          value={values?.FamilyDetails?.city}
+          // onChange={(e) => handleChange(item.name, e.target.value)}
+          options={cityOptions}
+          className="w-full"
+        />
+        {/* <div className="mt-4">
           <label className="mb-2 text-sm text-darkBlue font-semibold leading-5">
             City
           </label>
@@ -292,7 +301,7 @@ function LocationInfo({ values, handleChange, errors, touched }: SubTabProps) {
               />
             ))}
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
@@ -306,7 +315,15 @@ function EducationInfo({ values, handleChange, errors, touched }: SubTabProps) {
       <h3 className="text-lg font-semibold mb-4">Education Info</h3>
       <div className="grid grid-cols-2 gap-4">
         {/* Education Radio Buttons */}
-        <div className="mt-4">
+        <Field
+          as={SelectField}
+          label="Education"
+          name="Education.education"
+          value={values?.Education.education}
+          options={degreeOptions}
+          className="w-full"
+        />
+        {/* <div className="mt-4">
           <label className="mb-2 text-sm text-darkBlue font-semibold leading-5">
             Education
           </label>
@@ -322,7 +339,7 @@ function EducationInfo({ values, handleChange, errors, touched }: SubTabProps) {
               />
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* Occupation Dropdown */}
         <Field

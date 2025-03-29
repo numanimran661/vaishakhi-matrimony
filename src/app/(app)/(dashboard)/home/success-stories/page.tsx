@@ -122,7 +122,7 @@ const SuccessStoriesPage = () => {
                 ))
               ) : (
                 <div>
-                  <h4 className="md:text-lg text-center min-h-48 text-base font-normal text-gray-900 mb-6">
+                  <h4 className="md:text-lg text-center min-h-[40vh] text-base font-normal text-gray-900 mb-6">
                     No Stories Found!
                   </h4>
                 </div>

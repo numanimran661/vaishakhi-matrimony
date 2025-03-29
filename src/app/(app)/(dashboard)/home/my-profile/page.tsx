@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { TabGroup, TabPanels } from "@headlessui/react";
-import { ArrowLeft } from "@/app/components/common/allImages/AllImages";
+import { ArrowLeft, RightArrow } from "@/app/components/common/allImages/AllImages";
 import Link from "next/link";
 import MainTabs from "./components/MainTabs";
 import type { FormData } from "@/types/formTypes";
@@ -20,7 +20,7 @@ import { useAuth } from "@/context/AuthContext";
 // Main Profile Module Component
 const ProfilePage = () => {
   const { updateUser } = useAuth();
-  const [selectedMainTab, setSelectedMainTab] = useState<number>(0);
+  const [selectedMainTab, setSelectedMainTab] = useState<number | undefined>(0);
   const [selectedSubTab, setSelectedSubTab] = useState<number>(0);
   const [formData, setFormData] = useState<FormData>({});
   const [uploadedImages, setUploadedImages] = useState<string | null>(null);
@@ -110,57 +110,74 @@ const ProfilePage = () => {
           <span className="text-primary">Profile</span>
         </li>
       </ul>
-      <div className="md:border border-gray rounded-3xl">
-        {/* Mobile Header */}
-        <div
-          className="md:hidden flex items-center space-x-2 mb-4"
-          onClick={() => setSelectedSubTab(0)}
-        >
-          <ArrowLeft />
-          <h2 className="text-lg font-semibold">{mainTabs[selectedMainTab]}</h2>
+      {selectedMainTab === undefined ? (
+        <div className="flex flex-col gap-4">
+          {mainTabs.map((tab, index) => (
+            <div
+              className={`flex items-center justify-between gap-3 p-3 hover:bg-gray-50 cursor-pointer border border-gray rounded-lg transition-all duration-200 ease-in-out transform hover:scale-[1.02]`}
+              onClick={() => setSelectedMainTab(index)}
+            >
+              {/* <span className="text-gray-600">{item.icon}</span> */}
+              <span className="text-sm text-gray-700">{tab}</span>
+              <RightArrow className="w-4" />
+            </div>
+          ))}
         </div>
-        <TabGroup
-          selectedIndex={selectedMainTab}
-          onChange={(tab) => {
-            setSelectedMainTab(tab);
-            setSelectedSubTab(0);
-          }}
-        >
-          <div className="flex md:p-6">
-            <MainTabs />
-            <TabPanels className="md:px-5 py-0 w-full md:w-4/5">
-              {selectedMainTab === 0 && (
-                <MyAccountTab
-                  formData={formData}
-                  images={uploadedImages}
-                  // handleChange={handleChange}
-                  handleDeleteImage={handleDeleteImage}
-                  handleImageUpload={handleImageUpload}
-                  handleFormSubmit={handleSubmit}
-                />
-              )}
-              {selectedMainTab === 1 && (
-                <BasicInfoTab
-                  selectedSubTab={selectedSubTab}
-                  setSelectedSubTab={setSelectedSubTab}
-                  formData={formData}
-                  handleChange={handleChange}
-                  handleFormSubmit={handleSubmit}
-                />
-              )}
-              {selectedMainTab === 2 && (
-                <PreferencesTab
-                  selectedSubTab={selectedSubTab}
-                  setSelectedSubTab={setSelectedSubTab}
-                  formData={formData}
-                  handleChange={handleChange}
-                  handleFormSubmit={handleSubmit}
-                />
-              )}
-            </TabPanels>
+      ) : (
+        <div className="md:border border-gray rounded-3xl">
+          {/* Mobile Header */}
+          <div
+            className="md:hidden flex items-center space-x-2 mb-4"
+            onClick={() => setSelectedMainTab(undefined)}
+          >
+            <ArrowLeft />
+            <h2 className="text-lg font-semibold">
+              {selectedMainTab !== undefined && mainTabs[selectedMainTab]}
+            </h2>
           </div>
-        </TabGroup>
-      </div>
+          <TabGroup
+            selectedIndex={selectedMainTab}
+            onChange={(tab) => {
+              setSelectedMainTab(tab);
+              setSelectedSubTab(0);
+            }}
+          >
+            <div className="flex md:p-6">
+              <MainTabs />
+              <TabPanels className="md:px-5 py-0 w-full md:w-4/5">
+                {selectedMainTab === 0 && (
+                  <MyAccountTab
+                    formData={formData}
+                    images={uploadedImages}
+                    // handleChange={handleChange}
+                    handleDeleteImage={handleDeleteImage}
+                    handleImageUpload={handleImageUpload}
+                    handleFormSubmit={handleSubmit}
+                  />
+                )}
+                {selectedMainTab === 1 && (
+                  <BasicInfoTab
+                    selectedSubTab={selectedSubTab}
+                    setSelectedSubTab={setSelectedSubTab}
+                    formData={formData}
+                    handleChange={handleChange}
+                    handleFormSubmit={handleSubmit}
+                  />
+                )}
+                {selectedMainTab === 2 && (
+                  <PreferencesTab
+                    selectedSubTab={selectedSubTab}
+                    setSelectedSubTab={setSelectedSubTab}
+                    formData={formData}
+                    handleChange={handleChange}
+                    handleFormSubmit={handleSubmit}
+                  />
+                )}
+              </TabPanels>
+            </div>
+          </TabGroup>
+        </div>
+      )}
     </div>
   );
 };
