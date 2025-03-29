@@ -9,15 +9,21 @@ import PreferencesTab from "./components/tabs/PreferencesTab";
 import BasicInfoTab from "./components/tabs/BasicInfoTab";
 import MyAccountTab from "./components/tabs/MyAccountTab";
 import { mainTabs } from "@/constants/formConstants";
-import { getUserProfile, updateUserProfile, uploadFile } from "@/app/lib/api/profileRoutes";
+import {
+  getUserProfile,
+  updateUserProfile,
+  uploadFile,
+} from "@/app/lib/api/profileRoutes";
 import { showToast } from "@/app/components/ui/CustomToast";
+import { useAuth } from "@/context/AuthContext";
 
 // Main Profile Module Component
 const ProfilePage = () => {
+  const { updateUser } = useAuth();
   const [selectedMainTab, setSelectedMainTab] = useState<number>(0);
   const [selectedSubTab, setSelectedSubTab] = useState<number>(0);
   const [formData, setFormData] = useState<FormData>({});
-  const [uploadedImages, setUploadedImages] = useState<string |null>(null);
+  const [uploadedImages, setUploadedImages] = useState<string | null>(null);
   const [images, setImages] = useState<File | null>(null);
 
   const handleChange = (name: string, value: string) => {
@@ -43,16 +49,15 @@ const ProfilePage = () => {
   const handleSubmit = async (formData: any) => {
     try {
       let fileUrl;
-      if(images) {
-        const form = new FormData()
-        form.append("file", images)
-        const {data, status} = await uploadFile(form)
-        if(status === 200 && data?.fileUrl)
-        fileUrl = data?.fileUrl;
+      if (images) {
+        const form = new FormData();
+        form.append("file", images);
+        const { data, status } = await uploadFile(form);
+        if (status === 200 && data?.fileUrl) fileUrl = data?.fileUrl;
       }
       const formDataToSend = {
         ...formData,
-        ...(fileUrl && {userImages: [fileUrl]})
+        ...(fileUrl && { userImages: [fileUrl] }),
       };
       const { data, status } = await updateUserProfile(formDataToSend);
       if (status === 200) {
@@ -68,9 +73,8 @@ const ProfilePage = () => {
     try {
       const response = await getUserProfile();
       if (response?.data?.user) {
-        const { horoscopeDetails, FamilyDetails, Education, ...restUser } = response?.data?.user || {};
-        
-        localStorage.setItem("user", JSON.stringify(response?.data?.user));
+        const { horoscopeDetails, FamilyDetails, Education, ...restUser } =
+          response?.data?.user || {};
 
         setFormData({
           ...horoscopeDetails,
@@ -78,10 +82,11 @@ const ProfilePage = () => {
           ...Education,
           ...restUser,
         });
-        if(restUser?.userImages){
-          setImages(restUser?.userImages[0])
-          setUploadedImages(restUser?.userImages[0])
+        if (restUser?.userImages) {
+          setImages(restUser?.userImages[0]);
+          setUploadedImages(restUser?.userImages[0]);
         }
+        updateUser(response?.data?.user);
       }
     } catch (error) {}
   };

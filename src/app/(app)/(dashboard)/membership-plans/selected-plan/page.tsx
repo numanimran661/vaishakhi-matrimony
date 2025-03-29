@@ -8,10 +8,13 @@ import {
   Tick,
 } from "@/app/components/common/allImages/AllImages";
 import Button from "@/app/components/common/buttons/Button";
-import { createPaymentCheckout } from "@/app/lib/api/membershipRoutes";
+import { showToast } from "@/app/components/ui/CustomToast";
+import { createPaymentCheckout, verifyPayment } from "@/app/lib/api/membershipRoutes";
+import { useAuth } from "@/context/AuthContext";
 import { load } from "@cashfreepayments/cashfree-js";
 import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const BreadcrumbMain = () => {
@@ -39,14 +42,9 @@ const SelectedPlans = () => {
   const selectedPlan = localStorage.getItem("selected_plan");
   const parsedObj = selectedPlan ? JSON.parse(selectedPlan) : null;
   const [cashfree, setCashfree] = useState<any>(null);
-  const [userObj, setUserObj] = useState<any>({});
+  const router = useRouter()
+  const {user, updateUser} = useAuth()
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const user = localStorage.getItem("user");
-      setUserObj(user ? JSON.parse(user) : null);
-    }
-  }, []);
 
   // Initialize Cashfree SDK
   useEffect(() => {
@@ -59,19 +57,37 @@ const SelectedPlans = () => {
     initializeSDK();
   }, []);
 
+  const checkPaymentStatus = async (orderId: string) => {
+    try {
+      const response = await verifyPayment({order_id: orderId, membership: parsedObj?.id, userId: user?._id})
+      if(response?.data?.success && response?.data?.user) {
+        updateUser(response?.data?.user)
+        showToast('Payment Completed Successfully', 'success')
+        router.push("/membership-plans")
+      } else if(response?.data?.message){
+        showToast(response?.data?.message, 'error')
+      } else {
+        showToast("Something went wrong! Please try again.", 'error')
+      }
+    } catch (error) {
+      
+    }
+  }
+
   const handlePayment = async () => {
     try {
       const response = await createPaymentCheckout({
         amount: parsedObj?.price,
-        customer_name: userObj?.name,
-        customer_id: userObj?._id,
-        customer_phone: userObj?.phone,
-        customer_email: userObj?.email
+        customer_name: user?.name,
+        customer_id: user?._id,
+        customer_phone: user?.phone,
+        customer_email: user?.email
       });
 
       if (response.status === 200) {
         // Extract payment session ID from the response
         const paymentSessionId = response.data.payment_session_id;
+        const order_id = response.data.order_id;
         console.log("Order created:", paymentSessionId);
 
         // Open Cashfree payment modal
@@ -93,6 +109,7 @@ const SelectedPlans = () => {
             if (result.paymentDetails) {
               // Handle payment completion
               console.log("Payment completed:", result.paymentDetails);
+              checkPaymentStatus(order_id);
             }
           });
         }

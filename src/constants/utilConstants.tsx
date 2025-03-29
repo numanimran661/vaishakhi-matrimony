@@ -55,7 +55,7 @@ export const menuItems = [
   {
     icon: <MembershipPlansIcon />,
     label: "Membership Plan",
-    path: "/home/membership-plans",
+    path: "/membership-plans",
   },
   {
     icon: <SuccessStoriesIcon />,

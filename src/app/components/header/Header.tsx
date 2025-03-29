@@ -25,7 +25,6 @@ const Header: React.FC = () => {
   // const user = localStorage.getItem("user");
   // const userObj = user ? JSON.parse(user) : null;
 
-  const [userObj, setUserObj] = useState<any>({});
   const {user} = useAuth()
   const router = useRouter();
   const pathname = usePathname();
@@ -38,13 +37,6 @@ const Header: React.FC = () => {
   const [showNotifications, setShowNotifications] = useState(false);
   const token = Cookies.get("token");
 
-  useEffect(() => {
-    // Check if window is defined (i.e., we're in the browser)
-    if (typeof window !== "undefined") {
-      const user = localStorage.getItem("user");
-      setUserObj(user ? JSON.parse(user) : null);
-    }
-  }, []);
   // useEffect(() => {
   //   const handleClickOutside = (event: MouseEvent) => {
   //     if (

@@ -8,6 +8,7 @@ import { signOut } from "next-auth/react";
 interface AuthContextProps {
   user: any;
   token: string | null;
+  updateUser: (user: any) => void;
   loginInternal: (token: string, userData: any) => void;
   logoutInternal: () => void;
 }
@@ -30,6 +31,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, []);
 
+  const updateUser = (user: any) => {
+    localStorage.setItem("user", JSON.stringify(user));
+    setUser(user);
+  };
   const loginInternal = (newToken: string, userData: any) => {
     Cookies.set("token", newToken, { expires: 7 });
     localStorage.setItem("user", JSON.stringify(userData));
@@ -49,7 +54,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, token, loginInternal, logoutInternal }}
+      value={{ user, token, loginInternal, logoutInternal, updateUser}}
     >
       {children}
     </AuthContext.Provider>

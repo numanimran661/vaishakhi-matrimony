@@ -3,6 +3,7 @@ import FAQSection from "@/app/components/landingPageSections/faq/FAQ";
 import PricingPlans from "@/app/components/landingPageSections/membershipPlans/MembershipPlans";
 import SuccessStories from "@/app/components/landingPageSections/successStories/SuccessStories";
 import { RightArrowWithoutBg } from "@/app/components/common/allImages/AllImages";
+import { useAuth } from "@/context/AuthContext";
 
 const BreadcrumbMain = () => {
   return (
@@ -22,7 +23,7 @@ const BreadcrumbMain = () => {
 
 const MembershipPlans = () => {
   return (
-    <section className="md:px-12 lg:px-24 px-6 mx-auto bg-lightgray py-10">
+    <section className="md:px-12 lg:px-40 px-6 mx-auto bg-lightgray py-10">
       <BreadcrumbMain />
       <PricingPlans />
       <FAQSection />
