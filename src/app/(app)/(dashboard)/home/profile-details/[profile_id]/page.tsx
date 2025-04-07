@@ -655,20 +655,25 @@ const ProfileDetail = ({ params }: any) => {
           <div>
             <h2 className="text-xl font-bold">{userDetails?.name || "N/A"}</h2>
             <p className="text-sm text-gray-500 mt-2">
-              {userDetails?.partnerExpectation || "No details available"}{" "}
+              {/* {userDetails?.partnerExpectation || "No details available"}{" "}
               <span className="text-orange-500 cursor-pointer">
                 see more...
-              </span>
-              {/* {isExpanded ? userDetails?.partnerExpectation : `${userDetails?.partnerExpectation.substring(0, 100)}... `}
-                {userDetails?.partnerExpectation.length > 100 && (
-                  <span className="text-orange-500 cursor-pointer" onClick={() => setIsExpanded(!isExpanded)}>
-                    {isExpanded ? "see less" : "see more..."}
-                  </span>
-                )} */}
+              </span> */}
+              {isExpanded
+                ? userDetails?.partnerExpectation
+                : userDetails?.partnerExpectation?.substring(0, 100) + "..."}
+              {userDetails?.partnerExpectation?.length > 100 && (
+                <span
+                  className="text-orange-500 cursor-pointer"
+                  onClick={() => setIsExpanded(!isExpanded)}
+                >
+                  {isExpanded ? "see less" : "see more..."}
+                </span>
+              )}
             </p>
           </div>
 
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap">
             <span className="flex items-center gap-1 text-sm bg-slate-100 p-2 rounded-lg">
               <BriefcaseIcon /> {userDetails?.occupation || "N/A"}
             </span>
@@ -681,20 +686,32 @@ const ProfileDetail = ({ params }: any) => {
         </div>
 
         {/* Right Section */}
-        <div className="grid grid-cols-1 gap-6 px-4 md:px-8">
+        <div className="grid grid-cols-1 gap-2 md:gap-6 px-4 md:px-8">
           {/* Contact Details */}
           <div className="border-b border-gray pb-4">
             <h3 className="font-bold text-lg">Contact Details</h3>
             <ul className="text-sm text-gray-600 space-y-1 mt-2 grid grid-cols-2 gap-5">
               <li>
-                <span className="text-normal mb-1">Phone Number:</span>
-                {user?.isPaid
-                  ? userDetails?.phone
-                  : "+91 ******" + userDetails?.phone.slice(-4)}
+                <span className="text-normal mb-1">Phone Number:</span>{" "}
+                <span
+                  {...(!user?.isPaid && {
+                    onClick: () => setIsModalOpen(true),
+                  })}
+                >
+                  {user?.isPaid
+                    ? userDetails?.phone
+                    : "+91 ******" + userDetails?.phone.slice(-4)}
+                </span>
               </li>
               <li>
                 <span className="text-normal mb-1">Email:</span>{" "}
-                {user?.isPaid ? userDetails?.email : "******@gmail.com"}
+                <span
+                  {...(!user?.isPaid && {
+                    onClick: () => setIsModalOpen(true),
+                  })}
+                >
+                  {user?.isPaid ? userDetails?.email : "******@gmail.com"}
+                </span>
               </li>
             </ul>
           </div>
@@ -787,7 +804,10 @@ const ProfileDetail = ({ params }: any) => {
             label="Cancel"
             variant="light"
           />
-          <Button label="Upgrade Now" onClick={() => router.push('/membership-plans')} />
+          <Button
+            label="Upgrade Now"
+            onClick={() => router.push("/membership-plans")}
+          />
         </div>
       </GlobalModal>
     </div>

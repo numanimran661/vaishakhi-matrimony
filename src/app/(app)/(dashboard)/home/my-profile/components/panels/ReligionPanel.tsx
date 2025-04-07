@@ -75,7 +75,7 @@ const ReligionPanel: React.FC<ReligionPanelProps> = ({
                 onChange={handleChange}
                 error={errors.birthTime}
                 touched={touched.birthTime}
-                className="w-full mt-4"
+                className="w-full"
               />
             </div>
           </div>

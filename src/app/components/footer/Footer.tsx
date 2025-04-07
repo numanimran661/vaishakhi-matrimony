@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { AppStore, GooglePlay, LogoLight } from "../common/allImages/AllImages";
+import { AppStore, Facebook, GooglePlay, Insta, Linkedin, LogoLight, Pinterest, Xicon, Youtube } from "../common/allImages/AllImages";
 
 const Footer = () => {
   return (
@@ -19,19 +19,22 @@ const Footer = () => {
             <div className="flex space-x-4 mt-4">
               {/* Social Media Icons */}
               <a href="#" className="text-white">
-                <i className="fab fa-facebook-f"></i>
+                <Xicon/>
               </a>
               <a href="#" className="text-white">
-                <i className="fab fa-linkedin-in"></i>
+                <Facebook/>
               </a>
               <a href="#" className="text-white">
-                <i className="fab fa-pinterest-p"></i>
+                <Linkedin/>
               </a>
               <a href="#" className="text-white">
-                <i className="fab fa-youtube"></i>
+                <Pinterest/>
               </a>
               <a href="#" className="text-white">
-                <i className="fab fa-instagram"></i>
+                <Youtube/>
+              </a>
+              <a href="#" className="text-white">
+                <Insta/>
               </a>
             </div>
           </div>

@@ -36,7 +36,7 @@ const CoreValues: React.FC = () => {
   return (
     <section className="bg-gray-50 px-8 md:py-16 py-10 border-b border-gray">
       <div className="max-w-7xl mx-auto">
-        <div className="text-left">
+        <div className="md:text-left text-center">
           <h2 className="text-sm font-medium text-normal uppercase">
             core values
           </h2>

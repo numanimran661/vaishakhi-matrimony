@@ -37,7 +37,7 @@ const InputField: React.FC<InputFieldProps> = ({
       {label && (
         <label
           htmlFor={name}
-          className={`mb-2 text-sm font-regular text-gray-700 ${classNameLabel}`}
+          className={`mb-2 text-sm text-darkBlue font-semibold ${classNameLabel}`}
         >
           {label}
         </label>

@@ -2,7 +2,7 @@ import DatePicker from "@/app/components/common/inputFields/DatePicker";
 import InputField from "@/app/components/common/inputFields/InputField";
 import RadioField from "@/app/components/common/inputFields/RadioInput";
 import SelectField from "@/app/components/common/inputFields/SelectField";
-import { cityOptions, degreeOptions, doshOptions, dropdownOptions, incomeRangeOptions, manglikOptions, motherTongueOptions, occupationOptions, religionOptions, starOptions, stateOptions } from "@/constants/dummyConstants";
+import { castOptions, cityOptions, degreeOptions, doshOptions, dropdownOptions, incomeRangeOptions, manglikOptions, motherTongueOptions, occupationOptions, religionOptions, starOptions, stateOptions } from "@/constants/dummyConstants";
 import { basicPanelFormFields } from "@/constants/formConstants";
 import { Field, useFormikContext } from "formik";
 import { useState } from "react";
@@ -140,6 +140,8 @@ function BasicInfo({ values, handleChange, errors, touched }: SubTabProps) {
                 label={item.label}
                 name={fieldName}
                 value={values[fieldName]}
+                touched={touched[fieldName]}
+                errors={errors[fieldName]}
                 options={item.options}
                 className="w-full"
               />
@@ -152,9 +154,11 @@ function BasicInfo({ values, handleChange, errors, touched }: SubTabProps) {
                     To
                   </label>
                   <Field
-                    as={SelectField}
+                    as={SelectField} 
                     name={`${item.name}To`}
                     value={values[`${item.name}To`]}
+                    touched={touched[`${item.name}To`]}
+                    errors={errors[`${item.name}To`]}
                     options={item.options}
                     className={`max-w-48`}
                   />
@@ -179,11 +183,13 @@ function ReligionInfo({ values, handleChange, errors, touched }: SubTabProps) {
           label={"Religion"}
           name={"horoscopeDetails.religion"}
           value={values?.horoscopeDetails.religion}
+          touched={touched?.horoscopeDetails?.religion}
+          errors={errors?.horoscopeDetails?.religion}
           // onChange={(e) => handleChange(item.name, e.target.value)}
           options={religionOptions}
           className="w-full"
         />
-        <div className="mt-4">
+        {/* <div className="mt-4">
           <label className="mb-2 text-sm text-darkBlue font-semibold leading-5">
             Caste
           </label>
@@ -199,12 +205,24 @@ function ReligionInfo({ values, handleChange, errors, touched }: SubTabProps) {
               />
             ))}
           </div>
-        </div>
+        </div> */}
+        <Field
+          as={SelectField}
+          label={"Caste"}
+          name={"horoscopeDetails.caste"}
+          value={values?.horoscopeDetails?.caste}
+          touched={touched?.horoscopeDetails?.caste}
+          errors={errors?.horoscopeDetails?.caste}
+          options={castOptions}
+          className="w-full"
+        />
         <Field
           as={SelectField}
           label={"Mother Tongue"}
           name={"horoscopeDetails.motherTongue"}
           value={values?.horoscopeDetails.motherTongue}
+          touched={touched?.horoscopeDetails?.motherTongue}
+          errors={errors?.horoscopeDetails?.motherTongue}
           options={motherTongueOptions}
           className="w-full"
         />
@@ -213,6 +231,8 @@ function ReligionInfo({ values, handleChange, errors, touched }: SubTabProps) {
           label={"Manglik"}
           name={"horoscopeDetails.manglik"}
           value={values?.horoscopeDetails?.manglik}
+          touched={touched?.horoscopeDetails?.manglik}
+          errors={errors?.horoscopeDetails?.manglik}
           options={manglikOptions}
           className="w-full"
         />
@@ -221,6 +241,8 @@ function ReligionInfo({ values, handleChange, errors, touched }: SubTabProps) {
           label={"Star"}
           name={"horoscopeDetails.star"}
           value={values?.horoscopeDetails.star}
+          touched={touched?.horoscopeDetails?.star}
+          errors={errors?.horoscopeDetails?.star}
           options={starOptions}
           className="w-full"
         />
@@ -228,7 +250,9 @@ function ReligionInfo({ values, handleChange, errors, touched }: SubTabProps) {
           as={SelectField}
           label={"Dosh"}
           name={"horoscopeDetails.dosh"}
-          value={values?.horoscopeDetails.dosh}
+          value={values?.horoscopeDetails?.dosh}
+          touched={touched?.horoscopeDetails?.dosh}
+          errors={errors?.horoscopeDetails?.dosh}
           options={doshOptions}
           className="w-full"
         />
@@ -236,7 +260,9 @@ function ReligionInfo({ values, handleChange, errors, touched }: SubTabProps) {
           as={SelectField}
           label={"Birth Place"}
           name={"horoscopeDetails.birthPlace"}
-          value={values?.horoscopeDetails.birthPlace}
+          value={values?.horoscopeDetails?.birthPlace}
+          touched={touched?.horoscopeDetails?.birthPlace}
+          errors={errors?.horoscopeDetails?.birthPlace}
           options={cityOptions}
           className="w-full"
         />
@@ -244,7 +270,9 @@ function ReligionInfo({ values, handleChange, errors, touched }: SubTabProps) {
           as={DatePicker}
           label={"Birth Time"}
           name={"horoscopeDetails.birthTime"}
-          value={values?.horoscopeDetails.birthTime}
+          value={values?.horoscopeDetails?.birthTime}
+          touched={touched?.horoscopeDetails?.birthTime}
+          errors={errors?.horoscopeDetails?.birthTime}
           className="w-full"
         />
       </div>

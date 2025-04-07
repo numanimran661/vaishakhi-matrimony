@@ -20,13 +20,23 @@ export const completeProfileValidation = Yup.object({
   ageFrom: Yup.string().required("Age from is required"),
   ageTo: Yup.string()
     .required("Age to is required")
-    // .test("age-range", "Age To must be greater than Age From", function (value) {
-    //   return value > this.parent.ageFrom;
-    // })
-    ,
-
+    .test(
+      "age-range",
+      "Age To must be greater than Age From",
+      function (value) {
+        return value > this.parent.ageFrom;
+      }
+    ),
   heightFrom: Yup.string().required("Height from is required"),
-  heightTo: Yup.string().required("Height to is required"),
+  heightTo: Yup.string()
+    .required("Height to is required")
+    .test(
+      "height-range",
+      "Height To must be greater than Height From",
+      function (value) {
+        return value > this.parent.heightFrom;
+      }
+    ),
   lookingFor: Yup.string().required("Looking for is required"),
   physicalStatus: Yup.string().required("Physical status is required"),
   food: Yup.string().required("Food preference is required"),

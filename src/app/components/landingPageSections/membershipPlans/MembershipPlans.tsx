@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Cookies from "js-cookie";
 import Button from "../../common/buttons/Button";
 import { PricingBg } from "../../common/allImages/AllImages";
 import { useRouter } from "next/navigation";
@@ -38,6 +39,7 @@ interface Plan {
 }
 
 const PricingPlans: React.FC = () => {
+  const token = Cookies.get("token");
   const { user } = useAuth();
   const router = useRouter();
   const [plans, setPlans] = useState<Plan[]>([]);
@@ -82,13 +84,13 @@ const PricingPlans: React.FC = () => {
     fetchPlans();
   }, []);
 
-  if (user?.isPaid && user?.membership && !isUpgrade) {
+  if (token && user?.isPaid && user?.membership && !isUpgrade) {
     const currentPlan: any =
       plans?.length > 0
         ? plans.find((plan) => plan?.id === user?.membership)
         : {};
     return (
-      <section className="px-4 md:px-0 max-w-[90%] w-full sm:max-w-[707px] mx-auto my-6 sm:my-12">
+      <section className="md:px-0 max-w-full w-full sm:max-w-[707px] mx-auto my-6 sm:my-12">
         <div className="rounded-3xl sm:border-[0.5px] sm:border-gray px-4 sm:px-10 py-6 sm:py-10">
           {/* Current Plan Section */}
           <div className="flex flex-col">

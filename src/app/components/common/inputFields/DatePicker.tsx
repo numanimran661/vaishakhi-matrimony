@@ -20,7 +20,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
   touched
 }) => {
   return (
-    <div className={`flex flex-col ${className} text-[#949494]`}>
+    <div className={`flex flex-col mt-4 ${className} text-[#949494]`}>
       <label
         htmlFor={name}
         className="mb-2 text-[16px] text-[#1C264E] font-semibold leading-5"

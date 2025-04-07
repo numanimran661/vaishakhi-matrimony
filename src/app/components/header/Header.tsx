@@ -119,12 +119,19 @@ const Header: React.FC = () => {
           {/* Navigation Links */}
           <nav
             ref={menuRef}
-            className={`navbar w-56 lg:w-auto flex lg:flex-row lg:static lg:border-0 lg:p-0 lg:translate-x-0 p-3 pr-5 border border-gray flex-col absolute left-0 top-20 bg-white gap-5 text-nowrap transition-all duration-300 ease-in-out ${
+            className={`navbar w-72 lg:w-auto flex lg:flex-row lg:static lg:border-0 lg:p-0 lg:translate-x-0 p-3 pr-5 border border-gray flex-col absolute left-0 top-20 bg-white gap-5 text-nowrap transition-all duration-300 ease-in-out ${
               isMenuOpen
                 ? "translate-x-0 opacity-100"
                 : "-translate-x-full opacity-0 lg:opacity-100"
             }`}
           >
+            <div className="flex items-centers justify-center gap-2 my-2 lg:hidden">
+              <Button
+                label="Login"
+                onClick={handleLoginClick}
+              />
+              <Button label="Get Started" variant="secondary" className="px-2" onClick={handleSignUpClick} />
+            </div>
             {[
               { href: "/home", label: "Home" },
               { href: "/about", label: "About" },
@@ -134,7 +141,7 @@ const Header: React.FC = () => {
             ].map((item, i) => (
               <Link key={i} href={item.href}>
                 <div
-                  className={`lg:hover:text-primary lg:p-0 p-2 rounded-lg ${
+                  className={`lg:hover:text-primary lg:p-0 py-2 px-5 rounded-lg ${
                     pathname === item.href
                       ? "lg:text-primary lg:bg-opacity-0 lg:font-semibold text-darkBlue bg-orange-100" // Active style
                       : "text-gray-600 hover:text-gray-800"

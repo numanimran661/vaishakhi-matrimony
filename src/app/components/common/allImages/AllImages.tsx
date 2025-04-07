@@ -54,6 +54,13 @@ import ToastCheck from "@/assets/images/svg/toast-check.svg";
 import ToastCross from "@/assets/images/svg/toast-cross.svg";
 import EyeOpen from "@/assets/images/svg/eye-open.svg";
 import EyeClose from "@/assets/images/svg/eye-close.svg";
+import Xicon from "@/assets/images/svg/x-icon.svg";
+import Facebook from "@/assets/images/svg/facebook.svg";
+import Linkedin from "@/assets/images/svg/linkedin.svg";
+import Pinterest from "@/assets/images/svg/pinterest.svg";
+import Insta from "@/assets/images/svg/insta.svg";
+import Youtube from "@/assets/images/svg/youtube.svg";
+import RocketIcon from "@/assets/images/svg/rocket-svg.svg";
 
 import AppLogo from "../../../../../public/images/png/app-logo.png";
 import LogoDark from "../../../../../public/images/png/logo-dark.png";
@@ -155,6 +162,13 @@ export {
   ToastCross,
   CashfreeLogo,
   EyeOpen,
-  EyeClose
+  EyeClose,
+  Xicon,
+  Facebook,
+  Linkedin,
+  Pinterest,
+  Insta,
+  Youtube,
+  RocketIcon
 };
 
