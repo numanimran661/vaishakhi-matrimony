@@ -246,9 +246,10 @@ const TellUsMoreAboutYourself: React.FC = () => {
 
                     <Button
                       disabled={isSubmitting}
+                      className="md:w-auto w-full"
                       label={
                         step === steps.length && activeSubTab === 5
-                          ? "Submit"
+                          ? "Submit Info"
                           : "Continue"
                       }
                       type={

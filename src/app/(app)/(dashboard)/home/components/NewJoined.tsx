@@ -1,9 +1,11 @@
 "use client";
+import FeaturedProfileCard from "@/app/components/common/cards/FeaturedProfileCard";
 import ProfileCard from "@/app/components/common/cards/ProfileCard";
 import { showToast } from "@/app/components/ui/CustomToast";
 import { getNewUsers, sendInterest } from "@/app/lib/api/homeRoutes";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import Slider from "react-slick";
 
 // Define interface for the user data from API
 interface UserData {
@@ -42,10 +44,23 @@ interface ProfileCardProps {
 const NewJoined = () => {
   const [newUsers, setNewUsers] = useState<UserData[]>([]);
   const [suggestedUsers, setSuggestedUsers] = useState<UserData[]>([]);
+  const [featuredUsers, setFeaturedUsers] = useState<UserData[]>([]);
   const [recentlyViewedUsers, setRecentlyViewedUsers] = useState<UserData[]>(
     []
   );
   const [loading, setLoading] = useState<boolean>(true);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const sliderRef = useRef<Slider | null>(null);
+  const slickSettings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    autoplay: false,
+    beforeChange: (current: number, next: number) => setActiveSlide(next),
+  };
 
   const handleInterestSend = async (receiverId: string) => {
     const { status } = await sendInterest({ receiverId });
@@ -53,21 +68,27 @@ const NewJoined = () => {
       showToast("Interest Sent Successfully", "success");
       try {
         const { data } = await getNewUsers();
-  
+
         if (data?.newUsers && Array.isArray(data?.newUsers)) {
           const validUsers = data?.newUsers.filter((user: UserData) => true);
-          
+
           setNewUsers(validUsers.slice(0, 10));
-  
+
           setSuggestedUsers(validUsers.slice(5, 15));
-  
+
           const withRecentViews = validUsers.filter(
             (user: UserData) =>
               user.recentlyViewed && user.recentlyViewed.length > 0
           );
           setRecentlyViewedUsers(
-            withRecentViews.length > 0 ? withRecentViews : validUsers.slice(2, 12)
+            withRecentViews.length > 0
+              ? withRecentViews
+              : validUsers.slice(2, 12)
           );
+
+          if (validUsers.length > 0) {
+            setFeaturedUsers(validUsers.slice(0, 4));
+          }
         }
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -102,6 +123,9 @@ const NewJoined = () => {
         setRecentlyViewedUsers(
           withRecentViews.length > 0 ? withRecentViews : validUsers.slice(2, 12)
         );
+        if (validUsers.length > 0) {
+          setFeaturedUsers(validUsers.slice(0, 4));
+        }
       }
     } catch (error) {
       console.error("Error fetching user data:", error);
@@ -165,6 +189,32 @@ const NewJoined = () => {
 
   return (
     <main className="max-w-7xl mx-auto p-4">
+      {featuredUsers.length > 0 && (
+        <div className="mt-4 mb-6 md:hidden">
+          <Slider ref={sliderRef} {...slickSettings}>
+            {featuredUsers.map((user) => (
+              <div key={user._id} className="px-2">
+                <FeaturedProfileCard {...formatUserForCard(user)} />
+              </div>
+            ))}
+          </Slider>
+
+          {/* Custom Pagination Dots */}
+          <div className="flex justify-center mt-2">
+            {featuredUsers.map((_, index) => (
+              <div
+                key={index}
+                className={`h-1.5 rounded-full mx-0.5 cursor-pointer ${
+                  activeSlide === index
+                    ? "bg-orange-500 w-4"
+                    : "bg-orange-300 w-1.5"
+                }`}
+                onClick={() => sliderRef.current?.slickGoTo(index)}
+              />
+            ))}
+          </div>
+        </div>
+      )}
       {recentlyViewedUsers.length > 0 && (
         <section className="mb-8">
           <div className="flex justify-between items-center">

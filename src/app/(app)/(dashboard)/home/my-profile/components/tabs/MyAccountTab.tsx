@@ -138,7 +138,7 @@ const MyAccountTab: React.FC<ProfilePanelProps> = ({
               <Button
                 type="submit"
                 label={isSubmitting ? "Saving..." : "Save Changes"}
-                className="mt-5"
+                className="mt-5 md:w-auto w-full"
               />
 
               <h3 className="text-lg font-semibold mt-6 text-darkBlue">
@@ -147,7 +147,7 @@ const MyAccountTab: React.FC<ProfilePanelProps> = ({
               <Button
                 label={loading ? "Deleting..." : "Delete Account"}
                 variant="secondary"
-                className="mt-2 border border-red-500 text-red-500"
+                className="mt-2 border border-red-500 text-red-500 md:w-auto w-full"
                 onClick={() => setIsModalOpen(true)}
               />
             </Form>

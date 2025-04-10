@@ -75,16 +75,16 @@ const ContactPage: React.FC = () => {
                   label="Name"
                   name="name"
                   type="text"
-                  placeholder="Your Name"
+                  placeholder="John Paul"
                   error={errors.name}
                   touched={touched.name}
                 />
                 <Field
                   as={InputField}
-                  label="Email Address"
+                  label="Email"
                   name="email"
                   type="email"
-                  placeholder="Your Email"
+                  placeholder="example@gmail.com"
                   error={errors.email}
                   touched={touched.email}
                 />
@@ -93,17 +93,17 @@ const ContactPage: React.FC = () => {
                   label="Phone"
                   name="phone"
                   type="text"
-                  placeholder="Your Phone Number"
+                  placeholder="(123) 456 - 789"
                   error={errors.phone}
                   touched={touched.phone}
                 />
               </div>
               <Field
                 as={InputField}
-                label="Message"
+                label="Leave us a Message"
                 name="message"
                 type="textarea"
-                placeholder="Your Message"
+                placeholder="Please type your message here"
                 className="mt-4"
                 error={errors.message}
                 touched={touched.message}

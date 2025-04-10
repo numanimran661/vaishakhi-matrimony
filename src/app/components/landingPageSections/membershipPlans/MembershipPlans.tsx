@@ -43,7 +43,9 @@ const PricingPlans: React.FC = () => {
   const { user } = useAuth();
   const router = useRouter();
   const [plans, setPlans] = useState<Plan[]>([]);
+  const [filteredPlans, setFilteredPlans] = useState<Plan[]>([]);
   const [isUpgrade, setIsUpgrade] = useState<boolean>(false);
+  const [isAnual, setIsAnual] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchPlans = async () => {
@@ -76,6 +78,7 @@ const PricingPlans: React.FC = () => {
             })
           );
           setPlans(formattedPlans);
+          setFilteredPlans(formattedPlans)
         }
       } catch (error) {
         console.error("Failed to fetch plans:", error);
@@ -89,6 +92,7 @@ const PricingPlans: React.FC = () => {
       plans?.length > 0
         ? plans.find((plan) => plan?.id === user?.membership)
         : {};
+      localStorage.setItem("currentPlan", JSON.stringify(currentPlan))
     return (
       <section className="md:px-0 max-w-full w-full sm:max-w-[707px] mx-auto my-6 sm:my-12">
         <div className="rounded-3xl sm:border-[0.5px] sm:border-gray px-4 sm:px-10 py-6 sm:py-10">
@@ -103,7 +107,7 @@ const PricingPlans: React.FC = () => {
 
             {/* Plan Details */}
             <div className="mt-6 pb-6 border-b border-gray-200">
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between flex-wrap gap-4 items-center">
                 <div>
                   <h3 className="text-[18px] font-bold text-[#1C264E]">
                     {currentPlan?.title}
@@ -187,12 +191,24 @@ const PricingPlans: React.FC = () => {
         </h2>
 
         <div className="flex justify-center gap-2 mt-6">
-          <Button label="Monthly Plan" />
-          <Button label="Annual Plan" variant="secondary" />
+          <Button label="Monthly Plan" variant={isAnual ? "secondary" : "primary"} onClick={() => {
+            setIsAnual(false)
+            setFilteredPlans(plans.filter(plan => {
+            const numbers = plan?.description.match(/\d+/g);
+            const hasTwelveOrMore = numbers?.some(num => parseInt(num) < 12);
+            return hasTwelveOrMore
+          }))}} />
+          <Button label="Annual Plan" variant={!isAnual ? "secondary" : "primary"} onClick={() => {
+            setIsAnual(true)
+            setFilteredPlans(plans.filter(plan => {
+            const numbers = plan?.description.match(/\d+/g);
+            const hasTwelveOrMore = numbers?.some(num => parseInt(num) >= 12);
+            return hasTwelveOrMore
+          }))}} />
         </div>
 
         <div className="flex lg:flex-nowrap flex-wrap justify-center mt-12">
-          {plans.map((plan, index) => (
+          {filteredPlans.length > 0 ? filteredPlans.map((plan, index) => (
             <div
               key={index}
               className={`${plan.bgColor} rounded-2xl text-left border border-gray w-full sm:w-1/3 md:mx-4 mx-0 my-4 px-6 py-8 `}
@@ -226,7 +242,11 @@ const PricingPlans: React.FC = () => {
                 }}
               />
             </div>
-          ))}
+          )) : (
+            <div>
+              <span className="text-xl">No Plans found!</span>
+            </div>
+          )}
         </div>
       </div>
     </section>

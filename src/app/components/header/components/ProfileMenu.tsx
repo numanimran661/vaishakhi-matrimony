@@ -23,6 +23,8 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ isOpen, onClose }) => {
   const router = useRouter();
   const pathname = usePathname();
   const { logoutInternal, user } = useAuth();
+  const currentPlanJson = localStorage.getItem("currentPlan");
+  const currentPlan = currentPlanJson ? JSON.parse(currentPlanJson) : {};
 
   const handleLogout = async () => {
     try {
@@ -44,7 +46,7 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ isOpen, onClose }) => {
     >
       <div className="flex flex-col justify-between">
         <div>
-          <div className="p-4 flex items-center justify-between md:flex-col md:items-start mb-2 border-b border-gray mt-3">
+          <div className="p-4 flex justify-between flex-col items-start gap-3 mb-2 border-b border-gray mt-3">
             <div className="flex items-center md:gap-3 gap-1">
               <ProfileImage
                 src={
@@ -71,7 +73,7 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ isOpen, onClose }) => {
                 </div>
               </div>
             </div>
-            {!user?.isPaid && (
+            {!user?.isPaid ? (
               <Button
                 label="Upgrade Now"
                 variant="secondary"
@@ -79,6 +81,11 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ isOpen, onClose }) => {
                 size="sm"
                 onClick={() => router.push("/membership-plans")}
               />
+            ) : (
+              <div className="w-full flex justify-between items-center border border-primary rounded-full lg:rounded-xl py-3 px-4 bg-orange-50">
+                <span className="font-semibold">{currentPlan?.title}</span>
+                <Button label="In use" size="sm" />
+              </div>
             )}
           </div>
 

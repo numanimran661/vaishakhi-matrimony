@@ -42,7 +42,7 @@ const CriteriaPanel: React.FC<CriteriaPanelProps> = ({ formData, handleFormSubmi
           <Button
             type="submit"
             label={isSubmitting ? "Saving..." : "Save Changes"}
-            className="mt-5"
+            className="mt-5 md:w-auto w-full"
           />
         </Form>
       )}
