@@ -25,7 +25,7 @@ const Header: React.FC = () => {
   // const user = localStorage.getItem("user");
   // const userObj = user ? JSON.parse(user) : null;
 
-  const {user} = useAuth()
+  const { user } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
   const notificationsRef = useRef<HTMLDivElement>(null);
@@ -125,13 +125,17 @@ const Header: React.FC = () => {
                 : "-translate-x-full opacity-0 lg:opacity-100"
             }`}
           >
-            <div className="flex items-centers justify-center gap-2 my-2 lg:hidden">
-              <Button
-                label="Login"
-                onClick={handleLoginClick}
-              />
-              <Button label="Get Started" variant="secondary" className="px-2" onClick={handleSignUpClick} />
-            </div>
+            {!token && (
+              <div className="flex items-centers justify-center gap-2 my-2 lg:hidden">
+                <Button label="Login" onClick={handleLoginClick} />
+                <Button
+                  label="Get Started"
+                  variant="secondary"
+                  className="px-2"
+                  onClick={handleSignUpClick}
+                />
+              </div>
+            )}
             {[
               { href: "/home", label: "Home" },
               { href: "/about", label: "About" },
@@ -197,8 +201,7 @@ const Header: React.FC = () => {
                   >
                     <ProfileImage
                       src={
-                        Array.isArray(user?.userImages) &&
-                        user?.userImages[0]
+                        Array.isArray(user?.userImages) && user?.userImages[0]
                           ? user?.userImages[0]
                           : user?.gender === "male"
                           ? MalePlaceholder.src

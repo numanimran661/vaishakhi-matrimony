@@ -341,7 +341,7 @@ function EducationInfo({ values, handleChange, errors, touched }: SubTabProps) {
   return (
     <div>
       <h3 className="text-lg font-semibold mb-4">Education Info</h3>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid md:grid-cols-2 grid-cols-1 gap-4">
         {/* Education Radio Buttons */}
         <Field
           as={SelectField}

@@ -19,26 +19,44 @@ const BasicPanel: React.FC<BasicPanelProps> = ({
   formData,
   handleFormSubmit,
 }) => {
+  console.log(formData);
+
   // Generate validation schema dynamically based on form fields
   const validationSchema = Yup.object().shape(
     basicPanelFormFields.reduce((schema, field) => {
-      schema[field.name] = Yup.string().required(`${field.label} is required`);
       if (field.isRange) {
+        schema[`${field.name}From`] = Yup.string().required(
+          `${field.label} From is required`
+        );
         schema[`${field.name}To`] = Yup.string().required(
           `${field.label} To is required`
+        );
+      } else {
+        schema[field.name] = Yup.string().required(
+          `${field.label} is required`
         );
       }
       return schema;
     }, {} as Record<string, Yup.StringSchema>)
   );
   console.log(validationSchema);
-  
 
   return (
     <Formik
       initialValues={{
+        // ...basicPanelFormFields.reduce((acc, item) => {
+        //   acc[item.name] = formData?.[item.name] || "";
+        //   return acc;
+        // }, {} as ProfileFormData),
         ...basicPanelFormFields.reduce((acc, item) => {
-          acc[item.name] = formData?.[item.name] || "";
+          if (item.isRange) {
+            acc[`${item.name}From`] = formData?.[`${item.name}From`] || "";
+            acc[`${item.name}To`] = formData?.[`${item.name}To`] || "";
+          } else {
+            acc[item.name] = formData?.[item.name] || "";
+          }
+          console.log(acc);
+
           return acc;
         }, {} as ProfileFormData),
       }}
@@ -55,16 +73,27 @@ const BasicPanel: React.FC<BasicPanelProps> = ({
                   item.isRange ? "grid grid-cols-2 gap-2 items-end" : ""
                 }
               >
-                {/* Main Select Field */}
                 <Field
                   as={SelectField}
                   label={item.label}
                   name={item.isRange ? `${item.name}From` : item.name}
-                  value={values[item.name]}
+                  value={
+                    item.isRange
+                      ? values[`${item.name}From`]
+                      : values[item.name]
+                  }
                   onChange={handleChange}
                   options={item.options}
-                  error={errors[item.name]}
-                  touched={touched[item.name]}
+                  error={
+                    item.isRange
+                      ? errors[`${item.name}From`]
+                      : errors[item.name]
+                  }
+                  touched={
+                    item.isRange
+                      ? touched[`${item.name}From`]
+                      : touched[item.name]
+                  }
                   className="w-full"
                 />
 

@@ -690,7 +690,7 @@ const ProfileDetail = ({ params }: any) => {
           {/* Contact Details */}
           <div className="border-b border-gray pb-4">
             <h3 className="font-bold text-lg">Contact Details</h3>
-            <ul className="text-sm text-gray-600 space-y-1 mt-2 grid grid-cols-2 gap-5">
+            <ul className="text-sm text-gray-600 space-y-1 mt-2 grid md:grid-cols-2 grid-cols-1 gap-5">
               <li>
                 <span className="text-normal mb-1">Phone Number:</span>{" "}
                 <span
@@ -719,7 +719,7 @@ const ProfileDetail = ({ params }: any) => {
           {/* Education & Career */}
           <div className="border-b border-gray pb-4">
             <h3 className="font-bold text-lg">Education & Career</h3>
-            <ul className="text-sm text-gray-600 space-y-1 mt-2 grid grid-cols-2 gap-5">
+            <ul className="text-sm text-gray-600 space-y-1 mt-2 grid md:grid-cols-2 grid-cols-1 gap-5">
               <li>
                 <span className="text-normal mb-1">Highest Degree:</span>{" "}
                 {userDetails?.highestDegree || "N/A"}
@@ -738,7 +738,7 @@ const ProfileDetail = ({ params }: any) => {
           {/* Partner Expectation */}
           <div className="border-b border-gray pb-4">
             <h3 className="font-bold text-lg">Partner Expectation</h3>
-            <ul className="text-sm text-gray-600 space-y-1 mt-2 grid grid-cols-2 gap-5">
+            <ul className="text-sm text-gray-600 space-y-1 mt-2 grid md:grid-cols-2 grid-cols-1 gap-5">
               <li>
                 <span className="text-normal mb-1">Marital Expectation:</span>{" "}
                 {userDetails?.lookingFor || "N/A"}

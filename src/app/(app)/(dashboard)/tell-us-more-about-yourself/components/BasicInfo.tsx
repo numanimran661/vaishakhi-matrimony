@@ -31,7 +31,7 @@ const BasicInfoForm: React.FC<PersonalDetailsProps> = ({
         name="fullName"
         value={values.fullName}
         placeholder="Full Name"
-        className="w-full sm:w-[47%]"
+        className="w-full sm:w-[47%] mt-4"
         error={errors.fullName}
         touched={touched.fullName}
       />

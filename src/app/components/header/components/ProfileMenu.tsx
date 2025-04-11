@@ -81,7 +81,7 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ isOpen, onClose }) => {
                 size="sm"
                 onClick={() => router.push("/membership-plans")}
               />
-            ) : (
+            ) : currentPlan && (
               <div className="w-full flex justify-between items-center border border-primary rounded-full lg:rounded-xl py-3 px-4 bg-orange-50">
                 <span className="font-semibold">{currentPlan?.title}</span>
                 <Button label="In use" size="sm" />

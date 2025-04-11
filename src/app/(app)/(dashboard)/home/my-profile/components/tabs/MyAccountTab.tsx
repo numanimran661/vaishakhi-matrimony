@@ -33,7 +33,7 @@ const MyAccountTab: React.FC<ProfilePanelProps> = ({
   handleDeleteImage,
   handleFormSubmit,
 }) => {
-  const { logoutInternal } = useAuth();
+  const { logoutInternal, user } = useAuth();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -109,6 +109,12 @@ const MyAccountTab: React.FC<ProfilePanelProps> = ({
 
               <h3 className="text-lg font-semibold mb-6">Account Info</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <InputField
+                  label="Profile ID"
+                  name="profile_id"
+                  disabled
+                  value={user._id}
+                />
                 <Field
                   as={InputField}
                   label="Full Name"

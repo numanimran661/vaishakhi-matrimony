@@ -21,21 +21,24 @@ const ReligionPanel: React.FC<ReligionPanelProps> = ({
   handleFormSubmit,
 }) => {
   // Generate validation schema dynamically based on form fields
-  const validationSchema = Yup.object().shape(
-    religionFormFields.reduce((schema, field) => {
+  const validationSchema = Yup.object({
+    ...religionFormFields.reduce((schema, field) => {
       schema[field.name] = Yup.string().required(`${field.label} is required`);
       return schema;
-    }, {} as Record<string, Yup.StringSchema>)
-  );
+    }, {} as Record<string, Yup.StringSchema>),
+    birthTime: Yup.string().required("Birth Time is required"),
+  });
+  const initialValues: ProfileFormData = {
+    ...religionFormFields.reduce((acc, item) => {
+      acc[item.name] = formData?.[item.name] || "";
+      return acc;
+    }, {} as Record<string, string>),
+    birthTime: formData?.birthTime || "",
+  };
 
   return (
     <Formik
-      initialValues={{
-        ...religionFormFields.reduce((acc, item) => {
-          acc[item.name] = formData?.[item.name] || "";
-          return acc;
-        }, {} as ProfileFormData),
-      }}
+      initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={handleFormSubmit}
     >

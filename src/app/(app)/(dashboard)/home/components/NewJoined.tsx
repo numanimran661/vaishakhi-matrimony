@@ -48,6 +48,9 @@ const NewJoined = () => {
   const [recentlyViewedUsers, setRecentlyViewedUsers] = useState<UserData[]>(
     []
   );
+  const [showAllNewUsers, setShowAllNewUsers] = useState(false);
+  const [showAllSuggestedUsers, setShowAllSuggestedUsers] = useState(false);
+  const [showAllRecentlyViewed, setShowAllRecentlyViewed] = useState(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [activeSlide, setActiveSlide] = useState(0);
   const sliderRef = useRef<Slider | null>(null);
@@ -219,12 +222,20 @@ const NewJoined = () => {
         <section className="mb-8">
           <div className="flex justify-between items-center">
             <h2 className="text-xl font-bold">Recently Viewed</h2>
-            <Link href="#">
-              <span className="text-orange-500 font-semibold">See All</span>
-            </Link>
+            {recentlyViewedUsers.length > 5 && (
+              <button
+                onClick={() => setShowAllRecentlyViewed(!showAllRecentlyViewed)}
+                className="text-orange-500 font-semibold"
+              >
+                {showAllRecentlyViewed ? "Show Less" : "See All"}
+              </button>
+            )}
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 mt-4">
-            {recentlyViewedUsers.map((user) => (
+            {(showAllRecentlyViewed
+              ? recentlyViewedUsers
+              : recentlyViewedUsers.slice(0, 5)
+            ).map((user) => (
               <ProfileCard key={user._id} {...formatUserForCard(user)} />
             ))}
           </div>
@@ -235,12 +246,20 @@ const NewJoined = () => {
         <section className="mb-8">
           <div className="flex justify-between items-center">
             <h2 className="text-xl font-bold">Suggested For You</h2>
-            <Link href="#">
-              <span className="text-orange-500 font-semibold">See All</span>
-            </Link>
+            {suggestedUsers.length > 5 && (
+              <button
+                onClick={() => setShowAllSuggestedUsers(!showAllSuggestedUsers)}
+                className="text-orange-500 font-semibold"
+              >
+                {showAllSuggestedUsers ? "Show Less" : "See All"}
+              </button>
+            )}
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 mt-4">
-            {suggestedUsers.map((user) => (
+            {(showAllSuggestedUsers
+              ? suggestedUsers
+              : suggestedUsers.slice(0, 5)
+            ).map((user) => (
               <ProfileCard key={user._id} {...formatUserForCard(user)} />
             ))}
           </div>
@@ -251,12 +270,17 @@ const NewJoined = () => {
         <section className="mb-8">
           <div className="flex justify-between items-center">
             <h2 className="text-xl font-bold">New Joined</h2>
-            <Link href="#">
-              <span className="text-orange-500 font-semibold">See All</span>
-            </Link>
+            {newUsers.length > 5 && (
+              <button
+                onClick={() => setShowAllNewUsers(!showAllNewUsers)}
+                className="text-orange-500 font-semibold"
+              >
+                {showAllNewUsers ? "Show Less" : "See All"}
+              </button>
+            )}
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 mt-4">
-            {newUsers.map((user) => (
+            {(showAllNewUsers ? newUsers : newUsers.slice(0, 5)).map((user) => (
               <ProfileCard key={user._id} {...formatUserForCard(user)} />
             ))}
           </div>
