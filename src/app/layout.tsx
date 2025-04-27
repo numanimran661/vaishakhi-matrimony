@@ -16,6 +16,7 @@ export default function RootLayout({
 }) {
   const pathname = usePathname();
   const isAuthRoute = pathname?.startsWith("/auth");
+  const isMobile = window.innerWidth < 768;
   return (
     <html lang="en">
       <Head>
@@ -30,7 +31,7 @@ export default function RootLayout({
             {!isAuthRoute && <Footer />}
 
             <div id="modal-root"></div>
-            <Toaster position="top-right" reverseOrder={false} />
+            <Toaster position={isMobile ? "bottom-center" : "top-right"} reverseOrder={false} />
           </SessionProvider>
         </AuthProvider>
       </body>

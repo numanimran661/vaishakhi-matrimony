@@ -10,6 +10,7 @@ import BasicInfoTab from "./components/tabs/BasicInfoTab";
 import MyAccountTab from "./components/tabs/MyAccountTab";
 import { mainTabs } from "@/constants/formConstants";
 import {
+  getAllDropdownsData,
   getUserProfile,
   updateUserProfile,
   uploadFile,
@@ -25,6 +26,7 @@ const ProfilePage = () => {
   const [formData, setFormData] = useState<FormData>({});
   const [uploadedImages, setUploadedImages] = useState<string | null>(null);
   const [images, setImages] = useState<File | null>(null);
+  const [dropdowns, setDropdowns] = useState({});
 
   const handleChange = (name: string, value: string) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -94,6 +96,24 @@ const ProfilePage = () => {
   useEffect(() => {
     getUsersProfile();
   }, []);
+  const getAllDropdowns = async () => {
+      try {
+        const response = await getAllDropdownsData();
+        if (response.status === 200 && response?.data) {
+          let updatedData: any = {};
+          for (const key in response?.data) {
+            updatedData[key] = response?.data[key].map((item: any) => ({
+              ...item,
+              label: item.value,
+            }));
+          }
+          setDropdowns(updatedData);
+        }
+      } catch (error) {}
+    };
+    useEffect(() => {
+      getAllDropdowns();
+    }, []);
 
   return (
     <div className="max-w-7xl mx-auto py-6 px-4">
@@ -153,6 +173,7 @@ const ProfilePage = () => {
                     handleDeleteImage={handleDeleteImage}
                     handleImageUpload={handleImageUpload}
                     handleFormSubmit={handleSubmit}
+                    options={dropdowns}
                   />
                 )}
                 {selectedMainTab === 1 && (
@@ -162,6 +183,7 @@ const ProfilePage = () => {
                     formData={formData}
                     handleChange={handleChange}
                     handleFormSubmit={handleSubmit}
+                    options={dropdowns}
                   />
                 )}
                 {selectedMainTab === 2 && (
@@ -171,6 +193,7 @@ const ProfilePage = () => {
                     formData={formData}
                     handleChange={handleChange}
                     handleFormSubmit={handleSubmit}
+                    options={dropdowns}
                   />
                 )}
               </TabPanels>

@@ -34,6 +34,7 @@ interface ProfileCardProps {
   name: string;
   age: string;
   height: string;
+  gender?: string;
   occupation: string;
   sentInterests: string[];
   location: string;
@@ -154,6 +155,7 @@ const NewJoined = () => {
       height: user.height || "Not specified",
       occupation: user.occupation || "Not specified",
       sentInterests: user.sentInterests,
+      gender: user.gender,
       location:
         user.city ||
         (user.FamilyDetails && user.FamilyDetails.city) ||

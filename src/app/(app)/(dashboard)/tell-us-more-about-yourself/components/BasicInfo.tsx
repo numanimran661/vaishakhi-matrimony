@@ -10,6 +10,7 @@ interface PersonalDetailsProps {
   handleChange: (e: React.ChangeEvent<any>) => void;
   errors: any;
   touched: any;
+  options: any;
 }
 
 const BasicInfoForm: React.FC<PersonalDetailsProps> = ({
@@ -17,6 +18,7 @@ const BasicInfoForm: React.FC<PersonalDetailsProps> = ({
   handleChange,
   errors,
   touched,
+  options
 }) => {
   console.log(values);
   
@@ -53,7 +55,7 @@ const BasicInfoForm: React.FC<PersonalDetailsProps> = ({
           name={fieldData.name}
           value={values[fieldData.name]}
           // onChange={handleChange}
-          options={fieldData.options}
+          options={options[fieldData.label] || fieldData.options}
           className="w-full sm:w-[47%]"
           error={errors[fieldData.name]}
           touched={touched[fieldData.name]}

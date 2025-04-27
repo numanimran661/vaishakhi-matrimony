@@ -13,11 +13,13 @@ interface ProfileFormData {
 interface BasicPanelProps {
   formData: Record<string, string>; // Flexible type to avoid TS errors
   handleFormSubmit: (values: Record<string, string>) => void;
+  options: any;
 }
 
 const BasicPanel: React.FC<BasicPanelProps> = ({
   formData,
   handleFormSubmit,
+  options
 }) => {
   console.log(formData);
 
@@ -83,7 +85,7 @@ const BasicPanel: React.FC<BasicPanelProps> = ({
                       : values[item.name]
                   }
                   onChange={handleChange}
-                  options={item.options}
+                  options={options[item.label] || item.options}
                   error={
                     item.isRange
                       ? errors[`${item.name}From`]

@@ -17,6 +17,7 @@ interface UserData {
   occupation?: string;
   city?: string;
   createdAt: string;
+  gender: string;
   sentInterests: string[];
   userImages?: string[];
   recentlyViewed?: string[];
@@ -32,6 +33,7 @@ interface ProfileCardProps {
   occupation: string;
   sentInterests: string[];
   location: string;
+  gender: string;
   image?: string;
   handleInterestSend: (id: string) => void;
 }
@@ -123,6 +125,7 @@ const NearestMe = () => {
       occupation: user.occupation || "Not specified",
       sentInterests: user.sentInterests,
       location: user.city || "Not specified",
+      gender: user?.gender,
       image: user.userImages?.[0],
       handleInterestSend,
     };

@@ -6,7 +6,7 @@ import {
 } from "@/app/components/common/allImages/AllImages";
 import Button from "@/app/components/common/buttons/Button";
 import { Formik, useFormik } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BasicInfoForm from "./components/BasicInfo";
 import PersonalDetailForm from "./components/PersonalDetailForm";
 import PartnerPreferences from "./components/PartnerPreferencesForm";
@@ -15,6 +15,7 @@ import { completeProfile } from "@/app/lib/api/authRoutes";
 import { showToast } from "@/app/components/ui/CustomToast";
 import { useRouter } from "next/navigation";
 import { completeProfileValidation } from "@/constants/validationSchemas";
+import { getAllDropdownsData } from "@/app/lib/api/profileRoutes";
 
 const initialValues: InitialValuesProps = {
   gender: "",
@@ -80,6 +81,7 @@ const TellUsMoreAboutYourself: React.FC = () => {
   const router = useRouter();
   const [step, setStep] = useState(1);
   const [activeSubTab, setSubActiveTab] = useState(1);
+  const [dropdowns, setDropdowns] = useState({});
   const { handleChange, handleSubmit } = useFormik({
     initialValues,
     onSubmit: (value, action) => {
@@ -110,6 +112,25 @@ const TellUsMoreAboutYourself: React.FC = () => {
     if (step === steps.length && activeSubTab > 1)
       setSubActiveTab(activeSubTab - 1);
   };
+
+  const getAllDropdowns = async () => {
+    try {
+      const response = await getAllDropdownsData();
+      if (response.status === 200 && response?.data) {
+        let updatedData: any = {};
+        for (const key in response?.data) {
+          updatedData[key] = response?.data[key].map((item: any) => ({
+            ...item,
+            label: item.value,
+          }));
+        }
+        setDropdowns(updatedData);
+      }
+    } catch (error) {}
+  };
+  useEffect(() => {
+    getAllDropdowns();
+  }, []);
 
   return (
     <section className="size-full mt-16">
@@ -184,7 +205,10 @@ const TellUsMoreAboutYourself: React.FC = () => {
                       "Congratulation! Your profile is completed successfully.",
                       "success"
                     );
-                    localStorage.setItem("user", JSON.stringify(response?.data?.user));
+                    localStorage.setItem(
+                      "user",
+                      JSON.stringify(response?.data?.user)
+                    );
                     router.push("/home");
                   } else {
                     showToast(
@@ -209,6 +233,7 @@ const TellUsMoreAboutYourself: React.FC = () => {
                       handleChange={handleInputChange}
                       errors={errors}
                       touched={touched}
+                      options={dropdowns}
                     />
                   )}
 
@@ -218,6 +243,7 @@ const TellUsMoreAboutYourself: React.FC = () => {
                       handleChange={handleInputChange}
                       errors={errors}
                       touched={touched}
+                      options={dropdowns}
                     />
                   )}
                   {step === 3 && (
@@ -228,6 +254,7 @@ const TellUsMoreAboutYourself: React.FC = () => {
                       handleChange={handleInputChange}
                       errors={errors}
                       touched={touched}
+                      options={dropdowns}
                     />
                   )}
 

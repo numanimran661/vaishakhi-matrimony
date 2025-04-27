@@ -20,6 +20,7 @@ interface SubTabProps {
   handleChange: (e: React.ChangeEvent<any>) => void;
   errors: any;
   touched: any;
+  options: any;
 }
 interface PartnerPreferencesProps {
   values: any;
@@ -28,6 +29,7 @@ interface PartnerPreferencesProps {
   handleChange: (e: React.ChangeEvent<any>) => void;
   errors: any;
   touched: any;
+  options: any;
 }
 
 const PartnerPreferences: React.FC<PartnerPreferencesProps> = ({
@@ -37,6 +39,7 @@ const PartnerPreferences: React.FC<PartnerPreferencesProps> = ({
   touched,
   activeTab,
   setActiveTab,
+  options
 }) => {
   
   return (
@@ -77,6 +80,7 @@ const PartnerPreferences: React.FC<PartnerPreferencesProps> = ({
             handleChange={handleChange}
             errors={errors}
             touched={touched}
+            options={options}
           />
         )}
         {activeTab === 2 && (
@@ -85,6 +89,7 @@ const PartnerPreferences: React.FC<PartnerPreferencesProps> = ({
             handleChange={handleChange}
             errors={errors}
             touched={touched}
+            options={options}
           />
         )}
         {activeTab === 3 && (
@@ -93,6 +98,7 @@ const PartnerPreferences: React.FC<PartnerPreferencesProps> = ({
             handleChange={handleChange}
             errors={errors}
             touched={touched}
+            options={options}
           />
         )}
         {activeTab === 4 && (
@@ -101,6 +107,7 @@ const PartnerPreferences: React.FC<PartnerPreferencesProps> = ({
             handleChange={handleChange}
             errors={errors}
             touched={touched}
+            options={options}
           />
         )}
         {activeTab === 5 && (
@@ -109,6 +116,7 @@ const PartnerPreferences: React.FC<PartnerPreferencesProps> = ({
             handleChange={handleChange}
             errors={errors}
             touched={touched}
+            options={options}
           />
         )}
       </div>
@@ -117,7 +125,7 @@ const PartnerPreferences: React.FC<PartnerPreferencesProps> = ({
 };
 export default PartnerPreferences;
 
-function BasicInfo({ values, handleChange, errors, touched }: SubTabProps) {
+function BasicInfo({ values, handleChange, errors, touched, options }: SubTabProps) {
   return (
     <div>
       <h3 className="text-lg font-semibold mb-4">Basic Info</h3>
@@ -172,7 +180,7 @@ function BasicInfo({ values, handleChange, errors, touched }: SubTabProps) {
   );
 }
 
-function ReligionInfo({ values, handleChange, errors, touched }: SubTabProps) {
+function ReligionInfo({ values, handleChange, errors, touched, options }: SubTabProps) {
   const { setFieldValue } = useFormikContext();
   return (
     <div>
@@ -186,7 +194,7 @@ function ReligionInfo({ values, handleChange, errors, touched }: SubTabProps) {
           touched={touched?.horoscopeDetails?.religion}
           errors={errors?.horoscopeDetails?.religion}
           // onChange={(e) => handleChange(item.name, e.target.value)}
-          options={religionOptions}
+          options={options?.Religion}
           className="w-full"
         />
         {/* <div className="mt-4">
@@ -213,7 +221,7 @@ function ReligionInfo({ values, handleChange, errors, touched }: SubTabProps) {
           value={values?.horoscopeDetails?.caste}
           touched={touched?.horoscopeDetails?.caste}
           errors={errors?.horoscopeDetails?.caste}
-          options={castOptions}
+          options={options?.Caste}
           className="w-full"
         />
         <Field
@@ -280,7 +288,7 @@ function ReligionInfo({ values, handleChange, errors, touched }: SubTabProps) {
   );
 }
 
-function LocationInfo({ values, handleChange, errors, touched }: SubTabProps) {
+function LocationInfo({ values, handleChange, errors, touched, options }: SubTabProps) {
   const { setFieldValue } = useFormikContext();
   return (
     <div>
@@ -310,7 +318,7 @@ function LocationInfo({ values, handleChange, errors, touched }: SubTabProps) {
           name={"FamilyDetails.city"}
           value={values?.FamilyDetails?.city}
           // onChange={(e) => handleChange(item.name, e.target.value)}
-          options={cityOptions}
+          options={options?.City}
           className="w-full"
         />
         {/* <div className="mt-4">
@@ -335,7 +343,7 @@ function LocationInfo({ values, handleChange, errors, touched }: SubTabProps) {
   );
 }
 
-function EducationInfo({ values, handleChange, errors, touched }: SubTabProps) {
+function EducationInfo({ values, handleChange, errors, touched, options }: SubTabProps) {
   const { setFieldValue } = useFormikContext();
 
   return (
@@ -375,7 +383,7 @@ function EducationInfo({ values, handleChange, errors, touched }: SubTabProps) {
           label="Occupation"
           name="Education.occupation"
           value={values?.Education.occupation}
-          options={occupationOptions}
+          options={options?.Occupation}
           className="w-full"
         />
 
@@ -393,7 +401,7 @@ function EducationInfo({ values, handleChange, errors, touched }: SubTabProps) {
   );
 }
 
-function CriteriaInfo({ values, handleChange, errors, touched }: SubTabProps) {
+function CriteriaInfo({ values, handleChange, errors, touched, options }: SubTabProps) {
   return (
     <div>
       <h3 className="text-lg font-semibold mb-4">Criteria Info</h3>

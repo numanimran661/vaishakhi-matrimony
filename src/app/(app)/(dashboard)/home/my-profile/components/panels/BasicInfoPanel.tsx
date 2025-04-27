@@ -17,11 +17,13 @@ interface ProfileFormData {
 interface BasicPanelProps {
   formData: FormData;
   handleFormSubmit: (values: ProfileFormData) => void;
+  options: any;
 }
 
 const BasicInfoPanel: React.FC<BasicPanelProps> = ({
   formData,
   handleFormSubmit,
+  options
 }) => {
 
   return (
@@ -95,7 +97,7 @@ const BasicInfoPanel: React.FC<BasicPanelProps> = ({
                     name={item.name}
                     value={values[item.name]}
                     onChange={handleChange}
-                    options={item.options}
+                    options={options[item.label] || item.options}
                     error={errors[item.name]}
                     touched={touched[item.name]}
                     className="w-full"

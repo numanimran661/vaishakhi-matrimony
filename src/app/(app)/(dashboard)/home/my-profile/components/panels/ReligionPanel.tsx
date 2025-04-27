@@ -14,11 +14,13 @@ interface ProfileFormData {
 interface ReligionPanelProps {
   formData: Record<string, string>; // Flexible type to avoid TS errors
   handleFormSubmit: (values: Record<string, string>) => void;
+  options: any;
 }
 
 const ReligionPanel: React.FC<ReligionPanelProps> = ({
   formData,
   handleFormSubmit,
+  options
 }) => {
   // Generate validation schema dynamically based on form fields
   const validationSchema = Yup.object({
@@ -60,7 +62,7 @@ const ReligionPanel: React.FC<ReligionPanelProps> = ({
                   name={item.name}
                   value={values[item.name]}
                   onChange={handleChange}
-                  options={item.options}
+                  options={options[item.label] || item.options}
                   error={errors[item.name]}
                   touched={touched[item.name]}
                   className="w-full"

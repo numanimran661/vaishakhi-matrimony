@@ -65,3 +65,15 @@ export const uploadFile = async (formData: any) => {
     throw error;
   }
 };
+export const getAllDropdownsData = async () => {
+  try {
+    const response = await axiosInstance.get(`/user/get-all-dropdown-options`);
+
+    return response; // Return full response
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      return error.response;
+    }
+    throw error;
+  }
+};

@@ -9,6 +9,7 @@ interface PersonalDetailsProps {
   handleChange: (e: React.ChangeEvent<any>) => void;
   errors: any;
   touched: any;
+  options: any;
 }
 
 const PersonalDetailForm: React.FC<PersonalDetailsProps> = ({
@@ -16,6 +17,7 @@ const PersonalDetailForm: React.FC<PersonalDetailsProps> = ({
   handleChange,
   errors,
   touched,
+  options,
 }) => {
   return (
     <>
@@ -31,7 +33,11 @@ const PersonalDetailForm: React.FC<PersonalDetailsProps> = ({
           name={fieldData.name}
           value={values[fieldData.name]}
           // onChange={handleChange}
-          options={fieldData.options}
+          options={
+            options[fieldData.label] ||
+            (fieldData.name === "workLocation" && options?.City) ||
+            fieldData.options
+          }
           className="w-full sm:w-[47%]"
           error={errors[fieldData.name]}
           touched={touched[fieldData.name]}

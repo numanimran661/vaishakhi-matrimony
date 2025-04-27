@@ -13,23 +13,27 @@ interface ProfileFormData {
 interface PersonalPanelProps {
   formData: Record<string, string>; // Flexible type for formData
   handleFormSubmit: (values: Record<string, string>) => void;
+  options: any;
 }
 
 const PersonalPanel: React.FC<PersonalPanelProps> = ({
   formData,
   handleFormSubmit,
+  options,
 }) => {
   return (
     <Formik
       initialValues={{
-         ...personalPanelFields.reduce((acc, item) => {
+        ...personalPanelFields.reduce((acc, item) => {
           acc[item.name] = formData?.[item.name] || "";
           return acc;
         }, {} as ProfileFormData),
       }}
       validationSchema={Yup.object().shape(
         personalPanelFields.reduce((schema, field) => {
-          schema[field.name] = Yup.string().required(`${field.label} is required`);
+          schema[field.name] = Yup.string().required(
+            `${field.label} is required`
+          );
           return schema;
         }, {} as Record<string, Yup.StringSchema>)
       )}
@@ -46,7 +50,11 @@ const PersonalPanel: React.FC<PersonalPanelProps> = ({
                   name={item.name}
                   value={values[item.name]}
                   onChange={handleChange}
-                  options={item?.options}
+                  options={
+                    options[item.label] ||
+                    (item.name === "workLocation" && options?.City) ||
+                    item.options
+                  }
                   error={errors[item.name]}
                   touched={touched[item.name]}
                   className="w-full"
@@ -55,10 +63,10 @@ const PersonalPanel: React.FC<PersonalPanelProps> = ({
             ))}
           </div>
           <Button
-              type="submit"
-              label={isSubmitting ? "Saving..." : "Save Changes"}
-              className="mt-5 md:w-auto w-full"
-            />
+            type="submit"
+            label={isSubmitting ? "Saving..." : "Save Changes"}
+            className="mt-5 md:w-auto w-full"
+          />
         </Form>
       )}
     </Formik>

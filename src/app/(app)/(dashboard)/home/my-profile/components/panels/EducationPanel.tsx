@@ -14,11 +14,13 @@ interface ProfileFormData {
 interface EducationPanelProps {
   formData: Record<string, string>; // Prevents TypeScript index errors
   handleFormSubmit: (values: Record<string, string>) => void;
+  options: any;
 }
 
 const EducationPanel: React.FC<EducationPanelProps> = ({
   formData,
   handleFormSubmit,
+  options
 }) => {
   // Generate validation schema dynamically
   const validationSchema = Yup.object().shape(
@@ -50,7 +52,7 @@ const EducationPanel: React.FC<EducationPanelProps> = ({
                   name={item.name}
                   value={values[item.name]}
                   onChange={handleChange}
-                  options={item.options}
+                  options={options[item.label] || item.options}
                   error={errors[item.name]}
                   touched={touched[item.name]}
                   className="w-full"

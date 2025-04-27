@@ -23,6 +23,7 @@ interface ProfilePanelProps {
   handleImageUpload: (images: FileList | null) => void;
   handleDeleteImage: () => void;
   handleFormSubmit: (values: ProfileFormData) => void;
+  options: any;
 }
 
 const MyAccountTab: React.FC<ProfilePanelProps> = ({
@@ -32,6 +33,7 @@ const MyAccountTab: React.FC<ProfilePanelProps> = ({
   handleImageUpload,
   handleDeleteImage,
   handleFormSubmit,
+  options
 }) => {
   const { logoutInternal, user } = useAuth();
   const router = useRouter();

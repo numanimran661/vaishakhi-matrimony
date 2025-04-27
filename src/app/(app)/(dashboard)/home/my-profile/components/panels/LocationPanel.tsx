@@ -14,11 +14,13 @@ interface ProfileFormData {
 interface LocationPanelProps {
   formData: Record<string, string>; // Flexible type to avoid TypeScript errors
   handleFormSubmit: (values: Record<string, string>) => void;
+  options: any;
 }
 
 const LocationPanel: React.FC<LocationPanelProps> = ({
   formData,
   handleFormSubmit,
+  options
 }) => {
   // Generate validation schema dynamically
   const validationSchema = Yup.object().shape(
@@ -50,7 +52,7 @@ const LocationPanel: React.FC<LocationPanelProps> = ({
                   name={item.name}
                   value={values[item.name]}
                   onChange={handleChange}
-                  options={item.options}
+                  options={options[item.label] || item.options}
                   error={errors[item.name]}
                   touched={touched[item.name]}
                   className="w-full"

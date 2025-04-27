@@ -86,7 +86,7 @@ export const basicInfoFormFields = [
     name: "motherTongue",
     options: motherTongueOptions,
   },
-  { label: "Cast", name: "sect", options: castOptions },
+  { label: "Caste", name: "sect", options: castOptions },
   { label: "City", name: "city", options: cityOptions },
 ];
 export const personalPanelFields = [

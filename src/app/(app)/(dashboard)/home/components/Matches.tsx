@@ -36,6 +36,7 @@ interface ProfileCardProps {
   occupation: string;
   sentInterests: string[];
   location: string;
+  gender?: string;
   image?: string;
   handleInterestSend: (id: string) => void;
 }
@@ -148,6 +149,7 @@ const Matches = () => {
       height: user.height || "Not specified",
       occupation: user.occupation || "Not specified",
       sentInterests: user.sentInterests,
+      gender: user.gender,
       location:
         user.city ||
         (user.FamilyDetails && user.FamilyDetails.city) ||

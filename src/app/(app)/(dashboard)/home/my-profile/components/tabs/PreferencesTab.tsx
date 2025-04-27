@@ -18,6 +18,7 @@ interface PreferencesTabProps {
   formData: FormData;
   handleChange: (name: string, value: string) => void;
   handleFormSubmit: (values: ProfileFormData) => void;
+  options: any;
 }
 
 const PreferencesTab = ({
@@ -25,7 +26,8 @@ const PreferencesTab = ({
   setSelectedSubTab,
   formData,
   handleChange,
-  handleFormSubmit
+  handleFormSubmit,
+  options
 }: PreferencesTabProps) => {
   return (
     <TabGroup selectedIndex={selectedSubTab} onChange={setSelectedSubTab}>
@@ -34,16 +36,16 @@ const PreferencesTab = ({
       />
       <TabPanels className="mt-4">
         {selectedSubTab === 0 && (
-          <BasicPanel formData={formData} handleFormSubmit={handleFormSubmit} />
+          <BasicPanel formData={formData} handleFormSubmit={handleFormSubmit} options={options} />
         )}
         {selectedSubTab === 1 && (
-          <ReligionPanel formData={formData} handleFormSubmit={handleFormSubmit} />
+          <ReligionPanel formData={formData} handleFormSubmit={handleFormSubmit} options={options} />
         )}
         {selectedSubTab === 2 && (
-          <LocationPanel formData={formData} handleFormSubmit={handleFormSubmit} />
+          <LocationPanel formData={formData} handleFormSubmit={handleFormSubmit} options={options} />
         )}
         {selectedSubTab === 3 && (
-          <EducationPanel formData={formData} handleFormSubmit={handleFormSubmit} />
+          <EducationPanel formData={formData} handleFormSubmit={handleFormSubmit} options={options} />
         )}
         {selectedSubTab === 4 && (
           <CriteriaPanel formData={formData} handleFormSubmit={handleFormSubmit} />

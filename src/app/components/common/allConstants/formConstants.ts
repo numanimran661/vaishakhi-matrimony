@@ -34,7 +34,7 @@ export const selectFields: SelectFieldConstantsProps = [
       options: motherTongueOptions,
     },
     {
-      label: "Cast",
+      label: "Caste",
       name: "sect",
       options: castOptions,
     },
