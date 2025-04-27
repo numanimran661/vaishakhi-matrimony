@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   const pathname = usePathname();
   const isAuthRoute = pathname?.startsWith("/auth");
-  const isMobile = window.innerWidth < 768;
+  const isMobile = typeof window !== "undefined" ? window.innerWidth < 768 : false;
   return (
     <html lang="en">
       <Head>
