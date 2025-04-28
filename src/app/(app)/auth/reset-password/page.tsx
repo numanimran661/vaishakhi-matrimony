@@ -26,7 +26,7 @@ const ResetPassword: React.FC = () => {
           const response = await forgotPassword(values);
           if (response?.status === 200) {
             showToast("Reset Email sent successfully", "success");
-            router.push("/auth/reset-mail-sent");
+            // router.push("/auth/reset-mail-sent");
           } else {
             showToast("Something went wrong. Please try again.", "error");
           }
