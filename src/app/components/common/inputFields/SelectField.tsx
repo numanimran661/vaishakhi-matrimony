@@ -1,4 +1,5 @@
 import { SelectFieldProps } from "@/types/formTypes";
+import { ErrorMessage } from "formik";
 import React from "react";
 
 const SelectField: React.FC<SelectFieldProps> = ({
@@ -38,9 +39,10 @@ const SelectField: React.FC<SelectFieldProps> = ({
           </option>
         ))}
       </select>
-      {error && touched && (
+      <ErrorMessage name={name} component="div" className="text-red-500 text-sm" />
+      {/* {error && touched && (
         <div className="text-red-500 text-sm mt-1">{error}</div>
-      )}
+      )} */}
     </div>
   );
 };

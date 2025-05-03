@@ -7,6 +7,7 @@ import Button from "@/app/components/common/buttons/Button";
 import DatePicker from "@/app/components/common/inputFields/DatePicker";
 import SelectField from "@/app/components/common/inputFields/SelectField";
 import { religionFormFields } from "@/constants/formConstants";
+import TimePicker from "@/app/components/common/inputFields/TimePicker";
 
 interface ProfileFormData {
   [key: string]: any; // Allow dynamic keys
@@ -73,7 +74,7 @@ const ReligionPanel: React.FC<ReligionPanelProps> = ({
             {/* Birth Time Picker */}
             <div>
               <Field
-                as={DatePicker}
+                as={TimePicker}
                 label="Birth Time"
                 name="birthTime"
                 value={values.birthTime}

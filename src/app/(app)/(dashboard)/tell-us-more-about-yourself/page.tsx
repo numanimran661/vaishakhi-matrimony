@@ -77,6 +77,74 @@ const steps = [
   { id: 2, label: "Personal Details", Icon: personalInfo },
   { id: 3, label: "Partner Preferences", Icon: partnerPref },
 ];
+const getFieldsForStep = (step: number, subTab: number): string[] => {
+  switch (step) {
+    case 1:
+      return [
+        "fullName",
+        "gender",
+        "dateOfBirth",
+        "age",
+        "height",
+        "maritalStatus",
+        "religion",
+        "motherTongue",
+        "sect",
+        "city",
+      ];
+    case 2:
+      return [
+        "highestDegree",
+        "occupation",
+        "employedIn",
+        "annualIncome",
+        "workLocation",
+      ];
+    case 3:
+      switch (subTab) {
+        case 1:
+          return [
+            "ageFrom",
+            "ageTo",
+            "heightFrom",
+            "heightTo",
+            "lookingFor",
+            "physicalStatus",
+            "food",
+            "smoking",
+            "drinking",
+            "familyType",
+            "familyStatus",
+            "familyValue",
+            "fathersOccupation",
+          ];
+        case 2:
+          return [
+            "horoscopeDetails.religion",
+            "horoscopeDetails.caste",
+            "horoscopeDetails.motherTongue",
+            "horoscopeDetails.manglik",
+            "horoscopeDetails.star",
+            "horoscopeDetails.dosh",
+            "horoscopeDetails.birthPlace",
+            "horoscopeDetails.birthTime",];
+        case 3:
+          return [
+            "FamilyDetails.state",
+            "FamilyDetails.city",
+          ];
+        case 4:
+          return [
+            "Education.education",
+            "Education.occupation",
+            "Education.income",
+          ];
+        case 5:
+          return ["partnerExpectation"];
+      }
+  }
+  return [];
+};
 const TellUsMoreAboutYourself: React.FC = () => {
   const router = useRouter();
   const [step, setStep] = useState(1);
@@ -88,30 +156,30 @@ const TellUsMoreAboutYourself: React.FC = () => {
       console.log(value);
     },
   });
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    handleChange(e);
-  };
+  // const handleInputChange = (
+  //   e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  // ) => {
+  //   handleChange(e);
+  // };
 
-  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    handleChange(e);
-  };
+  // const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  //   handleChange(e);
+  // };
 
-  const nextStep = () => {
-    if (step < steps.length) setStep(step + 1);
+  // const nextStep = () => {
+  //   if (step < steps.length) setStep(step + 1);
 
-    if (step === steps.length && activeSubTab < 5)
-      setSubActiveTab(activeSubTab + 1);
-  };
+  //   if (step === steps.length && activeSubTab < 5)
+  //     setSubActiveTab(activeSubTab + 1);
+  // };
 
-  const prevStep = () => {
-    // if (step > 1) setStep(step - 1);
-    if (step > 1 && activeSubTab <= 1) setStep(step - 1);
+  // const prevStep = () => {
+  //   // if (step > 1) setStep(step - 1);
+  //   if (step > 1 && activeSubTab <= 1) setStep(step - 1);
 
-    if (step === steps.length && activeSubTab > 1)
-      setSubActiveTab(activeSubTab - 1);
-  };
+  //   if (step === steps.length && activeSubTab > 1)
+  //     setSubActiveTab(activeSubTab - 1);
+  // };
 
   const getAllDropdowns = async () => {
     try {
@@ -222,77 +290,139 @@ const TellUsMoreAboutYourself: React.FC = () => {
                 }
               }}
             >
-              {({ isSubmitting, values, errors, touched, handleSubmit }) => (
-                <form
-                  onSubmit={handleSubmit}
-                  className="flex flex-wrap gap-y-6 gap-x-8 md:pb-20 relative"
-                >
-                  {step === 1 && (
-                    <BasicInfoForm
-                      values={values}
-                      handleChange={handleInputChange}
-                      errors={errors}
-                      touched={touched}
-                      options={dropdowns}
-                    />
-                  )}
+              {({
+                isSubmitting,
+                values,
+                errors,
+                touched,
+                handleSubmit,
+                validateForm,
+                setTouched,
+              }) => {
+                const handleInputChange = (
+                  e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+                ) => handleChange(e);
+                const handleSelectChange = (
+                  e: React.ChangeEvent<HTMLSelectElement>
+                ) => handleChange(e);
 
-                  {step === 2 && (
-                    <PersonalDetailForm
-                      values={values}
-                      handleChange={handleInputChange}
-                      errors={errors}
-                      touched={touched}
-                      options={dropdowns}
-                    />
-                  )}
-                  {step === 3 && (
-                    <PartnerPreferences
-                      values={values}
-                      activeTab={activeSubTab}
-                      setActiveTab={setSubActiveTab}
-                      handleChange={handleInputChange}
-                      errors={errors}
-                      touched={touched}
-                      options={dropdowns}
-                    />
-                  )}
+                // ✅ NEW: Step-wise validation logic before moving to the next step
+                const nextStep = async () => {
+                  const fields = getFieldsForStep(step, activeSubTab);
 
-                  {/* Navigation Buttons */}
-                  <div className="w-full flex justify-between mt-6">
-                    <div>
-                      {step > 1 && (
-                        <Button
-                          label="Back"
-                          type="button"
-                          variant="light"
-                          onClick={prevStep}
-                        />
-                      )}
+                  // Mark fields as touched to trigger error display
+                  // const touchedMap = fields.reduce((acc, field) => {
+                  //   acc[field] = true;
+                  //   return acc;
+                  // }, {} as any);
+                  const touchedMap = fields.reduce((acc, field) => {
+                    const keys = field.split(".");
+                    let obj = acc;
+                    keys.forEach((key, index) => {
+                      if (index === keys.length - 1) {
+                        obj[key] = true;
+                      } else {
+                        obj[key] = obj[key] || {};
+                        obj = obj[key];
+                      }
+                    });
+                    return acc;
+                  }, {} as any);
+                  setTouched(touchedMap, true);
+
+                  const validationErrors: any = await validateForm();
+
+                  
+                  // Only proceed if all current step fields are valid
+                  const isValid = fields.every(
+                    (field) => !validationErrors[field]
+                  );
+                  console.log(fields, isValid);
+                  if (!isValid) return;
+
+                  if (step < steps.length) setStep(step + 1);
+                  else if (step === steps.length && activeSubTab < 5)
+                    setSubActiveTab(activeSubTab + 1);
+                };
+
+                // ✅ Moved this logic inside Formik to control steps
+                const prevStep = () => {
+                  if (step > 1 && activeSubTab <= 1) setStep(step - 1);
+                  else if (step === steps.length && activeSubTab > 1)
+                    setSubActiveTab(activeSubTab - 1);
+                };
+                return (
+                  <form
+                    onSubmit={handleSubmit}
+                    className="flex flex-wrap gap-y-6 gap-x-8 md:pb-20 relative"
+                  >
+                    {step === 1 && (
+                      <BasicInfoForm
+                        values={values}
+                        handleChange={handleInputChange}
+                        errors={errors}
+                        touched={touched}
+                        options={dropdowns}
+                      />
+                    )}
+
+                    {step === 2 && (
+                      <PersonalDetailForm
+                        values={values}
+                        handleChange={handleInputChange}
+                        errors={errors}
+                        touched={touched}
+                        options={dropdowns}
+                      />
+                    )}
+                    {step === 3 && (
+                      <PartnerPreferences
+                        values={values}
+                        activeTab={activeSubTab}
+                        setActiveTab={setSubActiveTab}
+                        handleChange={handleInputChange}
+                        errors={errors}
+                        touched={touched}
+                        options={dropdowns}
+                      />
+                    )}
+
+                    {/* Navigation Buttons */}
+                    <div className="w-full flex justify-between mt-6">
+                      <div>
+                        {step > 1 && (
+                          <Button
+                            label="Back"
+                            type="button"
+                            variant="light"
+                            onClick={prevStep}
+                          />
+                        )}
+                      </div>
+
+                      <Button
+                        disabled={isSubmitting}
+                        className="md:w-auto w-full"
+                        label={
+                          step === steps.length && activeSubTab === 5
+                            ? "Submit Info"
+                            : "Continue"
+                        }
+                        type={
+                          step === steps.length && activeSubTab === 5
+                            ? "submit"
+                            : "button"
+                        }
+                        onClick={
+                          step === steps.length && activeSubTab === 5
+                            ? handleSubmit
+                            : nextStep
+                        }
+                      />
                     </div>
-
-                    <Button
-                      disabled={isSubmitting}
-                      className="md:w-auto w-full"
-                      label={
-                        step === steps.length && activeSubTab === 5
-                          ? "Submit Info"
-                          : "Continue"
-                      }
-                      type={
-                        step === steps.length && activeSubTab === 5
-                          ? "submit"
-                          : "button"
-                      }
-                      onClick={
-                        step === steps.length && activeSubTab === 5
-                          ? handleSubmit
-                          : nextStep
-                      }
-                    />
-                  </div>
-                </form>
-              )}
+                  </form>
+                );
+              }}
             </Formik>
           </div>
         </main>

@@ -2,6 +2,7 @@ import DatePicker from "@/app/components/common/inputFields/DatePicker";
 import InputField from "@/app/components/common/inputFields/InputField";
 import RadioField from "@/app/components/common/inputFields/RadioInput";
 import SelectField from "@/app/components/common/inputFields/SelectField";
+import TimePicker from "@/app/components/common/inputFields/TimePicker";
 import { castOptions, cityOptions, degreeOptions, doshOptions, dropdownOptions, incomeRangeOptions, manglikOptions, motherTongueOptions, occupationOptions, religionOptions, starOptions, stateOptions } from "@/constants/dummyConstants";
 import { basicPanelFormFields } from "@/constants/formConstants";
 import { Field, useFormikContext } from "formik";
@@ -126,6 +127,8 @@ const PartnerPreferences: React.FC<PartnerPreferencesProps> = ({
 export default PartnerPreferences;
 
 function BasicInfo({ values, handleChange, errors, touched, options }: SubTabProps) {
+  console.log(errors);
+  
   return (
     <div>
       <h3 className="text-lg font-semibold mb-4">Basic Info</h3>
@@ -137,6 +140,8 @@ function BasicInfo({ values, handleChange, errors, touched, options }: SubTabPro
               : item.name === "height"
               ? "heightFrom"
               : item.name;
+              console.log(errors[fieldName], touched[fieldName]);
+              
 
           return (
             <div
@@ -275,7 +280,7 @@ function ReligionInfo({ values, handleChange, errors, touched, options }: SubTab
           className="w-full"
         />
         <Field
-          as={DatePicker}
+          as={TimePicker}
           label={"Birth Time"}
           name={"horoscopeDetails.birthTime"}
           value={values?.horoscopeDetails?.birthTime}
