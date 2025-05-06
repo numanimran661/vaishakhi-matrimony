@@ -71,6 +71,30 @@ export const forgotPassword = async (user: any) => {
     throw error;
   }
 };
+export const verifyOtp = async (data: any) => {
+  try {
+    const response = await axiosInstance.post("/user/verify-otp", data);
+
+    return response; // Return full response
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      return error.response;
+    }
+    throw error;
+  }
+};
+export const resetPassword = async (data: any) => {
+  try {
+    const response = await axiosInstance.post("/user/resetPassword", data);
+
+    return response; // Return full response
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      return error.response;
+    }
+    throw error;
+  }
+};
 export const completeProfile = async (formData: any) => {
   try {
     const response = await axiosInstance.put("/user/completeProfile", formData);

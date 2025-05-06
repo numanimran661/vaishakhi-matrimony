@@ -153,7 +153,7 @@ const LoginPage: React.FC = () => {
           <div className="flex justify-end">
             <p
               className="text-primary font-regular cursor-pointer"
-              onClick={() => router.push("/auth/reset-password")}
+              onClick={() => router.push("/auth/forgot-password")}
             >
               Forgot Password?
             </p>
