@@ -6,21 +6,16 @@ import * as Yup from "yup";
 import InputField from "@/app/components/common/inputFields/InputField";
 import Button from "@/app/components/common/buttons/Button";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { showToast } from "@/app/components/ui/CustomToast";
 import { resetPassword } from "@/app/lib/api/authRoutes";
 
-interface ResetMailSentProps {
-  searchParams: {
-    email?: string;
-    otp?: string;
-  };
-}
 
-const ResetPassword: React.FC<ResetMailSentProps> = ({ searchParams }) => {
+const ResetPassword: React.FC = () => {
+  const searchParams = useSearchParams();
   const router = useRouter();
-  const email = searchParams?.email;
-  const otp = searchParams?.otp;
+  const email = searchParams.get("email");
+  const otp = searchParams.get("otp");
 
   return (
     <Formik

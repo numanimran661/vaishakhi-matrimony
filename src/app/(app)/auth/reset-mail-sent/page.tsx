@@ -6,17 +6,13 @@ import Link from "next/link";
 import OtpInput from "@/app/components/common/inputFields/OtpInput";
 import { showToast } from "@/app/components/ui/CustomToast";
 import { verifyOtp } from "@/app/lib/api/authRoutes";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
-interface ResetMailSentProps {
-  searchParams: {
-    email?: string;
-  };
-}
-const ResetMailSent: React.FC<ResetMailSentProps> = ({searchParams}) => {
+const ResetMailSent: React.FC = () => {
   const router = useRouter()
+  const searchParams = useSearchParams();
   const [otp, setOtp] = useState("");
-  const [email] = useState(searchParams?.email || "");
+  const email = searchParams.get("email");
   const [loading, setLoading] = useState(false);
 
   const handleOtpChange = (val: string) => {
