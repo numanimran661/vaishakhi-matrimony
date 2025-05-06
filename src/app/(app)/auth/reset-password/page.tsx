@@ -6,16 +6,20 @@ import * as Yup from "yup";
 import InputField from "@/app/components/common/inputFields/InputField";
 import Button from "@/app/components/common/buttons/Button";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { showToast } from "@/app/components/ui/CustomToast";
 import { resetPassword } from "@/app/lib/api/authRoutes";
 
 
-const ResetPassword: React.FC = () => {
-  const searchParams = useSearchParams();
+
+const ResetPassword = ({
+  searchParams,
+}: {
+  searchParams: { email?: string; otp?: string };
+}) => {
   const router = useRouter();
-  const email = searchParams.get("email");
-  const otp = searchParams.get("otp");
+  const email = searchParams?.email;
+  const otp = searchParams?.otp;
 
   return (
     <Formik
