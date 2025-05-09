@@ -1,8 +1,9 @@
+"use client";
 import { selectFields } from "@/app/components/common/allConstants/formConstants";
 import DatePicker from "@/app/components/common/inputFields/DatePicker";
 import InputField from "@/app/components/common/inputFields/InputField";
 import SelectField from "@/app/components/common/inputFields/SelectField";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Field } from "formik";
 
 interface PersonalDetailsProps {
@@ -18,10 +19,30 @@ const BasicInfoForm: React.FC<PersonalDetailsProps> = ({
   handleChange,
   errors,
   touched,
-  options
+  options,
 }) => {
-  console.log(values);
-  
+  const [filteredCasteOptions, setFilteredCasteOptions] = useState([]);
+
+  useEffect(() => {
+    const selectedReligion = options?.Religion?.find(
+      (r: any) => r.value === values.religion
+    );
+
+    if (
+      selectedReligion &&
+      options?.Caste &&
+      Array.isArray(options?.Caste) &&
+      options?.Caste.length > 0
+    ) {
+      setFilteredCasteOptions(
+        options?.Caste.filter(
+          (item: any) => item?.parentId === selectedReligion?._id
+        )
+      );
+    } else {
+      setFilteredCasteOptions([]);
+    }
+  }, [values.religion]);
   return (
     <>
       <h2 className="text-[24px] leading-[28.8px] text-darkBlue font-semibold w-full">
@@ -47,20 +68,25 @@ const BasicInfoForm: React.FC<PersonalDetailsProps> = ({
         error={errors.dateOfBirth}
         touched={touched.dateOfBirth}
       />
-      {selectFields?.map((fieldData, i) => (
-        <Field
-          key={i}
-          as={SelectField}
-          label={fieldData.label}
-          name={fieldData.name}
-          value={values[fieldData.name]}
-          // onChange={handleChange}
-          options={options[fieldData.label] || fieldData.options}
-          className="w-full sm:w-[47%]"
-          error={errors[fieldData.name]}
-          touched={touched[fieldData.name]}
-        />
-      ))}
+      {selectFields?.map((fieldData, i) => {
+        const isCasteField = fieldData.label === "Caste";
+        return (
+          <Field
+            key={i}
+            as={SelectField}
+            label={fieldData.label}
+            name={fieldData.name}
+            value={values[fieldData.name]}
+            // onChange={handleChange}
+            options={
+              isCasteField ? filteredCasteOptions : options[fieldData.label] || fieldData.options
+            }
+            className="w-full sm:w-[47%]"
+            error={errors[fieldData.name]}
+            touched={touched[fieldData.name]}
+          />
+        );
+      })}
     </>
   );
 };

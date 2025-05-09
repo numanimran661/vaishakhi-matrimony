@@ -21,8 +21,6 @@ const BasicPanel: React.FC<BasicPanelProps> = ({
   handleFormSubmit,
   options
 }) => {
-  console.log(formData);
-
   // Generate validation schema dynamically based on form fields
   const validationSchema = Yup.object().shape(
     basicPanelFormFields.reduce((schema, field) => {
@@ -41,7 +39,6 @@ const BasicPanel: React.FC<BasicPanelProps> = ({
       return schema;
     }, {} as Record<string, Yup.StringSchema>)
   );
-  console.log(validationSchema);
 
   return (
     <Formik

@@ -3,10 +3,23 @@ import InputField from "@/app/components/common/inputFields/InputField";
 import RadioField from "@/app/components/common/inputFields/RadioInput";
 import SelectField from "@/app/components/common/inputFields/SelectField";
 import TimePicker from "@/app/components/common/inputFields/TimePicker";
-import { castOptions, cityOptions, degreeOptions, doshOptions, dropdownOptions, incomeRangeOptions, manglikOptions, motherTongueOptions, occupationOptions, religionOptions, starOptions, stateOptions } from "@/constants/dummyConstants";
+import {
+  castOptions,
+  cityOptions,
+  degreeOptions,
+  doshOptions,
+  dropdownOptions,
+  incomeRangeOptions,
+  manglikOptions,
+  motherTongueOptions,
+  occupationOptions,
+  religionOptions,
+  starOptions,
+  stateOptions,
+} from "@/constants/dummyConstants";
 import { basicPanelFormFields } from "@/constants/formConstants";
 import { Field, useFormikContext } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const tabs = [
   { id: 1, label: "Basic Info" },
@@ -40,9 +53,8 @@ const PartnerPreferences: React.FC<PartnerPreferencesProps> = ({
   touched,
   activeTab,
   setActiveTab,
-  options
+  options,
 }) => {
-  
   return (
     <div className="w-full mx-auto">
       <h2 className="text-2xl font-bold text-darkBlue">Partner Preferences</h2>
@@ -126,9 +138,15 @@ const PartnerPreferences: React.FC<PartnerPreferencesProps> = ({
 };
 export default PartnerPreferences;
 
-function BasicInfo({ values, handleChange, errors, touched, options }: SubTabProps) {
+function BasicInfo({
+  values,
+  handleChange,
+  errors,
+  touched,
+  options,
+}: SubTabProps) {
   console.log(errors);
-  
+
   return (
     <div>
       <h3 className="text-lg font-semibold mb-4">Basic Info</h3>
@@ -140,8 +158,7 @@ function BasicInfo({ values, handleChange, errors, touched, options }: SubTabPro
               : item.name === "height"
               ? "heightFrom"
               : item.name;
-              console.log(errors[fieldName], touched[fieldName]);
-              
+          console.log(errors[fieldName], touched[fieldName]);
 
           return (
             <div
@@ -167,7 +184,7 @@ function BasicInfo({ values, handleChange, errors, touched, options }: SubTabPro
                     To
                   </label>
                   <Field
-                    as={SelectField} 
+                    as={SelectField}
                     name={`${item.name}To`}
                     value={values[`${item.name}To`]}
                     touched={touched[`${item.name}To`]}
@@ -185,8 +202,35 @@ function BasicInfo({ values, handleChange, errors, touched, options }: SubTabPro
   );
 }
 
-function ReligionInfo({ values, handleChange, errors, touched, options }: SubTabProps) {
+function ReligionInfo({
+  values,
+  handleChange,
+  errors,
+  touched,
+  options,
+}: SubTabProps) {
   const { setFieldValue } = useFormikContext();
+  const [filteredCasteOptions, setFilteredCasteOptions] = useState([]);
+  useEffect(() => {
+    const selectedReligion = options?.Religion?.find(
+      (r: any) => r.value === values?.horoscopeDetails?.religion
+    );
+
+    if (
+      selectedReligion &&
+      options?.Caste &&
+      Array.isArray(options?.Caste) &&
+      options?.Caste.length > 0
+    ) {
+      setFilteredCasteOptions(
+        options?.Caste.filter(
+          (item: any) => item?.parentId === selectedReligion?._id
+        )
+      );
+    } else {
+      setFilteredCasteOptions([]);
+    }
+  }, [values?.horoscopeDetails?.religion, options?.Caste]);
   return (
     <div>
       <h3 className="text-lg font-semibold mb-4">Religion Info</h3>
@@ -226,7 +270,7 @@ function ReligionInfo({ values, handleChange, errors, touched, options }: SubTab
           value={values?.horoscopeDetails?.caste}
           touched={touched?.horoscopeDetails?.caste}
           errors={errors?.horoscopeDetails?.caste}
-          options={options?.Caste}
+          options={filteredCasteOptions}
           className="w-full"
         />
         <Field
@@ -293,7 +337,13 @@ function ReligionInfo({ values, handleChange, errors, touched, options }: SubTab
   );
 }
 
-function LocationInfo({ values, handleChange, errors, touched, options }: SubTabProps) {
+function LocationInfo({
+  values,
+  handleChange,
+  errors,
+  touched,
+  options,
+}: SubTabProps) {
   const { setFieldValue } = useFormikContext();
   return (
     <div>
@@ -348,7 +398,13 @@ function LocationInfo({ values, handleChange, errors, touched, options }: SubTab
   );
 }
 
-function EducationInfo({ values, handleChange, errors, touched, options }: SubTabProps) {
+function EducationInfo({
+  values,
+  handleChange,
+  errors,
+  touched,
+  options,
+}: SubTabProps) {
   const { setFieldValue } = useFormikContext();
 
   return (
@@ -406,7 +462,13 @@ function EducationInfo({ values, handleChange, errors, touched, options }: SubTa
   );
 }
 
-function CriteriaInfo({ values, handleChange, errors, touched, options }: SubTabProps) {
+function CriteriaInfo({
+  values,
+  handleChange,
+  errors,
+  touched,
+  options,
+}: SubTabProps) {
   return (
     <div>
       <h3 className="text-lg font-semibold mb-4">Criteria Info</h3>

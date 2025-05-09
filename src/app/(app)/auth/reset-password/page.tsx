@@ -1,105 +1,89 @@
-"use client";
+import React, { Suspense } from "react";
+import ResetPassForm from "./ResetPassForm";
 
-import React from "react";
-import { Formik, Form, Field } from "formik";
-import * as Yup from "yup";
-import InputField from "@/app/components/common/inputFields/InputField";
-import Button from "@/app/components/common/buttons/Button";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { showToast } from "@/app/components/ui/CustomToast";
-import { resetPassword } from "@/app/lib/api/authRoutes";
-
-
-
-const ResetPassword = ({
-  searchParams,
-}: {
-  searchParams: { email?: string; otp?: string };
-}) => {
-  const router = useRouter();
-  const email = searchParams?.email;
-  const otp = searchParams?.otp;
-
+const ResetPassword = () => {
   return (
-    <Formik
-      initialValues={{ password: "", confirmPassword: "" }}
-      validationSchema={Yup.object({
-        password: Yup.string()
-          .min(6, "Password must be at least 6 characters")
-          .required("Password is required"),
-        confirmPassword: Yup.string()
-          .oneOf([Yup.ref("password")], "Passwords must match")
-          .required("Please confirm your password"),
-      })}
-      onSubmit={async (values, { setSubmitting }) => {
-        try {
-          if (!email || !otp) {
-            showToast("Invalid or missing reset credentials", "error");
-            return;
-          }
+    <Suspense>
+      <ResetPassForm />
+    </Suspense>
+    // <Formik
+    //   initialValues={{ password: "", confirmPassword: "" }}
+    //   validationSchema={Yup.object({
+    //     password: Yup.string()
+    //       .min(6, "Password must be at least 6 characters")
+    //       .required("Password is required"),
+    //     confirmPassword: Yup.string()
+    //       .oneOf([Yup.ref("password")], "Passwords must match")
+    //       .required("Please confirm your password"),
+    //   })}
+    //   onSubmit={async (values, { setSubmitting }) => {
+    //     try {
+    //       if (!email || !otp) {
+    //         showToast("Invalid or missing reset credentials", "error");
+    //         return;
+    //       }
 
-          const response = await resetPassword({
-            email,
-            otp: otp,
-            password: values.password,
-          });
+    //       const response = await resetPassword({
+    //         email,
+    //         otp: otp,
+    //         password: values.password,
+    //       });
 
-          if (response?.status === 200) {
-            showToast("Password reset successfully", "success");
-            router.push("/auth/login");
-          } else {
-            showToast("Something went wrong. Please try again.", "error");
-          }
-        } catch (err: any) {
-          showToast("Server error. Please try again.", "error");
-        } finally {
-          setSubmitting(false);
-        }
-      }}
-    >
-      {({ isSubmitting, errors, touched }) => (
-        <Form>
-          <h2 className="text-3xl font-bold mb-7">Reset your password</h2>
+    //       if (response?.status === 200) {
+    //         showToast("Password reset successfully", "success");
+    //         router.push("/auth/login");
+    //       } else {
+    //         showToast("Something went wrong. Please try again.", "error");
+    //       }
+    //     } catch (err: any) {
+    //       showToast("Server error. Please try again.", "error");
+    //     } finally {
+    //       setSubmitting(false);
+    //     }
+    //   }}
+    // >
+    //   {({ isSubmitting, errors, touched }) => (
+    //     <Form>
+    //       <h2 className="text-3xl font-bold mb-7">Reset your password</h2>
 
-          <Field
-            as={InputField}
-            label="New Password"
-            name="password"
-            type="password"
-            placeholder="New Password"
-            className="mt-4"
-            error={errors.password}
-            touched={touched.password}
-          />
+    //       <Field
+    //         as={InputField}
+    //         label="New Password"
+    //         name="password"
+    //         type="password"
+    //         placeholder="New Password"
+    //         className="mt-4"
+    //         error={errors.password}
+    //         touched={touched.password}
+    //       />
 
-          <Field
-            as={InputField}
-            label="Confirm Password"
-            name="confirmPassword"
-            type="password"
-            placeholder="Confirm Password"
-            className="mt-4"
-            error={errors.confirmPassword}
-            touched={touched.confirmPassword}
-          />
+    //       <Field
+    //         as={InputField}
+    //         label="Confirm Password"
+    //         name="confirmPassword"
+    //         type="password"
+    //         placeholder="Confirm Password"
+    //         className="mt-4"
+    //         error={errors.confirmPassword}
+    //         touched={touched.confirmPassword}
+    //       />
 
-          <Button
-            type="submit"
-            disabled={isSubmitting}
-            label={isSubmitting ? "Resetting..." : "Reset"}
-            className="mt-6 w-full"
-          />
+    //       <Button
+    //         type="submit"
+    //         disabled={isSubmitting}
+    //         label={isSubmitting ? "Resetting..." : "Reset"}
+    //         className="mt-6 w-full"
+    //       />
 
-          <div className="mt-4 font-regular">
-            <span>Have your password?</span>{" "}
-            <Link href="/auth/login" className="text-primary">
-              Log in
-            </Link>
-          </div>
-        </Form>
-      )}
-    </Formik>
+    //       <div className="mt-4 font-regular">
+    //         <span>Have your password?</span>{" "}
+    //         <Link href="/auth/login" className="text-primary">
+    //           Log in
+    //         </Link>
+    //       </div>
+    //     </Form>
+    //   )}
+    // </Formik>
   );
 };
 

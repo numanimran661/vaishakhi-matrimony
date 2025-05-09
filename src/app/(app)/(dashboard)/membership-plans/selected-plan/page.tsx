@@ -50,7 +50,7 @@ const SelectedPlans = () => {
   useEffect(() => {
     const initializeSDK = async () => {
       const cashfreeInstance = await load({
-        mode: "sandbox", // Use "sandbox" for testing
+        mode: "production", // Use "sandbox" for testing
       });
       setCashfree(cashfreeInstance);
     };

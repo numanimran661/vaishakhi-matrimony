@@ -29,14 +29,14 @@ export const selectFields: SelectFieldConstantsProps = [
       options: religionOptions,
     },
     {
-      label: "Mother Tongue",
-      name: "motherTongue",
-      options: motherTongueOptions,
-    },
-    {
       label: "Caste",
       name: "sect",
       options: castOptions,
+    },
+    {
+      label: "Mother Tongue",
+      name: "motherTongue",
+      options: motherTongueOptions,
     },
     {
       label: "City",

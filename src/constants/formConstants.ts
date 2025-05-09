@@ -79,14 +79,14 @@ export const basicInfoFormFields = [
   { label: "Age", name: "age", options: ageOptions },
   { label: "Gender", name: "gender", options: genderOptions },
   { label: "Height", name: "height", options: heightOptions },
-  { label: "Martial Status", name: "maritalStatus", options: maritalStatus },
   { label: "Religion", name: "religion", options: religionOptions },
+  { label: "Caste", name: "sect", options: castOptions },
+  { label: "Martial Status", name: "maritalStatus", options: maritalStatus },
   {
     label: "Mother Tongue",
     name: "motherTongue",
     options: motherTongueOptions,
   },
-  { label: "Caste", name: "sect", options: castOptions },
   { label: "City", name: "city", options: cityOptions },
 ];
 export const personalPanelFields = [

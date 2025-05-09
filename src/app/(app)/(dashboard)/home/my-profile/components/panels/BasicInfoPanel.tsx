@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 import Button from "@/app/components/common/buttons/Button";
@@ -23,8 +23,9 @@ interface BasicPanelProps {
 const BasicInfoPanel: React.FC<BasicPanelProps> = ({
   formData,
   handleFormSubmit,
-  options
+  options,
 }) => {
+  const [filteredCasteOptions, setFilteredCasteOptions] = useState([]);
 
   return (
     <Formik
@@ -64,10 +65,31 @@ const BasicInfoPanel: React.FC<BasicPanelProps> = ({
         touched,
         handleChange,
         handleSubmit,
-      }) => (
-        <Form onSubmit={handleSubmit}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* <Field
+      }) => {
+        useEffect(() => {
+          const selectedReligion = options?.Religion?.find(
+            (r: any) => r.value === values.religion
+          );
+
+          if (
+            selectedReligion &&
+            options?.Caste &&
+            Array.isArray(options?.Caste) &&
+            options?.Caste.length > 0
+          ) {
+            setFilteredCasteOptions(
+              options?.Caste.filter(
+                (item: any) => item?.parentId === selectedReligion?._id
+              )
+            );
+          } else {
+            setFilteredCasteOptions([]);
+          }
+        }, [values.religion]);
+        return (
+          <Form onSubmit={handleSubmit}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* <Field
               as={InputField}
               label="Full Name"
               name="fullName"
@@ -77,42 +99,50 @@ const BasicInfoPanel: React.FC<BasicPanelProps> = ({
               placeholder="Full Name"
               className="w-full"
             /> */}
-            {basicInfoFormFields.map((item, i) => (
-              <div key={i}>
-                {item?.name === "dateOfBirth" ? (
-                  <Field
-                    as={DatePicker}
-                    name={item?.name}
-                    label={item?.label}
-                    value={values.dateOfBirth}
-                    onChange={handleChange}
-                    error={errors.dateOfBirth}
-                    touched={touched.dateOfBirth}
-                    className="w-full"
-                  />
-                ) : (
-                  <Field
-                    as={SelectField}
-                    label={item.label}
-                    name={item.name}
-                    value={values[item.name]}
-                    onChange={handleChange}
-                    options={options[item.label] || item.options}
-                    error={errors[item.name]}
-                    touched={touched[item.name]}
-                    className="w-full"
-                  />
-                )}
-              </div>
-            ))}
-          </div>
-          <Button
-            type="submit"
-            label={isSubmitting ? "Saving..." : "Save Changes"}
-            className="mt-5 md:w-auto w-full"
-          />
-        </Form>
-      )}
+              {basicInfoFormFields.map((item, i) => {
+                const isCasteField = item.label === "Caste";
+                return (
+                  <div key={i}>
+                    {item?.name === "dateOfBirth" ? (
+                      <Field
+                        as={DatePicker}
+                        name={item?.name}
+                        label={item?.label}
+                        value={values.dateOfBirth}
+                        onChange={handleChange}
+                        error={errors.dateOfBirth}
+                        touched={touched.dateOfBirth}
+                        className="w-full"
+                      />
+                    ) : (
+                      <Field
+                        as={SelectField}
+                        label={item.label}
+                        name={item.name}
+                        value={values[item.name]}
+                        onChange={handleChange}
+                        options={
+                          isCasteField
+                            ? filteredCasteOptions
+                            : options[item.label] || item.options
+                        }
+                        error={errors[item.name]}
+                        touched={touched[item.name]}
+                        className="w-full"
+                      />
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+            <Button
+              type="submit"
+              label={isSubmitting ? "Saving..." : "Save Changes"}
+              className="mt-5 md:w-auto w-full"
+            />
+          </Form>
+        );
+      }}
     </Formik>
   );
 };

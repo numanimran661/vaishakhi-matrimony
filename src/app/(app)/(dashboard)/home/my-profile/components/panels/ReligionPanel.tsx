@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import Button from "@/app/components/common/buttons/Button";
@@ -21,8 +21,9 @@ interface ReligionPanelProps {
 const ReligionPanel: React.FC<ReligionPanelProps> = ({
   formData,
   handleFormSubmit,
-  options
+  options,
 }) => {
+  const [filteredCasteOptions, setFilteredCasteOptions] = useState([]);
   // Generate validation schema dynamically based on form fields
   const validationSchema = Yup.object({
     ...religionFormFields.reduce((schema, field) => {
@@ -52,46 +53,70 @@ const ReligionPanel: React.FC<ReligionPanelProps> = ({
         isSubmitting,
         handleChange,
         setFieldValue,
-      }) => (
-        <Form>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {religionFormFields.map((item, i) => (
-              <div key={i}>
+      }) => {
+        useEffect(() => {
+          const selectedReligion = options?.Religion?.find(
+            (r: any) => r.value === values.religion
+          );
+          
+          if (selectedReligion && options?.Caste && Array.isArray(options?.Caste) && options?.Caste.length > 0) {
+            setFilteredCasteOptions(options?.Caste.filter((item: any) => item?.parentId === selectedReligion?._id));
+          } else {
+            setFilteredCasteOptions([]);
+          }
+        }, [values.religion]);
+        return (
+          <Form>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {religionFormFields.map((item, i) => {
+                const isCasteField = item.label === "Caste";
+                const isReligionField = item.label === "Religion";
+                return (
+                  <div key={i}>
+                    <Field
+                      as={SelectField}
+                      label={item.label}
+                      name={item.name}
+                      value={values[item.name]}
+                      onChange={handleChange}
+                      // options={
+                      //   options[item.label] || item?.options
+                      // }
+                      options={
+                        isCasteField
+                          ? filteredCasteOptions
+                          : options[item.label] || item.options
+                      }
+                      error={errors[item.name]}
+                      touched={touched[item.name]}
+                      className="w-full"
+                    />
+                  </div>
+                );
+              })}
+
+              {/* Birth Time Picker */}
+              <div>
                 <Field
-                  as={SelectField}
-                  label={item.label}
-                  name={item.name}
-                  value={values[item.name]}
+                  as={TimePicker}
+                  label="Birth Time"
+                  name="birthTime"
+                  value={values.birthTime}
                   onChange={handleChange}
-                  options={options[item.label] || item.options}
-                  error={errors[item.name]}
-                  touched={touched[item.name]}
+                  error={errors.birthTime}
+                  touched={touched.birthTime}
                   className="w-full"
                 />
               </div>
-            ))}
-
-            {/* Birth Time Picker */}
-            <div>
-              <Field
-                as={TimePicker}
-                label="Birth Time"
-                name="birthTime"
-                value={values.birthTime}
-                onChange={handleChange}
-                error={errors.birthTime}
-                touched={touched.birthTime}
-                className="w-full"
-              />
             </div>
-          </div>
-          <Button
-            type="submit"
-            label={isSubmitting ? "Saving..." : "Save Changes"}
-            className="mt-5 md:w-auto w-full"
-          />
-        </Form>
-      )}
+            <Button
+              type="submit"
+              label={isSubmitting ? "Saving..." : "Save Changes"}
+              className="mt-5 md:w-auto w-full"
+            />
+          </Form>
+        );
+      }}
     </Formik>
   );
 };
