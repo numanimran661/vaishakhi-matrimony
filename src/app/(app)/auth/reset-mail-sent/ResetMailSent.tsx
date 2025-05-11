@@ -27,7 +27,7 @@ const ResetMailSentForm = () => {
       setLoading(true);
       const response = await verifyOtp({
         email,
-        code: otp,
+        otp,
       });
 
       if (response.data.status) {
