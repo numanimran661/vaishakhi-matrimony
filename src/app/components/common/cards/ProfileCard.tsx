@@ -99,32 +99,34 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
               <LocationMarker width="20px" />
               {location}
             </p>
-            <div className="flex gap-1 items-center">
-              {sentInterests.includes(user?._id) ? (
-                <span className="rounded-full bg-lightGray p-2 cursor-pointer">
-                  <ClockIcon width={14} height={14} />
-                </span>
-              ) : (
+            {user?.isPaid && (
+              <div className="flex gap-1 items-center">
+                {/* {sentInterests.includes(user?._id) ? (
+                  <span className="rounded-full bg-lightGray p-2 cursor-pointer">
+                    <ClockIcon width={14} height={14} />
+                  </span>
+                ) : (
+                  <span
+                    className="rounded-full bg-lightGray p-2 cursor-pointer"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleInterestSend(id);
+                    }}
+                  >
+                    <ReqSendIcon width={14} height={14} />
+                  </span>
+                )} */}
                 <span
-                  className="rounded-full bg-lightGray p-2 cursor-pointer"
+                  className="rounded-full bg-orange-50 p-2 cursor-pointer"
                   onClick={(e) => {
                     e.stopPropagation();
-                    handleInterestSend(id);
+                    router.push(`/home/messages?receiverId=${id}`);
                   }}
                 >
-                  <ReqSendIcon width={14} height={14} />
+                  <MessageIcon width={14} height={14} />
                 </span>
-              )}
-              <span
-                className="rounded-full bg-orange-50 p-2 cursor-pointer"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  router.push(`/home/messages?receiverId=${id}`);
-                }}
-              >
-                <MessageIcon width={14} height={14} />
-              </span>
-            </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

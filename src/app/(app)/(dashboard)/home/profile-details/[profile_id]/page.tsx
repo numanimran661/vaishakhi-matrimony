@@ -756,7 +756,7 @@ const ProfileDetail = ({ params }: any) => {
 
           {/* Buttons */}
           <div className="mt-6 flex justify-end gap-3">
-            <div>
+            {/* <div>
               <Button
                 icon={ReqSendIcon}
                 label="Send Request"
@@ -771,7 +771,7 @@ const ProfileDetail = ({ params }: any) => {
                 }}
                 // onClick={() => setIsModalOpen(true)}
               />
-            </div>
+            </div> */}
             <div>
               <Button
                 icon={MessageIcon}
