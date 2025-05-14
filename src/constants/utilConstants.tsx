@@ -65,6 +65,6 @@ export const menuItems = [
   {
     icon: <PrivacyPolicyIcon />,
     label: "Privacy & Policy",
-    path: "/home/privacy-policy",
+    path: "/privacy-policy",
   },
 ];

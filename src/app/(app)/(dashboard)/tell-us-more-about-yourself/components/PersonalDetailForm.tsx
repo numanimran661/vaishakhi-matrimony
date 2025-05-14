@@ -35,7 +35,7 @@ const PersonalDetailForm: React.FC<PersonalDetailsProps> = ({
           // onChange={handleChange}
           options={
             options[fieldData.label] ||
-            (fieldData.name === "workLocation" && options?.City) ||
+            (fieldData.name === "workLocation" && options?.City) || (fieldData.name === "highestDegree" && options?.Education) ||
             fieldData.options
           }
           className="w-full sm:w-[47%]"

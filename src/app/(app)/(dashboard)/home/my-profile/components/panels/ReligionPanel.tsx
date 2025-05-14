@@ -13,8 +13,8 @@ interface ProfileFormData {
   [key: string]: any; // Allow dynamic keys
 }
 interface ReligionPanelProps {
-  formData: Record<string, string>; // Flexible type to avoid TS errors
-  handleFormSubmit: (values: Record<string, string>) => void;
+  formData: ProfileFormData; // Flexible type to avoid TS errors
+  handleFormSubmit: (values: ProfileFormData) => void;
   options: any;
 }
 

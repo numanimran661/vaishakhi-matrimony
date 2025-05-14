@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { AppStore, Facebook, GooglePlay, Insta, Linkedin, LogoLight, Pinterest, Xicon, Youtube } from "../common/allImages/AllImages";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -49,19 +50,29 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="#" className="text-sm text-gray-300 hover:text-white">
+                <Link href="/home/success-stories" className="text-sm text-gray-300 hover:text-white">
                   Success Stories
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-sm text-gray-300 hover:text-white">
+                <Link href="/terms-conditions" className="text-sm text-gray-300 hover:text-white">
                   Terms of Service
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-sm text-gray-300 hover:text-white">
+                <Link href="/privacy-policy" className="text-sm text-gray-300 hover:text-white">
                   Privacy Policy
-                </a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/refund-policy" className="text-sm text-gray-300 hover:text-white">
+                  Refund Policy
+                </Link>
+              </li>
+              <li>
+                <Link href="/cancellation-policy" className="text-sm text-gray-300 hover:text-white">
+                  Cancellation Policy
+                </Link>
               </li>
             </ul>
           </div>
@@ -71,17 +82,17 @@ const Footer = () => {
             <h3 className="font-bold mb-4">Support</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-sm text-gray-300 hover:text-white">
+                <a href="mailto:info@vaishakhimatrimony.com" className="text-sm text-gray-300 hover:text-white">
                   Help & Support
                 </a>
               </li>
               <li>
-                <a href="#" className="text-sm text-gray-300 hover:text-white">
+                <Link href="/contact" className="text-sm text-gray-300 hover:text-white">
                   Contact Us
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-sm text-gray-300 hover:text-white">
+                <a href="#faqs" className="text-sm text-gray-300 hover:text-white">
                   FAQs
                 </a>
               </li>

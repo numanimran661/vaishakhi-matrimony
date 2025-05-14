@@ -5,10 +5,11 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import Button from "@/app/components/common/buttons/Button";
 import InputField from "@/app/components/common/inputFields/InputField";
+import { FormData } from "@/types/formTypes";
 
 interface CriteriaPanelProps {
-  formData: Record<string, string>; // Prevents TypeScript index errors
-  handleFormSubmit: (values: Record<string, string>) => void;
+  formData: FormData; // Prevents TypeScript index errors
+  handleFormSubmit: (values: FormData) => void;
 }
 
 const CriteriaPanel: React.FC<CriteriaPanelProps> = ({ formData, handleFormSubmit }) => {

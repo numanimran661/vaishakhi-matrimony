@@ -11,7 +11,7 @@ interface ProfileFormData {
   [key: string]: any; // Allow dynamic keys
 }
 interface PersonalPanelProps {
-  formData: Record<string, string>; // Flexible type for formData
+  formData: ProfileFormData; // Flexible type for formData
   handleFormSubmit: (values: Record<string, string>) => void;
   options: any;
 }
@@ -52,7 +52,7 @@ const PersonalPanel: React.FC<PersonalPanelProps> = ({
                   onChange={handleChange}
                   options={
                     options[item.label] ||
-                    (item.name === "workLocation" && options?.City) ||
+                    (item.name === "workLocation" && options?.City) || (item.name === "highestDegree" && options?.Education) ||
                     item.options
                   }
                   error={errors[item.name]}

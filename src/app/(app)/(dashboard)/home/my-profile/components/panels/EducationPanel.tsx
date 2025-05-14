@@ -12,8 +12,8 @@ interface ProfileFormData {
   [key: string]: any; // Allow dynamic keys
 }
 interface EducationPanelProps {
-  formData: Record<string, string>; // Prevents TypeScript index errors
-  handleFormSubmit: (values: Record<string, string>) => void;
+  formData: ProfileFormData; // Prevents TypeScript index errors
+  handleFormSubmit: (values: ProfileFormData) => void;
   options: any;
 }
 

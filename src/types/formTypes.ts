@@ -99,5 +99,5 @@ export type initialValuesPersonalProps = {
 
 
 export interface FormData {
-  [key: string]: string;
+  [key: string]: string | string[];
 }

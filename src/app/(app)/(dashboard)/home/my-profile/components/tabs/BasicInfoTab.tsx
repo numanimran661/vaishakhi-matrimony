@@ -8,7 +8,7 @@ import PersonalPanel from "../panels/PersonalPanel";
 import { ArrowLeft } from "@/app/components/common/allImages/AllImages";
 
 interface ProfileFormData {
-  [key: string]: string;
+  [key: string]: any;
 }
 interface PreferencesTabProps {
   selectedSubTab: number;

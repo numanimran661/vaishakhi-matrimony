@@ -10,7 +10,7 @@ import CriteriaPanel from "../panels/Criteria";
 import { subTabs } from "@/constants/formConstants";
 
 interface ProfileFormData {
-  [key: string]: string;
+  [key: string]: any;
 }
 interface PreferencesTabProps {
   selectedSubTab: number;

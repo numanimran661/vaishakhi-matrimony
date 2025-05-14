@@ -12,8 +12,8 @@ interface ProfileFormData {
   [key: string]: any; // Allow dynamic keys
 }
 interface LocationPanelProps {
-  formData: Record<string, string>; // Flexible type to avoid TypeScript errors
-  handleFormSubmit: (values: Record<string, string>) => void;
+  formData: ProfileFormData; // Flexible type to avoid TypeScript errors
+  handleFormSubmit: (values: ProfileFormData) => void;
   options: any;
 }
 

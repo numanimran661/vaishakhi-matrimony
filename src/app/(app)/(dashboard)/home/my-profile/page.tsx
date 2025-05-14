@@ -24,44 +24,49 @@ const ProfilePage = () => {
   const [selectedMainTab, setSelectedMainTab] = useState<number | undefined>(0);
   const [selectedSubTab, setSelectedSubTab] = useState<number>(0);
   const [formData, setFormData] = useState<FormData>({});
-  const [uploadedImages, setUploadedImages] = useState<string | null>(null);
+  const [uploadedImages, setUploadedImages] = useState<string[]>([]);
   const [images, setImages] = useState<File | null>(null);
   const [dropdowns, setDropdowns] = useState({});
 
   const handleChange = (name: string, value: string) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
-  const handleImageUpload = (files: FileList | null) => {
+  const handleImageUpload = async (files: FileList | null) => {
     if (!files) return;
 
+    let fileUrl :string;
     const file = files[0]; // Take the first file only
     const imageUrl = URL.createObjectURL(file);
+    const form = new FormData();
+    form.append("file", file);
+    const { data, status } = await uploadFile(form);
+    if (status === 200 && data?.fileUrl) fileUrl = data?.fileUrl;
 
-    setUploadedImages(imageUrl); // Set single image
+    setUploadedImages(prevImgs => ([
+      ...prevImgs,
+      fileUrl
+    ]));
+    setFormData(prevData => ({
+      ...prevData,
+      userImages: [...prevData?.userImages, fileUrl]
+    }))
     setImages(file);
     // setUploadedImages((prevImages) => [...prevImages, ...newImages]);
     // handleImagesChange([...uploadedImages, ...newImages]);
     // setImages(Array.from(files));
   };
 
-  const handleDeleteImage = () => {
-    setUploadedImages(null);
+  const handleDeleteImage = (img: string) => {
+    setUploadedImages(prevImg => prevImg.filter(image => image !== img));
   };
 
   const handleSubmit = async (formData: any) => {
+    const updatedFormData = {
+      ...formData,
+      ...(uploadedImages && {userImages: uploadedImages})
+    }
     try {
-      let fileUrl;
-      if (images) {
-        const form = new FormData();
-        form.append("file", images);
-        const { data, status } = await uploadFile(form);
-        if (status === 200 && data?.fileUrl) fileUrl = data?.fileUrl;
-      }
-      const formDataToSend = {
-        ...formData,
-        ...(fileUrl && { userImages: [fileUrl] }),
-      };
-      const { data, status } = await updateUserProfile(formDataToSend);
+      const { data, status } = await updateUserProfile(updatedFormData);
       if (status === 200) {
         showToast(data?.message, "success");
         getUsersProfile();
@@ -86,7 +91,7 @@ const ProfilePage = () => {
         });
         if (restUser?.userImages) {
           setImages(restUser?.userImages[0]);
-          setUploadedImages(restUser?.userImages[0]);
+          setUploadedImages(restUser?.userImages);
         }
         updateUser(response?.data?.user);
       }
