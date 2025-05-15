@@ -103,17 +103,17 @@ const Footer = () => {
           <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
             <h3 className="font-bold mb-4">Apps</h3>
             <div className="flex flex-col gap-3">
-              <span>
+              <a href="https://play.google.com/store/apps/details?id=com.metrimoni" target="_blank">
                 <Image
                   src={GooglePlay}
                   alt="Google Play"
                   width={135}
                   height={40}
                 />
-              </span>
-              <span>
+              </a>
+              {/* <span>
                 <Image src={AppStore} alt="App Store" width={135} height={40} />
-              </span>
+              </span> */}
             </div>
           </div>
         </div>
