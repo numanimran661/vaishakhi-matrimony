@@ -119,7 +119,8 @@ const Footer = () => {
         </div>
         <div className="mt-8 pt-8 border-t border-gray-700 text-sm">
           &copy; Copyright 2024, All Rights Reserved By{" "}
-          <span className="font-bold">Vaishakhi Matrimony.</span>
+          <span className="font-bold">Vaishakhi Foundation and Matrimony Trust.</span>
+          <div className="mt-2">&nbsp;&nbsp; Designed & Developed by Selflance</div>
         </div>
       </div>
     </footer>

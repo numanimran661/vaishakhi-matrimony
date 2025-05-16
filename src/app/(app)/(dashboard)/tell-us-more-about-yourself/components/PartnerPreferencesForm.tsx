@@ -417,7 +417,7 @@ function EducationInfo({
           label="Education"
           name="Education.education"
           value={values?.Education.education}
-          options={degreeOptions}
+          options={options?.Education || []}
           className="w-full"
         />
         {/* <div className="mt-4">
