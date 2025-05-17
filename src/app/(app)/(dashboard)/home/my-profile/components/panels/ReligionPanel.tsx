@@ -8,6 +8,7 @@ import DatePicker from "@/app/components/common/inputFields/DatePicker";
 import SelectField from "@/app/components/common/inputFields/SelectField";
 import { religionFormFields } from "@/constants/formConstants";
 import TimePicker from "@/app/components/common/inputFields/TimePicker";
+import InputField from "@/app/components/common/inputFields/InputField";
 
 interface ProfileFormData {
   [key: string]: any; // Allow dynamic keys
@@ -58,9 +59,18 @@ const ReligionPanel: React.FC<ReligionPanelProps> = ({
           const selectedReligion = options?.Religion?.find(
             (r: any) => r.value === values.religion
           );
-          
-          if (selectedReligion && options?.Caste && Array.isArray(options?.Caste) && options?.Caste.length > 0) {
-            setFilteredCasteOptions(options?.Caste.filter((item: any) => item?.parentId === selectedReligion?._id));
+
+          if (
+            selectedReligion &&
+            options?.Caste &&
+            Array.isArray(options?.Caste) &&
+            options?.Caste.length > 0
+          ) {
+            setFilteredCasteOptions(
+              options?.Caste.filter(
+                (item: any) => item?.parentId === selectedReligion?._id
+              )
+            );
           } else {
             setFilteredCasteOptions([]);
           }
@@ -71,26 +81,41 @@ const ReligionPanel: React.FC<ReligionPanelProps> = ({
               {religionFormFields.map((item, i) => {
                 const isCasteField = item.label === "Caste";
                 const isReligionField = item.label === "Religion";
+                const birthPlaceField = item.name === "birthPlace";
                 return (
                   <div key={i}>
-                    <Field
-                      as={SelectField}
-                      label={item.label}
-                      name={item.name}
-                      value={values[item.name]}
-                      onChange={handleChange}
-                      // options={
-                      //   options[item.label] || item?.options
-                      // }
-                      options={
-                        isCasteField
-                          ? filteredCasteOptions
-                          : options[item.label] || item.options
-                      }
-                      error={errors[item.name]}
-                      touched={touched[item.name]}
-                      className="w-full"
-                    />
+                    {birthPlaceField ? (
+                      <Field
+                        as={InputField}
+                        label={item.label}
+                        placeholder={item.label}
+                        name={item.name}
+                        value={values[item.name]}
+                        onChange={handleChange}
+                        error={errors[item.name]}
+                        touched={touched[item.name]}
+                        className="w-full mt-4"
+                      />
+                    ) : (
+                      <Field
+                        as={SelectField}
+                        label={item.label}
+                        name={item.name}
+                        value={values[item.name]}
+                        onChange={handleChange}
+                        // options={
+                        //   options[item.label] || item?.options
+                        // }
+                        options={
+                          isCasteField
+                            ? filteredCasteOptions
+                            : options[item.label] || item.options
+                        }
+                        error={errors[item.name]}
+                        touched={touched[item.name]}
+                        className="w-full"
+                      />
+                    )}
                   </div>
                 );
               })}

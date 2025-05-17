@@ -313,7 +313,7 @@ function ReligionInfo({
           options={doshOptions}
           className="w-full"
         />
-        <Field
+        {/* <Field
           as={SelectField}
           label={"Birth Place"}
           name={"horoscopeDetails.birthPlace"}
@@ -322,6 +322,17 @@ function ReligionInfo({
           errors={errors?.horoscopeDetails?.birthPlace}
           options={cityOptions}
           className="w-full"
+        /> */}
+        <Field
+          as={InputField}
+          label={"Birth Place"}
+          placeholder={"Birth Place"}
+          name={"horoscopeDetails.birthPlace"}
+          value={values?.horoscopeDetails?.birthPlace}
+          touched={touched?.horoscopeDetails?.birthPlace}
+          error={errors?.horoscopeDetails?.birthPlace}
+          // options={cityOptions}
+          className="w-full mt-4"
         />
         <Field
           as={TimePicker}
