@@ -71,14 +71,22 @@ const FeaturedProfileCard: React.FC<FeaturedProfileCardProps> = ({
 
       {/* New Badge */}
       {isNew && (
-        <span className={`text-sm text-white px-3 py-1 bg-black bg-opacity-40 ${image ? "blur-bg" : "bg-gray"} rounded-full absolute top-4 left-4`}>
+        <span
+          className={`text-sm text-white px-3 py-1 bg-black bg-opacity-40 ${
+            image ? "blur-bg" : "bg-gray"
+          } rounded-full absolute top-4 left-4`}
+        >
           New
         </span>
       )}
 
       {/* Verified Icon */}
       {verified && (
-        <span className={`text-sm text-white p-2 ${image ? "blur-bg" : "bg-gray"} bg-opacity-70 rounded-full absolute top-4 right-4`}>
+        <span
+          className={`text-sm text-white p-2 ${
+            image ? "blur-bg" : "bg-gray"
+          } bg-opacity-70 rounded-full absolute top-4 right-4`}
+        >
           <VerifiedIcon width={16} height={16} />
         </span>
       )}
@@ -103,8 +111,9 @@ const FeaturedProfileCard: React.FC<FeaturedProfileCardProps> = ({
             </div>
           </div>
 
-          <div className="flex space-x-2">
-            {sentInterests.includes(user?._id) ? (
+          {user?.isPaid && (
+            <div className="flex space-x-2">
+              {/* {sentInterests.includes(user?._id) ? (
               <span className="rounded-full bg-gray-100 bg-opacity-30 p-2.5 cursor-pointer">
                 <ClockIcon width={18} height={18} />
               </span>
@@ -118,17 +127,18 @@ const FeaturedProfileCard: React.FC<FeaturedProfileCardProps> = ({
               >
                 <ReqSendIcon />
               </span>
-            )}
-            <span
-              className="rounded-full bg-white p-2.5 cursor-pointer"
-              onClick={(e) => {
-                e.stopPropagation();
-                router.push(`/home/messages?receiverId=${id}`);
-              }}
-            >
-              <MessageIcon />
-            </span>
-          </div>
+            )} */}
+              <span
+                className="rounded-full bg-white p-2.5 cursor-pointer"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  router.push(`/home/messages?receiverId=${id}`);
+                }}
+              >
+                <MessageIcon />
+              </span>
+            </div>
+          )}
         </div>
       </div>
     </div>

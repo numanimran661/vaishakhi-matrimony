@@ -42,16 +42,16 @@ export const menuItems = [
     label: "Profile",
     path: "/home/my-profile",
   },
-  {
-    icon: <ActiveStatusIcon />,
-    label: "Active Status",
-    path: "/home/active-status",
-  },
-  {
-    icon: <ConnectionsIcon />,
-    label: "Connections",
-    path: "/home/connections",
-  },
+  // {
+  //   icon: <ActiveStatusIcon />,
+  //   label: "Active Status",
+  //   path: "/home/active-status",
+  // },
+  // {
+  //   icon: <ConnectionsIcon />,
+  //   label: "Connections",
+  //   path: "/home/connections",
+  // },
   {
     icon: <MembershipPlansIcon />,
     label: "Membership Plan",

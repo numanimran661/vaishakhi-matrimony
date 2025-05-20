@@ -143,7 +143,7 @@ const Header: React.FC = () => {
               { href: "/membership-plans", label: "Pricing" },
               { href: "/contact", label: "Contact" },
             ].map((item, i) => (
-              <Link key={i} href={item.href}>
+              <Link key={i} href={item.href} onClick={() => setIsMenuOpen(false)}>
                 <div
                   className={`lg:hover:text-primary lg:p-0 py-2 px-5 rounded-lg ${
                     pathname === item.href

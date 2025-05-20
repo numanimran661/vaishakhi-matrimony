@@ -94,6 +94,7 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ isOpen, onClose }) => {
               <Link
                 href={item.path}
                 key={item.label}
+                onClick={onClose}
                 className={`flex items-center gap-3 p-3 hover:bg-gray-50 cursor-pointer rounded-lg transition-all duration-200 ease-in-out transform hover:scale-[1.02] ${
                   pathname === item.path
                     ? "text-darkBlue bg-orange-100" // Active style
