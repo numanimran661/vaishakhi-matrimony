@@ -9,7 +9,10 @@ import {
 } from "@/app/components/common/allImages/AllImages";
 import Button from "@/app/components/common/buttons/Button";
 import { showToast } from "@/app/components/ui/CustomToast";
-import { createPaymentCheckout, verifyPayment } from "@/app/lib/api/membershipRoutes";
+import {
+  createPaymentCheckout,
+  verifyPayment,
+} from "@/app/lib/api/membershipRoutes";
 import { useAuth } from "@/context/AuthContext";
 import { load } from "@cashfreepayments/cashfree-js";
 import axios from "axios";
@@ -42,9 +45,9 @@ const SelectedPlans = () => {
   const selectedPlan = localStorage.getItem("selected_plan");
   const parsedObj = selectedPlan ? JSON.parse(selectedPlan) : null;
   const [cashfree, setCashfree] = useState<any>(null);
-  const router = useRouter()
-  const {user, updateUser} = useAuth()
-
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const router = useRouter();
+  const { user, updateUser } = useAuth();
 
   // Initialize Cashfree SDK
   useEffect(() => {
@@ -59,29 +62,32 @@ const SelectedPlans = () => {
 
   const checkPaymentStatus = async (orderId: string) => {
     try {
-      const response = await verifyPayment({order_id: orderId, membership: parsedObj?.id, userId: user?._id})
-      if(response?.data?.success && response?.data?.user) {
-        updateUser(response?.data?.user)
-        showToast('Payment Completed Successfully', 'success')
-        router.push("/membership-plans")
-      } else if(response?.data?.message){
-        showToast(response?.data?.message, 'error')
+      const response = await verifyPayment({
+        order_id: orderId,
+        membership: parsedObj?.id,
+        userId: user?._id,
+      });
+      if (response?.data?.success && response?.data?.user) {
+        updateUser(response?.data?.user);
+        showToast("Payment Completed Successfully", "success");
+        router.push("/membership-plans");
+      } else if (response?.data?.message) {
+        showToast(response?.data?.message, "error");
       } else {
-        showToast("Something went wrong! Please try again.", 'error')
+        showToast("Something went wrong! Please try again.", "error");
       }
-    } catch (error) {
-      
-    }
-  }
+    } catch (error) {}
+  };
 
   const handlePayment = async () => {
+    setIsLoading(true);
     try {
       const response = await createPaymentCheckout({
         amount: parsedObj?.price,
         customer_name: user?.name,
         customer_id: user?._id,
         customer_phone: user?.phone,
-        customer_email: user?.email
+        customer_email: user?.email,
       });
 
       if (response.status === 200) {
@@ -98,6 +104,7 @@ const SelectedPlans = () => {
           };
 
           cashfree.checkout(checkoutOptions).then((result: any) => {
+            setIsLoading(false);
             if (result.error) {
               // Handle payment errors
               console.log("Payment error:", result.error);
@@ -112,10 +119,15 @@ const SelectedPlans = () => {
               checkPaymentStatus(order_id);
             }
           });
+        } else {
+          setIsLoading(false);
+          showToast("Payment gateway not initialized", "error");
         }
       }
     } catch (error) {
       console.error("Payment initiation failed", error);
+      showToast("Payment initiation failed", "error");
+      setIsLoading(false);
     }
   };
 
@@ -199,7 +211,8 @@ const SelectedPlans = () => {
             </p>
 
             <Button
-              label="Continue To Pay"
+              label={isLoading ? "Payment processing..." : "Continue To Pay"}
+              disabled={isLoading}
               className="w-full my-4"
               onClick={handlePayment}
             />
