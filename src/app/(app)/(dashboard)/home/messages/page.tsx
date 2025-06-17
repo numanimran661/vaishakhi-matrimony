@@ -55,7 +55,11 @@ const MessagePage: React.FC = () => {
   const storedUser = localStorage.getItem("user");
   const user = storedUser ? JSON.parse(storedUser) : null;
   const emojiPickerRef = useRef<HTMLDivElement>(null);
-  const [selectedChat, setSelectedChat] = useState<Chat | null>(null);
+  const chatUser = localStorage.getItem("chat_user");
+  const chatObj = chatUser ? JSON.parse(chatUser) : null;
+  const [selectedChat, setSelectedChat] = useState<Chat | null>(
+    chatObj || null
+  );
   const { messages, setMessages, sendMessage } = useChat(
     selectedChat?.roomId ? selectedChat?.roomId : `${receiver_id}_${user?._id}`,
     user?._id
@@ -72,32 +76,32 @@ const MessagePage: React.FC = () => {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [messagesLoading, setMessagesLoading] = useState(false);
 
+  const fetchChats = async () => {
+    try {
+      const response = await getAllChats();
+      setChats(
+        response?.data?.chats?.map((chat: any, i: number) => ({
+          _id: chat?.chattedUser?._id,
+          name: chat?.chattedUser?.name,
+          message: "",
+          time: getformattedTime(chat?.updatedAt),
+          image:
+            Array.isArray(chat?.chattedUser?.userImages) &&
+            chat?.chattedUser?.userImages.length > 0
+              ? chat?.chattedUser?.userImages[0]
+              : chat?.chattedUser?.gender === "male"
+              ? MalePlaceholder.src
+              : FemalePlaceholder.src,
+          roomId: chat?.roomId,
+          gender: chat?.chattedUser?.gender,
+          // roomId: chat?._doc?.roomId ? chat?._doc?.roomId : chat?._doc?._id,
+        }))
+      );
+    } catch (error) {
+      console.error("Error fetching conversations:", error);
+    }
+  };
   useEffect(() => {
-    const fetchChats = async () => {
-      try {
-        const response = await getAllChats();
-        setChats(
-          response?.data?.chats?.map((chat: any, i: number) => ({
-            _id: chat?.chattedUser?._id,
-            name: chat?.chattedUser?.name,
-            message: "",
-            time: getformattedTime(chat?.updatedAt),
-            image:
-              Array.isArray(chat?.chattedUser?.userImages) &&
-              chat?.chattedUser?.userImages.length > 0
-                ? chat?.chattedUser?.userImages[0]
-                : chat?.chattedUser?.gender === "male"
-                ? MalePlaceholder.src
-                : FemalePlaceholder.src,
-            roomId: chat?.roomId,
-            gender: chat?.chattedUser?.gender,
-            // roomId: chat?._doc?.roomId ? chat?._doc?.roomId : chat?._doc?._id,
-          }))
-        );
-      } catch (error) {
-        console.error("Error fetching conversations:", error);
-      }
-    };
     fetchChats();
   }, []);
 
@@ -141,7 +145,8 @@ const MessagePage: React.FC = () => {
     if (inputMessage.trim() === "" || !selectedChat || !receiver_id) return;
 
     try {
-      sendMessage(inputMessage, receiver_id);
+      await sendMessage(inputMessage, receiver_id);
+      fetchChats();
       // await axios.post("/api/sendMessage", {
       //   roomId: selectedChat.roomId,
       //   text: inputMessage,
@@ -328,7 +333,10 @@ const MessagePage: React.FC = () => {
               <button className="text-sm text-primary">Block</button>
             </div>
 
-            <div className="flex-1 p-6 overflow-y-auto space-y-4" ref={messagesEndRef}>
+            <div
+              className="flex-1 p-6 overflow-y-auto space-y-4"
+              ref={messagesEndRef}
+            >
               {messagesLoading ? (
                 <div className="w-full h-full flex justify-center items-end">
                   <CustomLoader />
@@ -370,14 +378,14 @@ const MessagePage: React.FC = () => {
                 ))
               )}
 
-              <div  />
+              <div />
             </div>
 
             <div className="p-4 border-t border-gray">
               {showEmojiPicker && (
                 <div
                   ref={emojiPickerRef}
-                  className="absolute bottom-20 right-4"
+                  className="absolute top-28 right-4"
                 >
                   <EmojiPicker onEmojiClick={handleEmojiClick} />
                 </div>

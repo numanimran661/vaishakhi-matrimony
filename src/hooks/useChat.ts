@@ -61,6 +61,7 @@ const useChat = (roomId: string | null, userId: string) => {
 
       socket.emit("send_message", messageData);
       setMessages((prevMessages) => [...prevMessages, messageData]);
+      localStorage.removeItem("chat_user")
     }
   };
 

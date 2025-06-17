@@ -23,6 +23,7 @@ import { useAuth } from "@/context/AuthContext";
 import Lightbox from "yet-another-react-lightbox";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import "yet-another-react-lightbox/styles.css";
+import { getformattedTime } from "@/util/util";
 
 const ProfileDetail = ({ params }: any) => {
   const id = params.profile_id;
@@ -270,6 +271,24 @@ const ProfileDetail = ({ params }: any) => {
                 onClick={() => {
                   if (user?.isPaid) {
                     router.push(`/home/messages?receiverId=${id}`);
+                    localStorage.setItem(
+                      "chat_user",
+                      JSON.stringify({
+                        _id: userDetails?._id,
+                        name: userDetails?.name,
+                        message: "",
+                        time: new Date(),
+                        image:
+                          Array.isArray(userDetails?.userImages) &&
+                          userDetails?.userImages.length > 0
+                            ? userDetails?.userImages[0]
+                            : userDetails?.gender === "male"
+                            ? MalePlaceholder.src
+                            : FemalePlaceholder.src,
+                        roomId: `${userDetails?._id}_${user?._id}`,
+                        gender: userDetails?.gender,
+                      })
+                    );
                   } else {
                     setIsModalOpen(true);
                   }
